@@ -2,3 +2,7 @@ env/
 .vscode/
 *.env
 __pycache__/
+*sqlite3
+*sqlite
+*.sql
+*.cnf
