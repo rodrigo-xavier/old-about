@@ -140,4 +140,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 ALLOWED_HOSTS = ["127.0.0.1"]
 INTERNAL_IPS = config('INTERNAL_IPS')
+
 # ALLOWED_HOSTS = config("ALLOWED_HOSTS")
