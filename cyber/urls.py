@@ -18,8 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import (include, handler400, handler403, handler404, handler500)
 
+
+def administrator(request):
+    from django.shortcuts import render
+    return render(request, 'index.html')
+
 urlpatterns = [
+    # path('cv/', include('cv.urls', namespace="cv")),
     path('admin/', admin.site.urls),
+    path('administrator/', administrator),
 ]
 
 if settings.DEBUG:
