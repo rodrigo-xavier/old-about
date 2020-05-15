@@ -7,14 +7,12 @@ from django.core.validators import RegexValidator
 class Profile(models.Model):
     name = models.CharField(verbose_name=_('Name'), max_length=30)
     mail = models.EmailField(verbose_name=_("Mail"), max_length=255, unique=True)
-    phone = models.CharField(verbose_name=_('Phone'), max_length=13, unique=True,
-                validators=[
-                    RegexValidator(
-                        regex=r'^\d{9,13}$',
-                        message=_("Phone number must be between 9 and 13 digits")
-                    )
-                ]
-            )
+    phone = models.CharField(
+                verbose_name=_('Phone'), max_length=13, unique=True,
+                validators=[RegexValidator(
+                    regex=r'^\d{9,13}$',
+                    message=_("Phone number must be between 9 and 13 digits")
+                    )])
     about = models.TextField(verbose_name=_("About"), max_length=3000)
     current_goals = models.TextField(verbose_name=_("Current Goals"), max_length=1000) # Objetivos atuais
     proffessional_description = models.TextField(verbose_name=_("Professional Description"), max_length=1000) # Descricao profissional (Pode nao ser necessario)

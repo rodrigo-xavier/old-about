@@ -16,17 +16,18 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
+from django.shortcuts import redirect
 from django.conf.urls import (include, handler400, handler403, handler404, handler500)
 
 
-def administrator(request):
-    from django.shortcuts import render
-    return render(request, 'index.html')
+def redirect_home_to_profile(request):
+    return redirect('cv/profile')
+    
 
 urlpatterns = [
-    # path('cv/', include('cv.urls', namespace="cv")),
+    path('', redirect_home_to_profile),
+    path('cv/', include('cv.urls', namespace="cv")),
     path('admin/', admin.site.urls),
-    path('administrator/', administrator),
 ]
 
 if settings.DEBUG:
