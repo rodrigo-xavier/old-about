@@ -2,43 +2,55 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>You Son Of A Bitch I I'm</title>
+    <title>Rodrigo | {% block title %}{% endblock %}</title>
 
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="{% static 'adminlte/plugins/fontawesome-free/css/all.min.css' %}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{% static 'adminlte/dist/css/adminlte.min.css' %}">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-</head>
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'adminlte/dist/css/adminlte.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-4.5.0/css/bootstrap-grid.css' %}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-  {% block header %}
-  {% endblock %}
+    {% block extrastyle %}
+    {% endblock %}
 
-  {% block menu %}
-  {% endblock %}
+  </head>
+  <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+      {% block header %}
+      {% endblock %}
 
-  {% block content %}
-  {% endblock %}
+      {% block content %}
+      {% endblock %}
 
-  {% block footer %}
-  {% endblock %}
-  
-</div>
-<!-- REQUIRED SCRIPTS -->
+      {% block footer %}
+      {% endblock %}
+    </div>
 
-<!-- jQuery -->
-<script src="{% static 'adminlte/plugins/jquery/jquery.min.js' %}"></script>
-<!-- Bootstrap 4 -->
-<script src="{% static 'adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<!-- AdminLTE App -->
-<script src="{% static 'adminlte/dist/js/adminlte.min.js' %}"></script>
-</body>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+      {% include "menu.html" %}
+    </aside>
+
+    <!-- REQUIRED SCRIPTS -->
+
+    <!-- jQuery -->
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{% static 'plugins/bootstrap-4.5.0-dist/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'adminlte/dist/js/adminlte.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'plugins/fastclick/fastclick.js' %}"></script>
+
+    {% block extrajs %}
+    {% endblock %}
+
+  </body>
 </html>

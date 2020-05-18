@@ -22,12 +22,17 @@ from django.conf.urls import (include, handler400, handler403, handler404, handl
 
 def redirect_home_to_profile(request):
     return redirect('cv/profile')
+
+def redirect_to_index(request):
+    from django.shortcuts import render
+    return render(request, 'index.html', {})
     
 
 urlpatterns = [
     path('', redirect_home_to_profile),
     path('cv/', include('cv.urls', namespace="cv")),
     path('admin/', admin.site.urls),
+    path('administrator/', redirect_to_index),
 ]
 
 if settings.DEBUG:
