@@ -30,7 +30,7 @@ def redirect_to_index(request):
 
 urlpatterns = [
     path('', redirect_home_to_profile),
-    path('cv/', include('cv.urls', namespace="cv")),
+    path('cv/', include('cv.urls', namespace="CV")),
     path('admin/', admin.site.urls),
     path('administrator/', redirect_to_index),
 ]

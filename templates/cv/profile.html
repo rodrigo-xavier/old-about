@@ -1,11 +1,11 @@
-{% extends "cv/header.html" %}
+{% extends "starter.html" %}
+{% load i18n %}
 
-{% comment %} {% block title %}{% trans "You son of a bitch, I'm in" %}{% endblock %} {% endcomment %}
+{% block title %}{% trans "You son of a bitch, I'm in" %}{% endblock %}
 
 {% block content %}
-    <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+  <div >
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -24,7 +24,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
+    <section class="content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-6">
@@ -85,7 +85,7 @@
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
-    </div>
+    </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

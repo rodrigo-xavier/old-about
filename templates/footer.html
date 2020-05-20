@@ -1,13 +1,26 @@
-{% extends "starter.html" %}
+{% load static i18n %}
 
-{% block footer %}
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <!-- Font Awesome Icons -->
+      <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+      <!-- Google Font: Source Sans Pro -->
+      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  </head>
+  <body>
+
+    <!-- Main Footer -->
+    <footer class="main-footer layout-footer-fixed">
+      <!-- To the right -->
+      <div class="float-right d-none d-sm-inline">
+        <aside>{% trans "Be free" %}</aside>
+      </div>
+      <!-- Default to the left -->
+      <strong>Copyright &copy; 2020 <a href="">Rodrigo.me</a>.</strong> {% trans "All rights reserved." %}
+    </footer>
+    
+
+    <script src="{% static 'plugins/bootstrap-4.5.0/js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>

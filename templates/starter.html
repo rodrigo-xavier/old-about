@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{% static 'adminlte/dist/css/adminlte.min.css' %}">
-    <link rel="stylesheet" href="{% static 'plugins/bootstrap-4.5.0/css/bootstrap-grid.css' %}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -21,21 +20,31 @@
     {% endblock %}
 
   </head>
-  <body class="hold-transition sidebar-mini">
+  <body>
     <div class="wrapper">
-      {% block header %}
-      {% endblock %}
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-1">
+          </div>
+          <div class="col-10">
+            {% block header %}
+            {% endblock %}
 
-      {% block content %}
-      {% endblock %}
-
-      {% block footer %}
-      {% endblock %}
+            {% block content %}
+            {% endblock %}
+          </div>
+          <div class="col-1">
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
+    <aside id="menu">
       {% include "menu.html" %}
+    </aside>
+    <aside id="footer">
+      {% include "footer.html" %}
     </aside>
 
     <!-- REQUIRED SCRIPTS -->
@@ -43,11 +52,12 @@
     <!-- jQuery -->
     <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
     <!-- Bootstrap 4 -->
-    <script src="{% static 'plugins/bootstrap-4.5.0-dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-4.5.0/js/bootstrap.bundle.min.js' %}"></script>
     <!-- AdminLTE App -->
     <script src="{% static 'adminlte/dist/js/adminlte.min.js' %}"></script>
     <!-- FastClick -->
-    <script src="{% static 'plugins/fastclick/fastclick.js' %}"></script>
+    <script src="{% static 'plugins/fastclick/fastclick.js' %}"></script>    
+    
 
     {% block extrajs %}
     {% endblock %}
