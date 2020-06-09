@@ -2,65 +2,60 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Rodrigo | {% block title %}{% endblock %}</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{% static 'adminlte/dist/css/adminlte.min.css' %}">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <title>Rodrigo | {% block title %}{% endblock %}</title>
 
-    {% block extrastyle %}
-    {% endblock %}
+  <link type="text/css" rel="stylesheet" href="{% static 'css/menu/menu.css' %}" title="Menu">
 
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-1">
-          </div>
-          <div class="col-10">
-            {% block header %}
-            {% endblock %}
+  <!-- Font Awesome Icons -->
+  <link type="text/css" rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Theme style -->
+  <link type="text/css" rel="stylesheet" href="{% static 'adminlte/dist/css/adminlte.min.css' %}">
+  
+  {% block extrastyle %}{% endblock %}
 
-            {% block content %}
-            {% endblock %}
-          </div>
-          <div class="col-1">
-          </div>
-        </div>
-      </div>
-    </div>
+</head>
 
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside id="menu">
+<body class="wrapper layout-fixed sidebar-collapse">
+  <aside>
+    <div id="menu" class="sidebar-wrapper">
       {% include "menu.html" %}
-    </aside>
-    <aside id="footer">
+    </div>
+  </aside>
+  <div id="header" class="main-header">
+    {% include "header.html" %}
+  </div>
+  <div id="content" class="content-wrapper">
+    {% block content %}{% endblock %}
+  </div>
+  <aside>
+    <div id="footer" class="layout-footer-fixed">
       {% include "footer.html" %}
-    </aside>
+    </div>
+  </aside>
 
-    <!-- REQUIRED SCRIPTS -->
+  <!-- REQUIRED SCRIPTS -->
 
-    <!-- jQuery -->
-    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{% static 'plugins/bootstrap-4.5.0/js/bootstrap.bundle.min.js' %}"></script>
-    <!-- AdminLTE App -->
-    <script src="{% static 'adminlte/dist/js/adminlte.min.js' %}"></script>
-    <!-- FastClick -->
-    <script src="{% static 'plugins/fastclick/fastclick.js' %}"></script>    
-    
+  <!-- jQuery -->
+  <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+  <!-- Bootstrap 4 -->
+  <script src="{% static 'plugins/bootstrap-4.5.0/js/bootstrap.bundle.min.js' %}"></script>
+  <!-- AdminLTE App -->
+  <script src="{% static 'adminlte/dist/js/adminlte.min.js' %}"></script>
+  <!-- FastClick -->
+  <script src="{% static 'plugins/fastclick/fastclick.js' %}"></script>
+  <script src="{% static 'js/menu/menu.js' %}"></script>
 
-    {% block extrajs %}
-    {% endblock %}
 
-  </body>
+  {% block extrajs %}{% endblock %}
+
+</body>
+
 </html>

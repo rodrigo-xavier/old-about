@@ -16,7 +16,6 @@ from decouple import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -139,7 +138,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'cyber/static')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = config("ALLOWED_HOSTS")
 INTERNAL_IPS = config('INTERNAL_IPS')
 
-# ALLOWED_HOSTS = config("ALLOWED_HOSTS")
+ADMINS = config("ADMINS")
+MANAGERS = config("MANAGERS")
