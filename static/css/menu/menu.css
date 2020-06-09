@@ -17,6 +17,10 @@
   margin: 0
 }
 
+#menu i{
+  padding: 4px 15px 4px 0px;
+}
+
 #menu article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block
 }
@@ -6545,7 +6549,7 @@
 }
 
 #menu #wrapper.toggled #sidebar-wrapper {
-  width: 220px;
+  width: 228px;
 }
 
 #menu #page-content-wrapper {
@@ -6644,7 +6648,6 @@
   display: block;
   color: #ddd;
   text-decoration: none;
-  padding: 10px 15px 10px 30px;
 }
 
 #menu .sidebar-nav li a:hover, .sidebar-nav li a:active, .sidebar-nav li a:focus, .sidebar-nav li.open a:hover, .sidebar-nav li.open a:active, .sidebar-nav li.open a:focus {

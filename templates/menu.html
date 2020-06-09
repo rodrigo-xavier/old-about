@@ -5,11 +5,12 @@
 
     <!-- Sidebar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            
         <ul class="nav sidebar-nav">
             <li>
-                <a href="{% static "img/logo/dragon.png" %}">
-                    <img src="{% static "img/logo/dragon.png" %}" alt="Skyrim" class="pl-0 d-block img-circle img-fluid"
-                        style="opacity: .9; max-width: 100%; height: auto;">
+                <a href="#">
+                    <img src="{% static "img/logo/dragon.png" %}" alt="Skyrim" class="img-circle"
+                        style="opacity: .9; max-width: 100%;">
                 </a>
             </li>
             <li>
@@ -33,7 +34,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{% url "Blog:Blog" %}">
                     <i class="fa fa-biohazard"></i> {% trans "Blog" %}
                 </a>
             </li>

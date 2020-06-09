@@ -24,27 +24,34 @@
     <div class="input-group input-group-sm">
       <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
       <div class="input-group-append">
-        <button class="btn btn-navbar" type="submit">
+        <button class="btn-navbar" type="submit">
           <i class="fas fa-search"></i>
         </button>
       </div>
     </div>
   </form>
 
+  {% comment %} TODO: Substituir links abaixo por links do banco de dados  {% endcomment %}
+
   <ul class="navbar-nav ml-auto">
     <li class="nav-item dropdown">
-      <a class="nav-link" href="https://www.linkedin.com/in/rodrigo-xavier-a33b18156/">
+      <a class="nav-link" target="_blank" title="Linkedin" href="https://www.linkedin.com/in/rodrigo-xavier-a33b18156/">
         <i class="fab fa-linkedin"></i>
       </a>
     </li>
     <li class="nav-item dropdown">
-      <a class="nav-link" href="https://github.com/rodrigo-xavier">
+      <a class="nav-link" target="_blank" title="Github:rodrigo-xavier" href="https://github.com/rodrigo-xavier">
         <i class="fab fa-github"></i>
       </a>
     </li>
     <li class="nav-item dropdown">
-      <a href="#" class="nav-link">
+      <a class="nav-link" target="_blank" title="Gmail:example@gmail.com" href="mailto:example@gmail.com">
         <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+    <li class="nav-item dropdown">  
+      <a class="nav-link" target="_blank" title="+55 (xx) xxxxx-xxxx" href="">
+        <i class="fab fa-whatsapp"></i>
       </a>
     </li>
   </ul>
