@@ -6591,7 +6591,7 @@
   left: 0;
   z-index: -1;
   height: 100%;
-  width: 3px;
+  width: 6px;
   background-color: #1c1c1c;
   -webkit-transition: width .2s ease-in;
   -moz-transition: width .2s ease-in;

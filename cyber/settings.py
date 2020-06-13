@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'utils',
     'tests',
     'debug_toolbar',
+    'blog',
 ]
 
 MIDDLEWARE = [
