@@ -17,24 +17,37 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Theme style -->
-  <link type="text/css" rel="stylesheet" href="{% static 'adminlte/dist/css/adminlte.min.css' %}">
+  <link type="text/css" rel="stylesheet" href="{% static 'adminlte/css/adminlte.min.css' %}">
   
   {% block extrastyle %}{% endblock %}
 
 </head>
 
 <body class="wrapper sidebar-collapse">
+
   <aside>
     <div id="menu" class="sidebar-wrapper">
       {% include "menu.html" %}
     </div>
   </aside>
+
   <div id="header" class="main-header">
     {% include "header.html" %}
   </div>
+
   <div id="content" class="content-wrapper" >
-    {% block content %}{% endblock %}
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="mb-2"></div>
+      </div>
+      <section class="content" style="text-align:justify;">
+        <div class="container-fluid">
+          {% block content %}{% endblock %}
+        </div>
+      </section>
+    </div>
   </div>
+
   <aside>
     <div id="footer" class="layout-footer-fixed">
       {% include "footer.html" %}
@@ -48,7 +61,7 @@
   <!-- Bootstrap 4 -->
   <script src="{% static 'plugins/bootstrap-4.5.0/js/bootstrap.bundle.min.js' %}"></script>
   <!-- AdminLTE App -->
-  <script src="{% static 'adminlte/dist/js/adminlte.min.js' %}"></script>
+  <script src="{% static 'adminlte/js/adminlte.min.js' %}"></script>
   <!-- FastClick -->
   <script src="{% static 'plugins/fastclick/fastclick.js' %}"></script>
   <script src="{% static 'js/menu/menu.js' %}"></script>

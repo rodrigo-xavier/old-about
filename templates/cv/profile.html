@@ -1,78 +1,64 @@
 {% extends "starter.html" %}
 {% load i18n static %}
 
-{% block title %}{% trans "You son of a bitch, I'm in" %}{% endblock %}
+{% block title %}{% trans "Profile" %}{% endblock %}
 
 {% block content %}
-  <div class="content-wrapper">
-    <div class="content-header">
-      <div class="mb-2"></div>
-    </div>
-
-    <section class="content">
-      <div class="container-fluid">
-          <div class="col-xl-12">
-              <span style="color:gray"><em>{% trans "Last modification" %}: {% now "jS F Y H:i" %}</em></span>
-            <div class="card card-primary">
-              <div class="card-header">
-                <div class="card-tools">
-                  {% comment %} TODO: Inserir icone de download {% endcomment %}
-                  <span class="badge badge-success">Get Curriculum</span>
-                </div>
-                <div style="text-align: center;">
-                  <img src="{% static "img/logo/dragon.png" %}" alt="{% lorem 1 w random %}" class="img-circle">
-                </div>
-                <div class="mb-5"></div>
-                <div>
-                  <h3 class="card-title">
-                  {% comment %} TODO: Adicionar idade atraves do banco {% endcomment %}
-                    <b><i>{% lorem 5 w random %}, 23</i></b>
-                  </h3>
-                </div>
-              </div>
-              <div class="card-body">
+  
+  <div class="col-xl-12">
+      <span style="color:gray"><em>{% trans "Last modification" %}: {% now "jS F Y H:i" %}</em></span>
+        {% comment %} TODO: Inserir icone de download {% endcomment %}
+      <div>
+        <span class="badge badge-success">Get Curriculum</span>
+        <span class="badge badge-success">Edit</span>
+      </div>
+        
+    <div class="card card-primary">
+      <div class="card-header">
+        <div style="text-align: center;">
+          <img src="{% static "img/logo/dragon.png" %}" alt="{% lorem 1 w random %}" class="img-circle">
+        </div>
+        <div class="mb-5"></div>
+        <div>
+          <h3 class="card-title">
+          {% comment %} TODO: Adicionar idade atraves do banco {% endcomment %}
+            <i style="padding: 0px 12px;" class="fas fa-male"></i><b><i>{% lorem 5 w random %}, 23</i></b><br>
+            <i style="padding: 0px 12px;" class="fas fa-building"></i><b><i>{% lorem 1 w random %}</i></b><br>
+            <i style="padding: 0px 12px;" class="fas fa-home"></i><b><i>{% lorem 1 w random %}, {% lorem 1 w random %}</i></b>
+          </h3>
+        </div>
+      </div>
+      <div class="card-body">
 
 
-                <div class="timeline">
-                  <div class="time-label">
-                    <span class="bg-green">23 Aug. 2019</span>
-                  </div>
-                  <div>
-                    <div class="timeline-item">
-                      <div class="timeline-body">
-                        {% lorem 100 w random %}
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <i class="fas fa-clock bg-gray"></i>
-                  </div>
-                </div>
-
-                <p class="card-text">
-                  {% lorem 50 w random %}
-                </p>
-
-
-
-
-              </div>
-              <div class="card-footer">
-                The footer of the card
+        <div class="timeline">
+          <div class="time-label">
+            <span class="bg-green">23 Aug. 2019</span>
+          </div>
+          <div>
+            <div class="timeline-item">
+              <div class="timeline-body">
+                {% lorem 100 w random %}
               </div>
             </div>
           </div>
-
-
-
-
-
+          <div>
+            <i class="fas fa-clock bg-gray"></i>
           </div>
-          <!-- /.col-md-6 -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+        </div>
+
+        <p class="card-text">
+          {% lorem 50 w random %}
+        </p>
+
+
+
+
+      </div>
+      <div class="card-footer">
+        The footer of the card
+      </div>
+    </div>
   </div>
-  <!-- /.content-wrapper -->
 
 {% endblock %}
