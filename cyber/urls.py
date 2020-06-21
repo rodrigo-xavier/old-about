@@ -13,27 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from . import views
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 from django.shortcuts import redirect
 from django.conf.urls import (include, handler400, handler403, handler404, handler500)
-
-
-def redirect_home_to_profile(request):
-    return redirect('cv/profile')
-
-def redirect_to_index(request):
-    from django.shortcuts import render
-    return render(request, 'index.html', {})
     
 
 urlpatterns = [
-    path('', redirect_home_to_profile),
-    path('cv/', include('cv.urls', namespace="CV")),
+    path('', include('cv.urls', namespace="CV")),
     path('blog/', include('blog.urls', namespace="Blog")),
-    path('admin/', admin.site.urls),
-    path('administrator/', redirect_to_index),
+    path('a/', admin.site.urls),
+    path('admin/', views.admin, name="Admin"),
 ]
 
 if settings.DEBUG:

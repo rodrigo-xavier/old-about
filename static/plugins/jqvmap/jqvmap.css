@@ -9,7 +9,7 @@
 	color: white;
 	font-family: sans-serif, Verdana;
 	font-size: smaller;
-	padding: 3px;
+	/* padding: 3px; */
   pointer-events:none;
 }
 .jqvmap-pin {
@@ -22,11 +22,11 @@
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	background: #000000;
-	padding: 3px;
+	background: #292929;
+	/* padding: 3px; */
 	color: white;
-	width: 10px;
-	height: 10px;
+	/* width: 10px;
+	height: 10px; */
 	cursor: pointer;
 	line-height: 10px;
 	text-align: center;
