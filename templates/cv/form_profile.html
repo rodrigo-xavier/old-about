@@ -3,95 +3,254 @@
 
 {% block title %}{% trans "Form of Profile" %}{% endblock %}
 
+{% block extrastyle %}
+  <style>
+    .textbox {
+      text-align: justify;
+    }
+  </style>
+{% endblock %}
+
+{% block extrajs %}
+  <script src="{% static 'plugins/moment/moment.min.js' %}"></script>
+  <script> 
+    $(document).ready(function(){
+      var date = moment().subtract(23, 'years');
+      var pattern = moment(date, "DD.MM.YYYY").format("YYYY-MM-DD");
+      $("#born_date").val(pattern);
+    });
+  </script> 
+{% endblock %}
+
 {% block content %}
 
-  <div class="row pb-2">
-    <h1>{% trans "Profile" %}</h1>
-  </div>
-
-  <div class="col-xl-4">
-    <div class="card card-primary">
-      <div class="card-header">
-        <h3 class="card-title">{% trans "Info" %}</h3>
+  <div class="card card-primary">
+    <div class="card-header">
+      <h1 class="card-title"><b>{% trans "Profile" %}</b></h1>
+      <div class="card-tools">
+        <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fas fa-minus"></i>
+        </button>
       </div>
-      <form role="form">
-        <div class="card-body">
-          <div class="form-group">
-            <label>{% trans "Name" %}</label>
-            <input class="form-control" placeholder="{% trans "Enter your name" %}">
+    </div>
+
+
+    <div class="card-body">
+      <form role="form" method="post">
+        {% csrf_token %}
+        <div class="row">
+
+          <div class="col-xl-4">
+            <div class="card bg-gradient-success">
+              <div class="card-tools">
+                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>{% trans "Name" %}</label>
+                  <input autofocus type="text" class="form-control" maxlength="30" placeholder="{% trans "Enter your name" %}" required>
+                </div>
+                <div class="form-group">
+                  <label>{% trans "Born Date" %}</label>
+                  <input id="born_date" type="date" class="form-control" value="" required>
+                </div>
+                <div class="form-group">
+                  <label>{% trans "Email Address" %}</label>
+                  <input type="email" class="form-control" maxlength="255" placeholder="{% trans "Enter your email" %}" required>
+                </div>
+                <div class="form-group">
+                  <label>{% trans "Phone" %}</label>
+                  <input type="tel" class="form-control" maxlength="13" placeholder="{% trans "Enter your phone. Ex: (00) 00000-0000" %}" pattern="r'^\d{9,13}$'" required>
+                </div>
+                <div class="form-group">
+                  <label>{% trans "Fluency" %}</label>
+                  <input type="text" class="form-control" placeholder="{% trans "Select languages you can speak" %}">
+                  {% comment %} TODO: add language level {% endcomment %}
+                </div>
+                <div class="form-group">
+                  <label>{% trans "Links" %}</label>
+                  <input type="text" class="form-control" placeholder="{% trans "Input your links" %}">
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label>{% trans "Email address" %}</label>
-            <input type="email" class="form-control" placeholder="{% trans "Enter your email" %}">
+
+          <div class="col-xl-4">
+            <div class="card bg-gradient-success">
+              <div class="card-tools">
+                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>{% trans "About" %}</label>
+                  <textarea class="form-control textbox" maxlength="2000" rows="19" placeholder="{% trans "Describe yourself" %}">{% lorem 250 w random %}</textarea>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label>{% trans "Email address" %}</label>
-            <input class="form-control" placeholder="{% trans "Enter your email" %}">
+
+          <div class="col-xl-4">
+            <div class="card bg-gradient-success">
+              <div class="card-tools">
+                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>{% trans "Current Goals" %}</label>
+                  <textarea class="form-control textbox" maxlength="1000" rows="8" placeholder="{% trans "Describe your current goals" %}">{% lorem 130 w random %}</textarea>
+                </div>
+                <div class="form-group">
+                  <label>{% trans "Professional Description" %}</label>
+                  <textarea class="form-control textbox" maxlength="1000" rows="8" placeholder="{% trans "Tell about your professional profile" %}">{% lorem 130 w random %}</textarea>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label>{% trans "Email address" %}</label>
-            <input class="form-control" placeholder="{% trans "Enter your email" %}">
-          </div>
-        </div>
-        <div class="card-footer">
-          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>
     </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
   </div>
+  <div class="pb-4"></div>
 
-  <div class="row pb-2 pt-5">
-    <h1>{% trans "Academic" %}</h1>
-  </div>
 
-  {% comment %} {% if  %} {% endcomment %}
 
-  <a href="#" class="small-box-footer">
-    <div style="text-align:center;">
-      <div class="col-xl-4 small-box bg-info">
-        <div class="icon p-3">
-          <i class="fas fa-plus" style="position:static; text-align:center;"></i>
-        </div>
+
+
+
+
+
+
+
+
+  <div class="card card-primary">
+    <div class="card-header">
+      <h1 class="card-title"><b>{% trans "Academic" %}</b></h1>
+      <div class="card-tools">
+        <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fas fa-minus"></i>
+        </button>
       </div>
     </div>
-  </a>
 
+    <div class="card-body">
+      <form role="form" method="post">
+        {% csrf_token %}
+        <div class="row">
 
-
-
-
-  <div class="row pb-2 pt-5">
-    <h1>{% trans "Professional Experience" %}</h1>
+          <div class="col-xl-4">
+            <a href="#" class="small-box-footer">
+              <div style="text-align:center;">
+                <div class="small-box bg-info">
+                  <div class="icon p-3">
+                    <i class="fas fa-plus" style="position:static; text-align:center;"></i>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          
+        </div>        
+      </form>
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
   </div>
+  <div class="pb-4"></div>
 
-  <a href="#" class="small-box-footer">
-    <div style="text-align:center;">
-      <div class="col-xl-4 small-box bg-info">
-        <div class="icon p-3">
-          <i class="fas fa-plus" style="position:static; text-align:center;"></i>
-        </div>
+
+
+
+
+
+
+
+  <div class="card card-primary">
+    <div class="card-header">
+      <h1 class="card-title"><b>{% trans "Professional Experience" %}</b></h1>
+      <div class="card-tools">
+        <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fas fa-minus"></i>
+        </button>
       </div>
     </div>
-  </a>
 
+    <div class="card-body">
+      <form role="form" method="post">
+        {% csrf_token %}
+        <div class="row">
 
-
-
-
-
-
-  <div class="row pb-2 pt-5">
-    <h1>{% trans "Certifications" %}</h1>
-  </div>
-
-  <a href="#" class="small-box-footer">
-    <div style="text-align:center;">
-      <div class="col-xl-4 small-box bg-info">
-        <div class="icon p-3">
-          <i class="fas fa-plus" style="position:static; text-align:center;"></i>
+          <div class="col-xl-4">
+            <a href="#" class="small-box-footer">
+              <div style="text-align:center;">
+                <div class="small-box bg-info">
+                  <div class="icon p-3">
+                    <i class="fas fa-plus" style="position:static; text-align:center;"></i>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
+      </form>
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </div>
+  <div class="pb-4"></div>
+
+
+
+
+
+
+
+
+
+
+  <div class="card card-primary">
+    <div class="card-header">
+      <h1 class="card-title"><b>{% trans "Certifications" %}</b></h1>
+      <div class="card-tools">
+        <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fas fa-minus"></i>
+        </button>
       </div>
     </div>
-  </a>
+
+    <div class="card-body">
+      <form role="form" method="post">
+        {% csrf_token %}
+        <div class="row">
+
+          <div class="col-xl-4">
+            <a href="#" class="small-box-footer">
+              <div style="text-align:center;">
+                <div class="small-box bg-info">
+                  <div class="icon p-3">
+                    <i class="fas fa-plus" style="position:static; text-align:center;"></i>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </div>
+  <div class="pb-4"></div>
 
 {% endblock %}
