@@ -13,16 +13,22 @@
   <script src="{% static 'plugins/jqvmap/jquery.vmap.min.js' %}"></script>
   <script src="{% static 'plugins/jqvmap/maps/jquery.vmap.brazil.js' %}"></script>
   <script>
-    jQuery('#vmap').vectorMap({
+    $(document).ready(function(){
+      jQuery('#vmap').vectorMap({
         map: 'brazil_br',
         backgroundColor: null,
         color: '#696969',
-        hoverColor: '#c9dfaf',
+        hoverColor: '#333333',
         enableZoom: true,
+        selectedColor:'#333333',
         showTooltip: true,
         colors: {
-          df: '#000099',
+          df: '#000000',
         },
+        onRegionClick: function(event, code, region){
+          event.preventDefault();
+        }
+      });      
     });
   </script>
          
