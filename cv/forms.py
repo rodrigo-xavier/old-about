@@ -1,4 +1,4 @@
-from cv import models
+from . import models
 from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 
@@ -9,6 +9,6 @@ class ProfileForm(ModelForm):
 
     class Meta:
         model = models.Profile
-        fields = ['name', 'born', 'mail', 'mail', 'phone', 'languages', 'links', 
+        fields = ('name', 'born', 'mail', 'mail', 'phone', 'languages', 'link', 
             'about', 'current_goals', 'proffessional_description'
-        ]
+        )

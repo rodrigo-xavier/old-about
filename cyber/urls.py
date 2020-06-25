@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('cv.urls', namespace="CV")),
     path('blog/', include('blog.urls', namespace="Blog")),
     path('a/', admin.site.urls),
+    path('login/', views.login, name="Login"),
     path('admin/', views.admin, name="Admin"),
 ]
 

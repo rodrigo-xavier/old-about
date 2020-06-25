@@ -4,15 +4,10 @@
 {% block title %}{% trans "Form of Profile" %}{% endblock %}
 
 {% block extrastyle %}
-  <link type="text/css" rel="stylesheet" href="{% static 'css/profile/profile.css' %}">
-  <!-- Material Design Bootstrap -->
-  <link type="text/css" rel="stylesheet" href="{% static 'plugins/mdb/css/mdb.min.css' %}">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/profile/form_profile.css' %}">
 {% endblock %}
 
 {% block extrajs %}
-  <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="{% static 'plugins/mdb/js/mdb.min.js' %}"></script>
-
   <script src="{% static 'plugins/moment/moment.min.js' %}"></script>
   <script> 
     $(document).ready(function(){
@@ -25,27 +20,26 @@
 {% endblock %}
 
 {% block content %}
-
-  <div class="card card-primary">
-    <div class="card-header elegant-color-dark">
-      <h1 class="card-title"><b>{% trans "Profile" %}</b></h1>
-      <div class="card-tools">
-        <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-          <i class="fas fa-minus"></i>
-        </button>
+  <form role="form" method="post">
+    {% csrf_token %}
+    <div class="card card-primary">
+      <div class="card-header elegant-color-dark">
+        <h1 class="card-title"><b>{% trans "Profile" %}</b></h1>
+        <div class="card-tools">
+          <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
       </div>
-    </div>
 
 
-    <div class="card-body">
-      <form role="form" method="post">
-        {% csrf_token %}
+      <div class="card-body">
         <div class="row">
 
           <div class="col-xl-4">
             <div class="card blue-gradient">
               <div class="card-tools">
-                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
                 </button>
               </div>
@@ -82,7 +76,7 @@
           <div class="col-xl-4">
             <div class="card blue-gradient">
               <div class="card-tools">
-                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
                 </button>
               </div>
@@ -98,7 +92,7 @@
           <div class="col-xl-4">
             <div class="card blue-gradient">
               <div class="card-tools">
-                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
                 </button>
               </div>
@@ -115,59 +109,9 @@
             </div>
           </div>
         </div>
-      </form>
-    </div>
-    <div class="card-footer">
-      <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-  </div>
-  <div class="pb-4"></div>
-
-
-
-
-
-
-
-
-
-
-
-  <div class="card card-primary">
-    <div class="card-header elegant-color-dark">
-      <h1 class="card-title"><b>{% trans "Academic" %}</b></h1>
-      <div class="card-tools">
-        <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-          <i class="fas fa-minus"></i>
-        </button>
       </div>
     </div>
-
-    <div class="card-body">
-      <form role="form" method="post">
-        {% csrf_token %}
-        <div class="row">
-
-          <div class="col-xl-4">
-            <a href="#" class="small-box-footer">
-              <div style="text-align:center;">
-                <div class="small-box bg-info">
-                  <div class="icon p-3">
-                    <i class="fas fa-plus" style="position:static; text-align:center;"></i>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          
-        </div>        
-      </form>
-    </div>
-    <div class="card-footer">
-      <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-  </div>
-  <div class="pb-4"></div>
+    <div class="pb-4"></div>
 
 
 
@@ -176,19 +120,20 @@
 
 
 
-  <div class="card card-primary">
-    <div class="card-header elegant-color-dark">
-      <h1 class="card-title"><b>{% trans "Professional Experience" %}</b></h1>
-      <div class="card-tools">
-        <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-          <i class="fas fa-minus"></i>
-        </button>
+
+
+
+    <div class="card card-primary">
+      <div class="card-header elegant-color-dark">
+        <h1 class="card-title"><b>{% trans "Academic" %}</b></h1>
+        <div class="card-tools">
+          <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="card-body">
-      <form role="form" method="post">
-        {% csrf_token %}
+      <div class="card-body">
         <div class="row">
 
           <div class="col-xl-4">
@@ -203,36 +148,28 @@
             </a>
           </div>
         </div>
-      </form>
-    </div>
-    <div class="card-footer">
-      <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-  </div>
-  <div class="pb-4"></div>
-
-
-
-
-
-
-
-
-
-
-  <div class="card card-primary">
-    <div class="card-header elegant-color-dark">
-      <h1 class="card-title"><b>{% trans "Certifications" %}</b></h1>
-      <div class="card-tools">
-        <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-          <i class="fas fa-minus"></i>
-        </button>
       </div>
     </div>
+    <div class="pb-4"></div>
 
-    <div class="card-body">
-      <form role="form" method="post">
-        {% csrf_token %}
+
+
+
+
+
+
+
+    <div class="card card-primary">
+      <div class="card-header elegant-color-dark">
+        <h1 class="card-title"><b>{% trans "Professional Experience" %}</b></h1>
+        <div class="card-tools">
+          <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body">
         <div class="row">
 
           <div class="col-xl-4">
@@ -247,30 +184,57 @@
             </a>
           </div>
         </div>
-      </form>
+      </div>
     </div>
-    <div class="card-footer">
+    <div class="pb-4"></div>
+
+
+
+
+
+
+
+
+
+
+    <div class="card card-primary">
+      <div class="card-header elegant-color-dark">
+        <h1 class="card-title"><b>{% trans "Certifications" %}</b></h1>
+        <div class="card-tools">
+          <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-xl-4">
+            <a href="#" class="small-box-footer">
+              <div style="text-align:center;">
+                <div class="small-box bg-info">
+                  <div class="icon p-3">
+                    <i class="fas fa-plus" style="position:static; text-align:center;"></i>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+      </div>
     </div>
-  </div>
-  <div class="pb-4"></div>
-  
+    <div class="pb-4"></div>
+    
 
 
-<a class="btn-floating btn-lg btn-default"><i class="fas fa-bolt"></i></a>
-<a class="btn-floating btn-primary"><i class="fas fa-leaf"></i></a>
-<a class="btn-floating btn-sm btn-secondary"><i class="fas fa-star"></i></a>
 
-<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-  <a class="btn-floating btn-lg red">
-    <i class="fas fa-pencil-alt"></i>
-  </a>
-
-  <ul class="list-unstyled">
-    <li><a class="btn-floating red"><i class="fas fa-star"></i></a></li>
-    <li><a class="btn-floating yellow darken-1"><i class="fas fa-user"></i></a></li>
-    <li><a class="btn-floating green"><i class="fas fa-envelope"></i></a></li>
-    <li><a class="btn-floating blue"><i class="fas fa-shopping-cart"></i></a></li>
-  </ul>
-</div>
-
+    <button type="submit" style="position:fixed;bottom:65px;right:65px;">
+      <div class="float">
+        <i class="fas fa-save float-icon"></i>
+      </div>
+    </button>
+  </form>
 {% endblock %}

@@ -28,6 +28,7 @@ class Profile(models.Model):
                     )])
     languages = models.CharField(choices=LANGUAGES, verbose_name=_("Languages"), max_length=30) # Have to be a dict
     # fluency = models.ChoiceField(choices=[FLUENCY], verbose_name=_("Fluency"))
+    # nickname
     link = models.URLField(verbose_name=_("Other Platform"), max_length=100) # Have to be a dict
     about = models.TextField(verbose_name=_("About"), max_length=2000)
     current_goals = models.TextField(verbose_name=_("Current Goals"), max_length=1000) # Objetivos atuais
