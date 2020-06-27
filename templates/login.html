@@ -18,7 +18,7 @@
         <link type="text/css" rel="stylesheet" href="{% static 'plugins/adminlte/css/adminlte.min.css' %}">
         <!-- Material Design Bootstrap -->
         <link type="text/css" rel="stylesheet" href="{% static 'plugins/mdb/css/mdb.min.css' %}">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/admin/login.css' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/login/login.css' %}">
 
     </head>
 
@@ -36,18 +36,24 @@
                     <div class="card-body">
                         <div class="form-group">
                             <input autofocus type="text" class="form-control" maxlength="30"
-                                placeholder="{% trans "Enter your name" %}" required>
+                                placeholder="{% trans "Login" %}" required>
                         </div>
                         <div class="form-group">
                             <input autofocus type="password" class="form-control" maxlength="30"
-                                placeholder="{% trans "Enter your password" %}" required>
+                                placeholder="{% trans "Password" %}" required>
+                        </div>
+                        <div class="form-group">
+                            <a href="{% url "Login" %}">
+                                {% trans "Join" %}
+                            </a>
+                            <a style="align-content: flex-end;" href="{% url "Login" %}">
+                                {% trans "Forgot Password" %}
+                            </a>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn">
-                        <div class="">
-                            <i class="fas fa-broom" style="font-size: 50px;"></i>
-                        </div>
+                    <button type="submit" class="btn black login-btn">
+                        <i class="fas fa-check" style="font-size: 50px;"></i>
                     </button>
 
                 </div>
@@ -69,7 +75,5 @@
 
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="{% static 'plugins/mdb/js/mdb.min.js' %}"></script>
-
     </body>
-
 </html>

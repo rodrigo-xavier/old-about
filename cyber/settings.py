@@ -145,5 +145,12 @@ INTERNAL_IPS = config('INTERNAL_IPS')
 ADMINS = config("ADMINS")
 MANAGERS = config("MANAGERS")
 
-RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
-RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
+# EMAIL_HOST = config('EMAIL_HOST', default='localhost')
+# EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+# EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
+
+# RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
+# RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
+

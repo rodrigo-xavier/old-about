@@ -24,9 +24,9 @@ from django.conf.urls import (include, handler400, handler403, handler404, handl
 urlpatterns = [
     path('', include('cv.urls', namespace="CV")),
     path('blog/', include('blog.urls', namespace="Blog")),
-    path('a/', admin.site.urls),
     path('login/', views.login, name="Login"),
     path('admin/', views.admin, name="Admin"),
+    path('root/', admin.site.urls),
 ]
 
 if settings.DEBUG:

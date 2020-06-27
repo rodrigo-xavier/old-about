@@ -41,10 +41,17 @@
                 </a>
             </li>
             <li>
-                <a href="{% url "Admin" %}">
-                    <i class="fas fa-skull-crossbones"></i> {% trans "Admin" %}
+                <a href="{% url "Login" %}">
+                    <i class="fas fa-broom"></i> {% trans "Login" %}
                 </a>
             </li>
+            {% if request.user.is_superuser %}
+                <li>
+                    <a href="{% url "Admin" %}">
+                        <i class="fas fa-skull-crossbones"></i> {% trans "Admin" %}
+                    </a>
+                </li>
+            {% endif %}
         </ul>
     </nav>
 </div>
