@@ -44,9 +44,92 @@
                 </button>
               </div>
               <div class="card-body">
+                {% for field in form.visible_fields|slice:"0:6" %}
+                  <div class="form-group">
+                      {{ field.errors }}
+                      {{ field.label_tag }} {{ field }}
+                      {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                      {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="card blue-gradient">
+              <div class="card-tools">
+                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                {% for field in form.visible_fields|slice:"6:7" %}
+                  <div class="form-group">
+                      {{ field.errors }}
+                      {{ field.label_tag }} {{ field }}
+                      {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                      {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="card blue-gradient">
+              <div class="card-tools">
+                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                {% for field in form.visible_fields|slice:"7:9" %}
+                  <div class="form-group">
+                      {{ field.errors }}
+                      {{ field.label_tag }} {{ field }}
+                      {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                      {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pb-4"></div>
+
+
+
+
+
+<div class="card card-primary">
+      <div class="card-header elegant-color-dark">
+        <h1 class="card-title"><b>{% trans "Profile" %}</b></h1>
+        <div class="card-tools">
+          <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+
+
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-xl-4">
+            <div class="card blue-gradient">
+              <div class="card-tools">
+                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+              <div class="card-body">
                 <div class="form-group">
                   <label>{% trans "Name" %}</label>
-                  <input autofocus type="text" class="form-control" maxlength="30" placeholder="{% trans "Enter your name" %}" required>
+                  <input type="text" class="form-control" maxlength="30" placeholder="{% trans "Enter your name" %}" required>
                 </div>
                 <div class="form-group">
                   <label>{% trans "Born Date" %}</label>
@@ -63,12 +146,11 @@
                 <div class="form-group">
                   <label>{% trans "Fluency" %}</label>
                   <input type="text" class="form-control" placeholder="{% trans "Select languages you can speak" %}">
-                  {% comment %} TODO: add language level {% endcomment %}
                 </div>
                 <div class="form-group">
                   <label>{% trans "Links" %}</label>
                   <input type="text" class="form-control" placeholder="{% trans "Input your links" %}">
-                </div>
+                </div>                
               </div>
             </div>
           </div>
@@ -112,6 +194,15 @@
       </div>
     </div>
     <div class="pb-4"></div>
+
+
+
+
+
+
+
+
+
 
 
 

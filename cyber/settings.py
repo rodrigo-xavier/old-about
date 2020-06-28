@@ -33,10 +33,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'cv',
     'utils',
     'tests',
-    'debug_toolbar',
     'blog',
 ]
 
@@ -153,4 +153,3 @@ MANAGERS = config("MANAGERS")
 
 # RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
 # RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
-

@@ -4,6 +4,7 @@ from django.shortcuts import (render, get_object_or_404)
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 
+
 def profile(request):
     # profile = models.Profile.objects.all()
     return render(request, 'cv/profile.html', {})
@@ -11,8 +12,6 @@ def profile(request):
 def edit(request):
     if not request.user.is_superuser:
         raise PermissionDenied
-    
-    profile = get_object_or_404(models.Profile)
 
     if request.method == "POST":
         form = forms.ProfileForm(request.POST)
@@ -21,11 +20,15 @@ def edit(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = forms.ProfileForm()
+            return redirect("Profile")
+    elif request.method == "GET":
+        profile = models.Profile.objects.first()
 
-    form = forms.ProfileForm()
+        if not (profile is None):
+            form = forms.ProfileForm.objects.first()
+        else:
+            form = forms.ProfileForm()
+
     return render(request, 'cv/form_profile.html', {'form': form})
 
 def schedule(request):
