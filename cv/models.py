@@ -3,7 +3,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
-from datetime import date
+from datetime import date, timedelta
+
 
 class Profile(models.Model):
     LANGUAGES = [
@@ -19,7 +20,7 @@ class Profile(models.Model):
     ]
 
     name = models.CharField(verbose_name=_('Name'), max_length=30, default='')
-    born = models.DateField(verbose_name=_("Born"), unique=True, default=date.today)
+    born = models.DateField(verbose_name=_("Born"), unique=True, default=date.today() - timedelta(23*365))
     mail = models.EmailField(verbose_name=_("Mail"), max_length=255, unique=True, default='')
     phone = models.CharField(
             verbose_name=_('Phone'), max_length=13, unique=True,
@@ -29,7 +30,7 @@ class Profile(models.Model):
             )
         ], default=''
     )
-    languages = models.CharField(choices=LANGUAGES, verbose_name=_("Languages"), max_length=30, default='') # Have to be a dict
+    languages = models.CharField(choices=LANGUAGES, verbose_name=_("Languages"), max_length=30, default=0) # Have to be a dict
     # fluency = models.ChoiceField(choices=[FLUENCY], verbose_name=_("Fluency"))
     # nickname
     link = models.URLField(verbose_name=_("Other Platform"), max_length=100, default='') # Have to be a dict

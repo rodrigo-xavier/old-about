@@ -13,7 +13,14 @@ def edit(request):
     if not request.user.is_superuser:
         raise PermissionDenied
 
-    if request.method == "POST":
+    if request.method == "GET":
+        profile = models.Profile.objects.first()
+
+        if not (profile is None):
+            form = forms.ProfileForm.objects.first()
+        else:
+            form = forms.ProfileForm()
+    elif request.method == "POST":
         form = forms.ProfileForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
@@ -21,13 +28,6 @@ def edit(request):
             post.published_date = timezone.now()
             post.save()
             return redirect("Profile")
-    elif request.method == "GET":
-        profile = models.Profile.objects.first()
-
-        if not (profile is None):
-            form = forms.ProfileForm.objects.first()
-        else:
-            form = forms.ProfileForm()
 
     return render(request, 'cv/form_profile.html', {'form': form})
 
