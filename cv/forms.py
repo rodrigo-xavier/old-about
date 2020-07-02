@@ -14,6 +14,7 @@ class ProfileForm(forms.ModelForm):
             self.fields['name'].widget.attrs.update({
                     'placeholder': _("Enter your name"),
                     'autofocus': "",
+                    'value': 'loool'
                 }
             )
             self.fields['born'].widget.attrs.update({
@@ -22,10 +23,11 @@ class ProfileForm(forms.ModelForm):
             )
             self.fields['mail'].widget.attrs.update({
                     'placeholder': _("Enter your email"),
+                    'value': 'qualquercoisa@email.com'
                 }
             )
             self.fields['phone'].widget.attrs.update({
-                    'placeholder': _("Enter your phone. Ex: (00) 00000-0000"),
+                    'placeholder': _("Ex: (00) 00000-0000"),
                 }
             )
             self.fields['languages'].widget.attrs.update({

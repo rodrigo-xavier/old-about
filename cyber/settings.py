@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'phonenumber_field',
     'cv',
     'utils',
     'tests',
@@ -144,6 +145,9 @@ INTERNAL_IPS = config('INTERNAL_IPS')
 
 ADMINS = config("ADMINS")
 MANAGERS = config("MANAGERS")
+
+PHONENUMBER_DEFAULT_REGION = 'BR'
+PHONENUMBER_DB_FORMAT = 'INTERNATIONAL'
 
 # EMAIL_HOST = config('EMAIL_HOST', default='localhost')
 # EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)

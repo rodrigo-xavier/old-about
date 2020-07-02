@@ -3,6 +3,8 @@ from . import models
 from django.shortcuts import (render, get_object_or_404)
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
+from django.utils import timezone
+from django.shortcuts import redirect
 
 
 def profile(request):
@@ -23,11 +25,14 @@ def edit(request):
     elif request.method == "POST":
         form = forms.ProfileForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect("Profile")
+            try:
+                profileform = form.save(commit=False)
+                profileform.last = timezone.now()
+                profileform.save()
+                return redirect("cv:Profile")
+
+            except Exception as e:
+                print(e)            
 
     return render(request, 'cv/form_profile.html', {'form': form})
 
