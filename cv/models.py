@@ -3,9 +3,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from phonenumber_field.modelfields import PhoneNumberField
-
 
 
 class Profile(models.Model):
@@ -22,20 +21,24 @@ class Profile(models.Model):
     ]
 
     name = models.CharField(verbose_name=_('Name'), max_length=30, default='')
-    born = models.DateField(verbose_name=_("Born"), unique=True, default=date.today() - timedelta(23*365))
-    mail = models.EmailField(verbose_name=_("Mail"), max_length=255, unique=True, default='')
+    birth = models.DateField(verbose_name=_("Born"), default=date.today() - timedelta(23*365))
+    mail = models.EmailField(verbose_name=_("Mail"), max_length=255, default='')
     languages = models.PositiveSmallIntegerField(choices=LANGUAGES, verbose_name=_("Languages"), default=0) # Have to be a dict
-    phone = PhoneNumberField(verbose_name=_('Phone'), max_length=15)
+    phone = PhoneNumberField(verbose_name=_('Phone'), max_length=255)
     # fluency = models.ChoiceField(choices=[FLUENCY], verbose_name=_("Fluency"))
     # nickname
     link = models.URLField(verbose_name=_("Other Platform"), max_length=100, default='', blank=True) # Have to be a dict
     about = models.TextField(verbose_name=_("About"), max_length=2000, default='', blank=True)
     current_goals = models.TextField(verbose_name=_("Current Goals"), max_length=1000, default='', blank=True) # Objetivos atuais
     proffessional_description = models.TextField(verbose_name=_("Professional Description"), max_length=1000, default='', blank=True) # Descricao profissional (Pode nao ser necessario)
-    last = models.TimeField(verbose_name=_("Last Modification"), unique=True, default='')
+    last = models.DateTimeField(verbose_name=_("Last Modification"), unique=True, default=datetime.now)
 
     def __str__(self):
         return self.name
+    
+    @property
+    def age(self):
+        return int((datetime.now().date() - self.birth).days / 365.2425)
     
     class Meta:
         verbose_name = _("Profile")

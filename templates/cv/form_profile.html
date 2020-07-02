@@ -8,42 +8,13 @@
 {% endblock %}
 
 {% block extrajs %}
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function(){
-    $("input[type='tel']").each(function(){
-      $(this).on("change keyup paste", function (e){
-        var output,
-          $this = $(this),
-          input = $this.val();
-
-        if(e.keyCode != 8) {
-          input = input.replace(/[^0-9]/g, '');
-          var area = input.substr(0, 2);
-          var pre = input.substr(2, 5);
-          var tel = input.substr(7, 5);
-          if (area.length < 2) {
-            output = "(" + area;
-          } else if (area.length == 2 && pre.length < 5) {
-            output = "(" + area + ")" + " " + pre;
-          } else if (area.length == 2 && pre.length == 5) {
-            output = "(" + area + ")" + " " + pre + "-" + tel;
-          }
-          $this.val(output);
-        }
-      });
-    });
-
-    $("button").click(function(){
-      $("tel").replace(/\D/g,'');
-    });
-  });
-</script>
+  <script type="text/javascript" src="{% static 'js/profile/form_profile.js' %}"></script>
 {% endblock %}
 
 {% block content %}
   <form role="form" method="post">
     {% csrf_token %}
-    <div class="card card-primary">
+    <div class="card card-primary collapsed-card">
       <div class="card-header elegant-color-dark">
         <h1 class="card-title"><b>{% trans "Profile" %}</b></h1>
         <div class="card-tools">
@@ -52,11 +23,8 @@
           </button>
         </div>
       </div>
-
-
       <div class="card-body">
         <div class="row">
-
           <div class="col-xl-4">
             <div class="card blue-gradient">
               <div class="card-tools">
@@ -143,64 +111,6 @@
 
 
 
-
-
-    {% comment %} <div class="form-group">
-      <label>{% trans "Name" %}</label>
-      <input type="text" class="form-control" maxlength="30" placeholder="{% trans "Enter your name" %}" required>
-    </div>
-    <div class="form-group">
-      <label>{% trans "Born Date" %}</label>
-      <input id="born_date" type="date" class="form-control" value="" required>
-    </div>
-    <div class="form-group">
-      <label>{% trans "Email Address" %}</label>
-      <input type="email" class="form-control" maxlength="255" placeholder="{% trans "Enter your email" %}" required>
-    </div>
-    <div class="form-group">
-      <label>{% trans "Phone" %}</label>
-      <input type="tel" class="form-control" maxlength="13" placeholder="{% trans "Enter your phone. Ex: (00) 00000-0000" %}" pattern="r'^\d{9,13}$'" required>
-    </div>
-    <div class="form-group">
-      <label>{% trans "Fluency" %}</label>
-      <input type="text" class="form-control" placeholder="{% trans "Select languages you can speak" %}">
-    </div>
-    <div class="form-group">
-      <label>{% trans "Links" %}</label>
-      <input type="text" class="form-control" placeholder="{% trans "Input your links" %}">
-    </div>                
-    <div class="form-group">
-      <label>{% trans "About" %}</label>
-      <textarea class="form-control" maxlength="2000" rows="19" placeholder="{% trans "Describe yourself" %}">{% lorem 250 w random %}</textarea>
-    </div>
-    <div class="form-group">
-      <label>{% trans "Current Goals" %}</label>
-      <textarea class="form-control" maxlength="1000" rows="8" placeholder="{% trans "Describe your current goals" %}">{% lorem 130 w random %}</textarea>
-    </div>
-    <div class="form-group">
-      <label>{% trans "Professional Description" %}</label>
-      <textarea class="form-control" maxlength="1000" rows="8" placeholder="{% trans "Tell about your professional profile" %}">{% lorem 130 w random %}</textarea>
-    </div> {% endcomment %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="card card-primary">
       <div class="card-header elegant-color-dark">
         <h1 class="card-title"><b>{% trans "Academic" %}</b></h1>
@@ -216,6 +126,7 @@
 
           <div class="col-xl-4">
             <a href="#" class="small-box-footer">
+            <button  class="small-box-footer" >
               <div style="text-align:center;">
                 <div class="small-box bg-info">
                   <div class="icon p-3">
@@ -223,6 +134,7 @@
                   </div>
                 </div>
               </div>
+            </button>
             </a>
           </div>
         </div>
@@ -309,7 +221,7 @@
 
 
 
-    <button onclick="" type="submit" style="position:fixed;bottom:65px;right:65px;">
+    <button onclick="remove_non_number();" type="submit" style="position:fixed;bottom:65px;right:65px;">
       <div class="float">
         <i class="fas fa-save float-icon"></i>
       </div>

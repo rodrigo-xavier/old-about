@@ -14,20 +14,19 @@ class ProfileForm(forms.ModelForm):
             self.fields['name'].widget.attrs.update({
                     'placeholder': _("Enter your name"),
                     'autofocus': "",
-                    'value': 'loool'
                 }
             )
-            self.fields['born'].widget.attrs.update({
+            self.fields['birth'].widget.attrs.update({
                     'value':'2019-01-01'
                 }
             )
             self.fields['mail'].widget.attrs.update({
                     'placeholder': _("Enter your email"),
-                    'value': 'qualquercoisa@email.com'
                 }
             )
             self.fields['phone'].widget.attrs.update({
                     'placeholder': _("Ex: (00) 00000-0000"),
+                    'maxlength':'15',
                 }
             )
             self.fields['languages'].widget.attrs.update({
@@ -56,9 +55,9 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = models.Profile
-        fields = ('name', 'born', 'mail', 'phone', 'languages', 'link', 
+        fields = ('name', 'birth', 'mail', 'phone', 'languages', 'link', 
             'about', 'current_goals', 'proffessional_description'
         )
         widgets = {
-            'born': forms.DateInput(attrs={'type': 'date'})
+            'birth': forms.DateInput(attrs={'type': 'date'})
         }

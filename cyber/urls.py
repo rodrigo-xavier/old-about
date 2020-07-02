@@ -26,7 +26,7 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace="Blog")),
     path('login/', views.login, name="Login"),
     path('admin/', views.admin, name="Admin"),
-    path('root/', admin.site.urls),
+    path('root/', admin.site.urls, name="root"),
 ]
 
 if settings.DEBUG:
