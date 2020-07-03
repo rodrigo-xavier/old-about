@@ -33,7 +33,7 @@
                 </button>
               </div>
               <div class="card-body">
-                {% for field in form.visible_fields|slice:"0:6" %}
+                {% for field in profile.visible_fields|slice:"0:6" %}
                   <div class="form-group">
                       {{ field.label_tag }} 
                       {{ field }}
@@ -59,7 +59,7 @@
                 </button>
               </div>
               <div class="card-body">
-                {% for field in form.visible_fields|slice:"6:7" %}
+                {% for field in profile.visible_fields|slice:"6:7" %}
                   <div class="form-group">
                       {{ field.label_tag }} 
                       {{ field }}
@@ -85,7 +85,7 @@
                 </button>
               </div>
               <div class="card-body">
-                {% for field in form.visible_fields|slice:"7:9" %}
+                {% for field in profile.visible_fields|slice:"7:9" %}
                   <div class="form-group">
                       {{ field.label_tag }} 
                       {{ field }}
@@ -107,46 +107,6 @@
       </div>
     </div>
     <div class="pb-4"></div>
-
-
-
-
-    <div class="card card-primary">
-      <div class="card-header elegant-color-dark">
-        <h1 class="card-title"><b>{% trans "Academic" %}</b></h1>
-        <div class="card-tools">
-          <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="card-body">
-        <div class="row">
-
-          <div class="col-xl-4">
-            <a href="#" class="small-box-footer">
-            <button  class="small-box-footer" >
-              <div style="text-align:center;">
-                <div class="small-box bg-info">
-                  <div class="icon p-3">
-                    <i class="fas fa-plus" style="position:static; text-align:center;"></i>
-                  </div>
-                </div>
-              </div>
-            </button>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="pb-4"></div>
-
-
-
-
-
-
 
 
     <div class="card card-primary">
@@ -163,20 +123,55 @@
         <div class="row">
 
           <div class="col-xl-4">
-            <a href="#" class="small-box-footer">
+            <button class="btn btn-lg btn-info waves-effect" type="submit" name="xp">
               <div style="text-align:center;">
-                <div class="small-box bg-info">
-                  <div class="icon p-3">
-                    <i class="fas fa-plus" style="position:static; text-align:center;"></i>
-                  </div>
-                </div>
+                <i class="fas fa-plus" style="position:static; text-align:center; font-size:25px;"></i>
               </div>
-            </a>
+            </button>
           </div>
         </div>
       </div>
     </div>
     <div class="pb-4"></div>
+
+
+
+
+
+
+    <div class="card card-primary">
+      <div class="card-header elegant-color-dark">
+        <h1 class="card-title"><b>{% trans "Education" %}</b></h1>
+        <div class="card-tools">
+          <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-xl-4">
+            <button type="button" name="new_education" class="btn btn-primary">
+              <div style="text-align:center;">
+                <i class="fas fa-plus" style="position:static; text-align:center; font-size:25px;"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pb-4"></div>
+
+
+
+
+
+
+
+
+    
 
 
 
@@ -221,7 +216,7 @@
 
 
 
-    <button onclick="remove_non_number();" type="submit" style="position:fixed;bottom:65px;right:65px;">
+    <button onclick="clean_phone();" type="submit" name="save" style="position:fixed;bottom:65px;right:65px;">
       <div class="float">
         <i class="fas fa-save float-icon"></i>
       </div>

@@ -52,6 +52,17 @@ class ProfileForm(forms.ModelForm):
                     'rows': 8,
                 }
             )
+    
+    def clean(self):
+        cleaned_data = super(ProfileForm, self).clean()
+        name = cleaned_data['name'].split(" ")
+        name = "".join(name)
+        if not (name.isalpha()):
+            self.add_error('name', _('must be alphanumeric'))
+            raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
+
+        return cleaned_data
+
 
     class Meta:
         model = models.Profile
@@ -61,3 +72,102 @@ class ProfileForm(forms.ModelForm):
         widgets = {
             'birth': forms.DateInput(attrs={'type': 'date'})
         }
+
+
+class XPForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(XPForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+            # self.fields['profile'].widget.attrs.update({
+            #         'placeholder': _("Enter your name"),
+            #         'autofocus': "",
+            #     }
+            # )
+            self.fields['company'].widget.attrs.update({
+                }
+            )
+            self.fields['role'].widget.attrs.update({
+                }
+            )
+            self.fields['main_activities'].widget.attrs.update({
+                }
+            )
+            self.fields['from_period'].widget.attrs.update({
+                }
+            )
+            self.fields['until_period'].widget.attrs.update({
+                }
+            )
+
+    class Meta:
+        model = models.XP
+        fields = ('profile', 'company', 'role', 'main_activities',
+            'from_period', 'until_period'
+        )
+
+
+class EducationForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(EducationForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+            # self.fields['profile'].widget.attrs.update({
+            #         'placeholder': _("Enter your name"),
+            #         'autofocus': "",
+            #     }
+            # )
+            self.fields['institution'].widget.attrs.update({
+                }
+            )
+            self.fields['description'].widget.attrs.update({
+                }
+            )
+            self.fields['from_period'].widget.attrs.update({
+                }
+            )
+            self.fields['until_period'].widget.attrs.update({
+                }
+            )
+
+    class Meta:
+        model = models.Education
+        fields = ('profile', 'institution', 'description',
+            'from_period', 'until_period'
+        )
+
+
+class AdditionalEducationForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(AdditionalEducationForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+            # self.fields['profile'].widget.attrs.update({
+            #         'placeholder': _("Enter your name"),
+            #         'autofocus': "",
+            #     }
+            # )
+            self.fields['institution'].widget.attrs.update({
+                }
+            )
+            self.fields['description'].widget.attrs.update({
+                }
+            )
+            self.fields['from_period'].widget.attrs.update({
+                }
+            )
+            self.fields['until_period'].widget.attrs.update({
+                }
+            )
+            self.fields['duration'].widget.attrs.update({
+                }
+            )
+
+    class Meta:
+        model = models.AdditionalEducation
+        fields = ('profile', 'institution', 'description',
+            'from_period', 'until_period', 'duration'
+        )

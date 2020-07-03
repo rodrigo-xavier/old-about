@@ -9,7 +9,7 @@
     {% comment %} TODO: Inserir icone de download {% endcomment %}
   <div>
     {% if request.user.is_superuser %}
-      <a href="{% url "CV:Edit" %}" class="badge badge-success nav-link" title="Edit" style="color:white">Edit</a>
+      <a href="{% url "CV:Edit" name=profile.first_name %}" class="badge badge-success nav-link" title="Edit" style="color:white">Edit</a>
     {% endif %}
     <a href="" class="badge badge-success nav-link" title="Get Curriculum" style="color:white">Get Curriculum</a>
   </div>
