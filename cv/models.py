@@ -46,6 +46,10 @@ class Profile(models.Model):
     def first_name(self):
         return self.name.split(' ')[0]
 
+    @property
+    def last_name(self):
+        return self.name.split(' ')[-1]
+
     def clean(self):
         super(Profile, self).clean()
 
@@ -85,8 +89,8 @@ class Education(models.Model):
     profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
     institution = models.CharField(verbose_name=_("Institution"), max_length=100, default='')
     description = models.TextField(verbose_name=_("Description"), max_length=1000, default='')
-    from_period = models.DateField(verbose_name=_("From Period"), default=timezone.now)
-    until_period = models.DateField(verbose_name=_("Until Period"), default=timezone.now)
+    from_period = models.DateField(verbose_name=_("From Period"), default=timezone.now, null=True)
+    until_period = models.DateField(verbose_name=_("Until Period"), default=timezone.now, null=True)
 
     def __str__(self):
         return self.institution
@@ -103,11 +107,11 @@ class AdditionalEducation(Education):
     def clean(self):
         self.from_period = None
         self.until_period = None
-        return super.clean()
+        return super(AdditionalEducation, self).clean()
     
     def save(self, *args, **kwargs):
         self.clean()
-        return super().save(*args, **kwargs)
+        return super(AdditionalEducation, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = _("Additional Education")

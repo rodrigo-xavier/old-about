@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-  <form role="form" method="post">
+  <form role="form" method="post" action="{% url 'cv:Edit Profile' %}">
     {% csrf_token %}
     <div class="card card-primary collapsed-card">
       <div class="card-header elegant-color-dark">
@@ -33,7 +33,7 @@
                 </button>
               </div>
               <div class="card-body">
-                {% for field in profile.visible_fields|slice:"0:6" %}
+                {% for field in form.profile.visible_fields|slice:"0:6" %}
                   <div class="form-group">
                       {{ field.label_tag }} 
                       {{ field }}
@@ -59,7 +59,7 @@
                 </button>
               </div>
               <div class="card-body">
-                {% for field in profile.visible_fields|slice:"6:7" %}
+                {% for field in form.profile.visible_fields|slice:"6:7" %}
                   <div class="form-group">
                       {{ field.label_tag }} 
                       {{ field }}
@@ -85,7 +85,7 @@
                 </button>
               </div>
               <div class="card-body">
-                {% for field in profile.visible_fields|slice:"7:9" %}
+                {% for field in form.profile.visible_fields|slice:"7:9" %}
                   <div class="form-group">
                       {{ field.label_tag }} 
                       {{ field }}
@@ -106,9 +106,21 @@
         </div>
       </div>
     </div>
-    <div class="pb-4"></div>
+  </form>
+  <div class="pb-4"></div>
 
 
+
+
+
+
+
+
+
+
+
+  <form role="form" method="post" action="{% url 'cv:Edit XP' %}">
+    {% csrf_token %}
     <div class="card card-primary">
       <div class="card-header elegant-color-dark">
         <h1 class="card-title"><b>{% trans "Professional Experience" %}</b></h1>
@@ -120,6 +132,23 @@
       </div>
 
       <div class="card-body">
+        {% comment %} {% for xp in form.xp  %} {% endcomment %}
+          {% for field in xp %}
+            <div class="form-group">
+                {{ field.label_tag }} 
+                {{ field }}
+                {% if field.errors %}
+                  <div class="alert alert-danger red"  style="font-size:13px;">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      {{ field.errors|striptags }}<br>
+                  </div>
+                {% endif %}
+                {% if field.help_text %}
+                  <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+          {% endfor %}
+        {% comment %} {% endfor %} {% endcomment %}
         <div class="row">
 
           <div class="col-xl-4">
@@ -132,7 +161,9 @@
         </div>
       </div>
     </div>
-    <div class="pb-4"></div>
+  </form>
+  <div class="pb-4"></div>
+  
 
 
 

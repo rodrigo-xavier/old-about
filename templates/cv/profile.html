@@ -9,7 +9,7 @@
     {% comment %} TODO: Inserir icone de download {% endcomment %}
   <div>
     {% if request.user.is_superuser %}
-      <a href="{% url "CV:Edit" name=profile.first_name %}" class="badge badge-success nav-link" title="Edit" style="color:white">Edit</a>
+      <a href="{% url "CV:Edit Profile" %}" class="badge badge-success nav-link" title="Edit" style="color:white">Edit</a>
     {% endif %}
     <a href="" class="badge badge-success nav-link" title="Get Curriculum" style="color:white">Get Curriculum</a>
   </div>
@@ -23,7 +23,7 @@
       <div>
         <h3 class="card-title">
         {% comment %} TODO: Adicionar idade atraves do banco {% endcomment %}
-          <i style="padding: 0px 12px;" class="fas fa-male"></i><b><i>{{ profile.name }}, {{ profile.age }}</i></b><br>
+          <i style="padding: 0px 12px;" class="fas fa-male"></i><b><i>{{ profile.first_name }} {{ profile.last_name }}, {{ profile.age }}</i></b><br>
           <i style="padding: 0px 12px;" class="fas fa-building"></i><b><i>{% lorem 1 w random %}</i></b><br>
           <i style="padding: 0px 12px;" class="fas fa-home"></i><b><i>{% lorem 1 w random %}, {% lorem 1 w random %}</i></b>
         </h3>
