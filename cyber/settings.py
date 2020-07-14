@@ -92,9 +92,10 @@ WSGI_APPLICATION = 'cyber.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': config('ENGINE'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'OPTIONS': {
-            'read_default_file': config('DATABASE_CONF'),
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+            # 'read_default_file': config('DATABASE_CONF'),
+            # 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         },
     }
 }
