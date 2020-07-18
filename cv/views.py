@@ -17,6 +17,47 @@ def profile(request):
 
 
 @login_required(login_url='/root/')
+def edit(request, **kwargs):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
+    form = {}
+
+    profile = models.Profile.objects.first()
+    xp = models.XP.objects.all()
+    education = models.Education.objects.all()
+    additional_education = models.AdditionalEducation.objects.all()
+
+    if request.method == "GET":
+        if not (profile is None):
+            _profile = forms.ProfileForm(instance=profile)
+        else:
+            _profile = forms.ProfileForm()
+
+        if not (xp is None):
+            _xp = forms.XPForm(instance=xp)
+        else:
+            _xp = forms.XPForm()
+
+        if not (education is None):
+            _education = forms.EducationForm(instance=education)
+        else:
+            _education = forms.EducationForm()
+
+        if not (additional_education is None):
+            _additional_education = forms.AdditionalEducationForm(instance=additional_education)
+        else:
+            _additional_education = forms.AdditionalEducationForm()
+        
+    
+    form['profile'] = _profile
+    form['xp'] = _xp
+    form['education'] = _education
+    form['additional_education'] = _additional_education
+
+    return render(request, 'cv/form_profile.html', {'form': form})
+
+@login_required(login_url='/root/')
 def edit_profile(request, **kwargs):
     if not request.user.is_superuser:
         raise PermissionDenied
@@ -24,7 +65,7 @@ def edit_profile(request, **kwargs):
     form = {}
 
     profile = models.Profile.objects.first()
-    xp = models.XP.objects.first().profile.xp_set.all()
+    # xp = models.XP.objects.first().profile.xp_set.all()
     # education = models.Education.objects.all()
     # additional_education = models.AdditionalEducation.objects.all()
 
@@ -46,7 +87,7 @@ def edit_profile(request, **kwargs):
                 print(e)
     
     form['profile'] = profileform
-    form['xp'] = xp
+    # form['xp'] = xp
     # form['education'] = education
     # form['additional_education'] = profileform
 
@@ -58,31 +99,18 @@ def edit_xp(request, **kwargs):
     if not request.user.is_superuser:
         raise PermissionDenied
 
-    form = {}
-
-    xp = models.XP()
-    
-
-    if request.method == "GET":
-        if not (xp is None):
-            xpform = forms.XPForm(instance=xp)
-        else:
-            xpform = forms.XPForm()
-
-    elif request.method == "POST":
-        xpform = forms.XPForm(request.POST, instance=xp)
-        if xpform.is_valid():
+    if request.method == "POST":
+        _xp = forms.XPForm(request.POST, instance=xp)
+        if _xp.is_valid():
             try:
-                xpform = xpform.save(commit=False)
-                xpform.save()
+                _xp = _xp.save(commit=False)
+                _xp.save()
                 return redirect("cv:Profile")
 
             except Exception as e:
                 print(e)
-    
-    form['xp'] = xpform
 
-    return render(request, 'cv/form_profile.html', {'xp': xpform})
+    return redirect("cv:Edit")
 
 
 # @login_required(login_url='/root/')

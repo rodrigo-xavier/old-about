@@ -47,4 +47,8 @@ $(document).ready(function(){
     function clean_phone(){
         $("tel").replace(/\D/g,'');
     }
+
+    $("button[name='save']").click(function () {
+        $(".cv").trigger('submit');
+    });
   });

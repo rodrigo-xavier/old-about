@@ -49,16 +49,16 @@ class Profile(models.Model):
     @property
     def last_name(self):
         return self.name.split(' ')[-1]
+    
+    def capitalize(self, words):
+        uppercase = ""
+        for n in words:
+            uppercase += n.capitalize() + " "
+        return uppercase[0:-1]
 
     def clean(self):
-        super(Profile, self).clean()
-
-        uppercase = ""
-        name = self.name.split(' ')
-        for n in name:
-            uppercase += n.capitalize() + " "
-        
-        self.name = uppercase[0:-1]
+        super(Profile, self).clean()       
+        self.name = self.capitalize(self.name.split(' '))
     
     def save(self, *args, **kwargs):
         self.clean()
