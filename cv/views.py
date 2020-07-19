@@ -52,31 +52,25 @@ def edit_xp(request):
     if not request.user.is_superuser:
         raise PermissionDenied
     
+    
     profile = models.Profile.objects.first()
 
+    extra = 1 + int(request.POST.get('new')) if request.POST.get('new') else 0
     xp = inlineformset_factory(
         parent_model=models.Profile,
         model=models.XP,
         form=forms.XPForm,
         exclude=('profile',),
-        extra=profile.xp_set.count()+3,
+        extra=profile.xp_set.count() + extra,
         max_num=15,
     )
     
     if request.method == "GET":
         _xp = xp()
     elif request.method == "POST":
-        _xp = forms.XPForm(request.POST, instance=xp)
-        if _xp.is_valid():
-            try:
-                _xp = _xp.save(commit=False)
-                _xp.save()
-                return redirect("cv:Edit XP")
+        _xp = xp()
 
-            except Exception as e:
-                print(e)
-
-    return render(request, 'cv/edit_xp.html', {'xp': _xp})
+    return render(request, 'cv/edit_xp.html', {'xp': _xp, 'extra': extra})
 
 
 @login_required(login_url='/root/')

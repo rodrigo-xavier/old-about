@@ -82,6 +82,7 @@ class XPForm(forms.ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
             self.fields['company'].widget.attrs.update({
+                    'placeholder': _("Enter company name"),
                 }
             )
             self.fields['role'].widget.attrs.update({
