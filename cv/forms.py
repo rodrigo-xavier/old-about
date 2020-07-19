@@ -66,7 +66,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = models.Profile
-        fields = ('name', 'birth', 'mail', 'phone', 'languages', 'link', 
+        fields = ('name', 'birth', 'mail', 'phone', 'languages', 'link',
             'about', 'current_goals', 'proffessional_description'
         )
         widgets = {
@@ -75,16 +75,10 @@ class ProfileForm(forms.ModelForm):
 
 
 class XPForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         super(XPForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
-            # self.fields['profile'].widget.attrs.update({
-            #         'placeholder': _("Enter your name"),
-            #         'autofocus': "",
-            #     }
-            # )
             self.fields['company'].widget.attrs.update({
                 }
             )
@@ -100,25 +94,19 @@ class XPForm(forms.ModelForm):
             self.fields['until_period'].widget.attrs.update({
                 }
             )
-
+    
     class Meta:
-        model = models.XP
-        fields = ('profile', 'company', 'role', 'main_activities',
-            'from_period', 'until_period'
-        )
+        widgets = {
+            'from_period': forms.DateInput(attrs={'type': 'date'}),
+            'until_period': forms.DateInput(attrs={'type': 'date'})
+        }
 
 
 class EducationForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         super(EducationForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
-            # self.fields['profile'].widget.attrs.update({
-            #         'placeholder': _("Enter your name"),
-            #         'autofocus': "",
-            #     }
-            # )
             self.fields['institution'].widget.attrs.update({
                 }
             )
@@ -132,24 +120,12 @@ class EducationForm(forms.ModelForm):
                 }
             )
 
-    class Meta:
-        model = models.Education
-        fields = ('profile', 'institution', 'description',
-            'from_period', 'until_period'
-        )
-
 
 class AdditionalEducationForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         super(AdditionalEducationForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
-            # self.fields['profile'].widget.attrs.update({
-            #         'placeholder': _("Enter your name"),
-            #         'autofocus': "",
-            #     }
-            # )
             self.fields['institution'].widget.attrs.update({
                 }
             )
@@ -165,9 +141,3 @@ class AdditionalEducationForm(forms.ModelForm):
             self.fields['duration'].widget.attrs.update({
                 }
             )
-
-    class Meta:
-        model = models.AdditionalEducation
-        fields = ('profile', 'institution', 'description',
-            'from_period', 'until_period', 'duration'
-        )

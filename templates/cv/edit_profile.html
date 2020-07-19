@@ -4,19 +4,17 @@
 {% block title %}{% trans "Form of Profile" %}{% endblock %}
 
 {% block extrastyle %}
-  <link type="text/css" rel="stylesheet" href="{% static 'css/profile/form_profile.css' %}">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/profile/edit.css' %}">
 {% endblock %}
 
 {% block extrajs %}
-  <script type="text/javascript" src="{% static 'js/profile/form_profile.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/profile/edit.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-
-{% comment %} PROFILE {% endcomment %}
   <form class="cv" role="form" method="post" action="{% url 'cv:Edit Profile' %}">
     {% csrf_token %}
-    <div class="card card-primary collapsed-card">
+    <div class="card card-primary">
       <div class="card-header elegant-color-dark">
         <h1 class="card-title"><b>{% trans "Profile" %}</b></h1>
         <div class="card-tools">
@@ -108,153 +106,10 @@
         </div>
       </div>
     </div>
+    <button onclick="clean_phone();" type="submit" name="save" style="position:fixed;bottom:65px;right:65px;">
+        <div class="float">
+        <i class="fas fa-save float-icon"></i>
+        </div>
+    </button>
   </form>
-
-  <div class="pb-4"></div>
-
-
-
-
-
-
-
-
-
-
-{% comment %} PROFESSIONAL EXPERIENCE {% endcomment %}
-  <form class="cv" role="form" method="post" action="{% url 'cv:Edit XP' %}">
-    {% csrf_token %}
-    <div class="card card-primary">
-      <div class="card-header elegant-color-dark">
-        <h1 class="card-title"><b>{% trans "Professional Experience" %}</b></h1>
-        <div class="card-tools">
-          <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="card-body">
-        {% comment %} {% for xp in form.xp  %} {% endcomment %}
-          {% for field in xp %}
-            <div class="form-group">
-                {{ field.label_tag }}
-                {{ field }}
-                {% if field.errors %}
-                  <div class="alert alert-danger red"  style="font-size:13px;">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      {{ field.errors|striptags }}<br>
-                  </div>
-                {% endif %}
-                {% if field.help_text %}
-                  <p class="help">{{ field.help_text|safe }}</p>
-                {% endif %}
-            </div>
-          {% endfor %}
-        {% comment %} {% endfor %} {% endcomment %}
-        <div class="row">
-          <div class="col-xl-4">
-            <button class="btn btn-lg btn-info waves-effect" type="submit" name="xp">
-              <div style="text-align:center;">
-                <i class="fas fa-plus" style="position:static; text-align:center; font-size:25px;"></i>
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-
-  <div class="pb-4"></div>
-  
-
-
-
-
-
-{% comment %} EDUCATION {% endcomment %}
-  <div class="card card-primary">
-    <div class="card-header elegant-color-dark">
-      <h1 class="card-title"><b>{% trans "Education" %}</b></h1>
-      <div class="card-tools">
-        <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
-          <i class="fas fa-minus"></i>
-        </button>
-      </div>
-    </div>
-
-    <div class="card-body">
-      <div class="row">
-
-        <div class="col-xl-4">
-          <button type="button" name="new_education" class="btn btn-primary">
-            <div style="text-align:center;">
-              <i class="fas fa-plus" style="position:static; text-align:center; font-size:25px;"></i>
-            </div>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="pb-4"></div>
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-{% comment %} CERTIFICATIONS {% endcomment %}
-  <div class="card card-primary">
-    <div class="card-header elegant-color-dark">
-      <h1 class="card-title"><b>{% trans "Certifications" %}</b></h1>
-      <div class="card-tools">
-        <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
-          <i class="fas fa-minus"></i>
-        </button>
-      </div>
-    </div>
-
-    <div class="card-body">
-      <div class="row">
-
-        <div class="col-xl-4">
-          <a href="#" class="small-box-footer">
-            <div style="text-align:center;">
-              <div class="small-box bg-info">
-                <div class="icon p-3">
-                  <i class="fas fa-plus" style="position:static; text-align:center;"></i>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="card-footer">
-    </div>
-  </div>
-
-  <div class="pb-4"></div>
-    
-
-
-
-  <button onclick="clean_phone();" type="submit" name="save" style="position:fixed;bottom:65px;right:65px;">
-    <div class="float">
-      <i class="fas fa-save float-icon"></i>
-    </div>
-  </button>
 {% endblock %}

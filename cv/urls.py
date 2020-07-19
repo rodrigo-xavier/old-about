@@ -8,5 +8,7 @@ urlpatterns = [
     path('cv/edit/', views.edit, name="Edit"),
     path('cv/edit/profile', views.edit_profile, name="Edit Profile"),
     path('cv/edit/xp', views.edit_xp, name="Edit XP"),
+    path('cv/edit/education', views.edit_education, name="Edit Education"),
+    path('cv/edit/additional_education', views.edit_additional_education, name="Edit Additional Education"),
     path('schedule/', views.schedule, name="Schedule"),
 ]

@@ -1,0 +1,23 @@
+{% extends "starter.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans "Edit" %}{% endblock %}
+
+{% block content %}
+  <div class="row">
+  <div class="col-xl-3" style="height: 100px;">
+    <a class="h-100 form-control btn btn-primary waves-effect" href="{% url "CV:Edit Profile" %}">
+      <h3>Edit Profile</h3>
+    </a>
+  </div>
+    <div class="col-xl-3">
+      <a class="form-control btn btn-danger waves-effect" href="{% url "CV:Edit XP" %}">Edit XP</a>
+    </div>
+    <div class="col-xl-3">
+      <a class="form-control btn btn-success waves-effect" href="{% url "CV:Edit Education" %}">Edit Education</a>
+    </div>
+    <div class="col-xl-3">
+      <a class="form-control btn btn-warning waves-effect" href="{% url "CV:Edit Additional Education" %}">Edit Additional Education</a>
+    </div>
+  </div>
+{% endblock %}
