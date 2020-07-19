@@ -47,4 +47,6 @@ $(document).ready(function(){
     function clean_phone(){
         $("tel").replace(/\D/g,'');
     }
+
+    $('input,textarea,select').filter('[required]').parent().parent().find("label").append("*");
   });

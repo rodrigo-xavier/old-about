@@ -12,6 +12,7 @@
 {% endblock %}
 
 {% block content %}
+  {% include "cv/buttons.html" %}
   <form class="cv" role="form" method="post" action="{% url 'cv:Edit Education' %}">
     {% csrf_token %}
     <div class="card card-primary">
@@ -35,7 +36,7 @@
               </div>
 
               <div class="card-body">
-                {% for field in form.education %}
+                {% for field in education %}
                   <div class="form-group">
                       {{ field.label_tag }} 
                       {{ field }}

@@ -17,21 +17,13 @@ def profile(request):
 
 
 
-@login_required(login_url='/root/')
-def edit(request, **kwargs):
-    if not request.user.is_superuser:
-        raise PermissionDenied
-
-    return render(request, 'cv/edit.html', {})
 
 
 
 @login_required(login_url='/root/')
-def edit_profile(request, **kwargs):
+def edit_profile(request):
     if not request.user.is_superuser:
         raise PermissionDenied
-
-    form = {}
 
     profile = models.Profile.objects.first()
 
@@ -47,54 +39,50 @@ def edit_profile(request, **kwargs):
             try:
                 _profile = _profile.save(commit=False)
                 _profile.save()
-                return redirect("cv:Edit")
+                return redirect("cv:Edit Profile")
 
             except Exception as e:
                 print(e)
-    
-    form['profile'] = _profile
 
-    return render(request, 'cv/edit_profile.html', {'form': form})
+    return render(request, 'cv/edit_profile.html', {'profile': _profile})
 
 
 @login_required(login_url='/root/')
-def edit_xp(request, **kwargs):
+def edit_xp(request):
     if not request.user.is_superuser:
         raise PermissionDenied
     
-    form = {}
+    profile = models.Profile.objects.first()
 
     xp = inlineformset_factory(
         parent_model=models.Profile,
         model=models.XP,
         form=forms.XPForm,
         exclude=('profile',),
-        extra=1,
+        extra=profile.xp_set.count()+3,
         max_num=15,
     )
     
     if request.method == "GET":
         _xp = xp()
-    else:
+    elif request.method == "POST":
         _xp = forms.XPForm(request.POST, instance=xp)
         if _xp.is_valid():
             try:
                 _xp = _xp.save(commit=False)
                 _xp.save()
-                return redirect("cv:Edit")
+                return redirect("cv:Edit XP")
 
             except Exception as e:
                 print(e)
 
-    return render(request, 'cv/edit_xp.html', {'form': form})
+    return render(request, 'cv/edit_xp.html', {'xp': _xp})
 
 
 @login_required(login_url='/root/')
-def edit_education(request, **kwargs):
+def edit_education(request):
     if not request.user.is_superuser:
         raise PermissionDenied
-    
-    form = {}
     
     education = inlineformset_factory(
         parent_model=models.Profile,
@@ -107,26 +95,24 @@ def edit_education(request, **kwargs):
 
     if request.method == "GET":
         _education = education()
-    else:
+    elif request.method == "POST":
         _education = forms.EducationForm(request.POST, instance=education)
         if _education.is_valid():
             try:
                 _education = _education.save(commit=False)
                 _education.save()
-                return redirect("cv:Edit")
+                return redirect("cv:Edit Education")
 
             except Exception as e:
                 print(e)
 
-    return render(request, 'cv/edit_education.html', {'form': form})
+    return render(request, 'cv/edit_education.html', {'education': _education})
 
 
 @login_required(login_url='/root/')
-def edit_additional_education(request, **kwargs):
+def edit_additional_education(request):
     if not request.user.is_superuser:
         raise PermissionDenied
-    
-    form = {}
     
     additional_education = inlineformset_factory(
         parent_model=models.Profile,
@@ -139,18 +125,18 @@ def edit_additional_education(request, **kwargs):
 
     if request.method == "GET":
         _additional_education = additional_education()
-    else:
+    elif request.method == "POST":
         _additional_education = forms.AdditionalEducationForm(request.POST, instance=additional_education)
         if _additional_education.is_valid():
             try:
                 _additional_education = _additional_education.save(commit=False)
                 _additional_education.save()
-                return redirect("cv:Edit")
+                return redirect("cv:Edit Additional Education")
 
             except Exception as e:
                 print(e)
 
-    return render(request, 'cv/edit_additional_education.html', {'form': form})
+    return render(request, 'cv/edit_additional_education.html', {'additional_education': _additional_education})
 
 
 

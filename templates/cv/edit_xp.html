@@ -4,73 +4,67 @@
 {% block title %}{% trans "Form of Profile" %}{% endblock %}
 
 {% block extrastyle %}
-  <link type="text/css" rel="stylesheet" href="{% static 'css/profile/edit.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/profile/edit.css' %}">
 {% endblock %}
 
 {% block extrajs %}
-  <script type="text/javascript" src="{% static 'js/profile/edit.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/profile/edit.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-  <form class="cv" role="form" method="post" action="{% url 'cv:Edit XP' %}">
-    {% csrf_token %}
-    <div class="card card-primary">
-      <div class="card-header elegant-color-dark">
-        <h1 class="card-title"><b>{% trans "Professional Experience" %}</b></h1>
-        <div class="card-tools">
-          <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-        </div>
-      </div>
-      <div class="card-body">
+    {% include "cv/buttons.html" %}
 
-        <div class="row">
-          <div class="col-xl-4">
-            <div class="card blue-gradient">
-              <div class="card-tools">
-                <button type="button" class="btn btn-gradient-success btn-sm" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-              </div>
-
-              <div class="card-body">
-                {% for field in form.xp %}
-                  <div class="form-group">
-                      {{ field.label_tag }} 
-                      {{ field }}
-                      {% if field.errors %}
-                        <div class="alert alert-danger red"  style="font-size:13px;">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            {{ field.errors|striptags }}<br>
-                        </div>
-                      {% endif %}
-                      {% if field.help_text %}
-                        <p class="help">{{ field.help_text|safe }}</p>
-                      {% endif %}
-                  </div>
-                {% endfor %}
-              </div>
+    <form class="cv" role="form" method="post" action="{% url 'cv:Edit XP' %}">
+        {% csrf_token %}
+        <div class="card card-primary">
+            <div class="card-header elegant-color-dark" style="height: 70px; font-size:50px">
+                <h1 style="font-size:25px;" class="card-title"><b>{% trans "Professional Experience" %}</b></h1>
             </div>
-          </div>
+            <div class="card-body">
+
+                <div class="row">
+                    {% for field in xp %}
+                    <div class="col-xl-4">
+                        <div class="pt-2"></div>
+                        <div class="card blue-gradient">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    {{ field.label_tag }}
+                                    {{ field }}
+                                    {% if field.errors %}
+                                    <div class="alert alert-danger red" style="font-size:13px;">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                        {{ field.errors|striptags }}<br>
+                                    </div>
+                                    {% endif %}
+                                    {% if field.help_text %}
+                                    <p class="help">{{ field.help_text|safe }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pb-2"></div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="pb-5"></div>
+                <div class="row">
+                    <div class="col-xl-4">
+                        <button class="btn btn-lg btn-info waves-effect" type="button" formmethod="get">
+                            <div style="text-align:center;">
+                                <i class="fas fa-plus" style="position:static; text-align:center; font-size:25px;"></i>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      
-        <div class="pb-5"></div>
-        <div class="row">
-          <div class="col-xl-4">
-            <button class="btn btn-lg btn-info waves-effect" type="button" name="xp">
-              <div style="text-align:center;">
-                <i class="fas fa-plus" style="position:static; text-align:center; font-size:25px;"></i>
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button onclick="clean_phone();" type="submit" name="save" style="position:fixed;bottom:65px;right:65px;">
-        <div class="float">
-        <i class="fas fa-save float-icon"></i>
-        </div>
-    </button>
-  </form>
+        <button onclick="clean_phone();" type="submit" name="save" style="position:fixed;bottom:65px;right:65px;">
+            <div class="float">
+                <i class="fas fa-save float-icon"></i>
+            </div>
+        </button>
+    </form>
 {% endblock %}

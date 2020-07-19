@@ -72,10 +72,12 @@ class Profile(models.Model):
 class XP(models.Model):
     profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
     company = models.CharField(verbose_name=_("Company"), unique=True, max_length=100, default='')
-    role = models.CharField(verbose_name=_("Role"), max_length=100, default='')               # Cargo
+    role = models.CharField(verbose_name=_("Role"), max_length=100, default='') # Cargo
     main_activities = models.CharField(verbose_name=_("Main Activities"), max_length=100, default='')
     from_period = models.DateField(verbose_name=_("From Period"), default=timezone.now)
     until_period = models.DateField(verbose_name=_("Until Period"), default=timezone.now)
+    # site da empresa
+    # numero da empresa
 
     def __str__(self):
         return self.company
@@ -91,6 +93,7 @@ class Education(models.Model):
     description = models.TextField(verbose_name=_("Description"), max_length=1000, default='')
     from_period = models.DateField(verbose_name=_("From Period"), default=timezone.now, null=True)
     until_period = models.DateField(verbose_name=_("Until Period"), default=timezone.now, null=True)
+    # site da universidade
 
     def __str__(self):
         return self.institution

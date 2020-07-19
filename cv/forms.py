@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 class ProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
         super(ProfileForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
@@ -76,6 +77,7 @@ class ProfileForm(forms.ModelForm):
 
 class XPForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
         super(XPForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
@@ -104,6 +106,7 @@ class XPForm(forms.ModelForm):
 
 class EducationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
         super(EducationForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
@@ -123,6 +126,7 @@ class EducationForm(forms.ModelForm):
 
 class AdditionalEducationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
         super(AdditionalEducationForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'

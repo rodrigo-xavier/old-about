@@ -1,0 +1,24 @@
+{% load i18n static %}
+<div class="row">
+  <div class="col-xl-3">
+      <a class="w-100 btn btn-primary waves-effect" href="{% url "CV:Edit Profile" %}">
+          Profile
+      </a>
+  </div>
+  <div class="col-xl-3">
+      <a class="w-100 btn btn-danger waves-effect" href="{% url "CV:Edit XP" %}">
+          Professional Experience
+      </a>
+  </div>
+  <div class="col-xl-3">
+      <a class="w-100 btn btn-success waves-effect" href="{% url "CV:Edit Education" %}">
+          Education
+      </a>
+  </div>
+  <div class="col-xl-3">
+      <a class="w-100 btn btn-warning waves-effect" href="{% url "CV:Edit Additional Education" %}">
+          Additional Education
+      </a>
+  </div>
+</div>
+<div class="pb-3"></div>
