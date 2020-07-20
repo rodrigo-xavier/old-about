@@ -1,7 +1,7 @@
 {% extends "starter.html" %}
 {% load i18n static %}
 
-{% block title %}{% trans "Form of Profile" %}{% endblock %}
+{% block title %}{% trans "Edit Professional Experience" %}{% endblock %}
 
 {% block extrastyle %}
 <link type="text/css" rel="stylesheet" href="{% static 'css/profile/edit.css' %}">
@@ -18,7 +18,7 @@
         {% csrf_token %}
         <div class="card card-primary">
             <div class="card-header elegant-color-dark" style="height: 70px; font-size:50px">
-                <h1 style="font-size:25px;" class="card-title"><b>{% trans "Professional Experience" %}</b></h1>
+                <h1 style="font-size:35px;" class="centralize card-title"><b>{% trans "Professional Experience" %}</b></h1>
             </div>
             <div class="card-body">
 
@@ -49,23 +49,26 @@
                     {% endfor %}
                 </div>
 
-                <div class="pb-5"></div>
+                <div class="pb-3"></div>
 
-                <div class="row">
-                    <div class="col-xl-4">
-                        <button autofocus class="btn btn-lg btn-success waves-effect" type="submit" name="new" value="{{ extra }}">
-                            <div style="text-align:center;">
-                                <i class="fas fa-plus" style="position:static; text-align:center; font-size:25px;"></i>
-                            </div>
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
-        <button onclick="clean_phone();" type="submit" name="save" style="position:fixed;bottom:65px;right:65px;">
-            <div class="float">
-                <i class="fas fa-save float-icon"></i>
+        <button onclick="clean_phone();" type="submit" name="save" class="float">
+            <div class="float-save success-color text-light">
+                <i class="fas fa-save centralize"></i>
             </div>
         </button>
     </form>
+    <form class="cv" role="form" method="get" action="{% url 'cv:Edit XP' %}">
+        <div class="row">
+            <div class="col-xl-4"></div>
+            <div class="col-xl-4">
+                <button autofocus class="centralize btn-circle btn btn-lg blue-gradient waves-effect" formmethod="get" type="submit" name="new" value="{{ extra }}">
+                        <i class="fas fa-plus centralize text-light" style="font-size:60px;"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="pb-5"></div>
+    <div class="pb-3"></div>
 {% endblock %}

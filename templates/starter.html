@@ -10,7 +10,6 @@
 
   <title>Rodrigo | {% block title %}{% endblock %}</title>
 
-  <link type="text/css" rel="stylesheet" href="{% static 'css/menu/menu.css' %}">
 
   <!-- Font Awesome Icons -->
   <link type="text/css" rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
@@ -21,6 +20,8 @@
   <!-- Material Design Bootstrap -->
   <link type="text/css" rel="stylesheet" href="{% static 'plugins/mdb/css/mdb.min.css' %}">
   
+  <link type="text/css" rel="stylesheet" href="{% static 'css/menu/menu.css' %}">
+
   {% block extrastyle %}{% endblock %}
 
 </head>
@@ -33,12 +34,12 @@
     </div>
   </aside>
 
-  <div id="header" class="main-header">
+  <div id="header" class="main-header" style="margin-left:0px;">
     {% include "header.html" %}
   </div>
 
-  <div id="content" class="content-wrapper" >
-    <div class="content-wrapper">
+  <div id="content">
+    <div class="content-wrapper" style="margin-left:0px;">
       <div class="content-header">
         <div class="mb-2"></div>
       </div>
@@ -53,9 +54,17 @@
   </div>
 
   <aside>
-    <div id="footer" class="layout-footer-fixed">
+    <div id="footer" class="main-footer" style="margin-left:0px;">
       {% include "footer.html" %}
     </div>
+  </aside>
+
+  <aside>
+    <button onclick="topFunction()" type="button" id="backtop" class="float">
+      <div class="info-color float-chevron text-light">
+          <i class="fas fa-chevron-up centralize"></i>
+      </div>
+    </button>
   </aside>
 
   <!-- REQUIRED SCRIPTS -->
@@ -66,12 +75,19 @@
   <script type="text/javascript" src="{% static 'plugins/bootstrap-4.5.0/js/bootstrap.bundle.min.js' %}"></script>
   <!-- AdminLTE App -->
   <script type="text/javascript" src="{% static 'plugins/adminlte/js/adminlte.min.js' %}"></script>
-  <!-- FastClick -->
-  <script type="text/javascript" src="{% static 'plugins/fastclick/fastclick.js' %}"></script>
+  {% comment %} Menu {% endcomment %}
   <script type="text/javascript" src="{% static 'js/menu/menu.js' %}"></script>
 
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="{% static 'plugins/mdb/js/mdb.min.js' %}"></script>
+
+  <!-- FastClick -->
+  <script type="text/javascript" src="{% static 'plugins/fastclick/fastclick.js' %}"></script>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+    FastClick.attach(document.body);
+  });
+  </script>
 
   {% block extrajs %}{% endblock %}
 

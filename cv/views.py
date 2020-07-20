@@ -39,7 +39,7 @@ def edit_profile(request):
             try:
                 _profile = _profile.save(commit=False)
                 _profile.save()
-                return redirect("cv:Edit Profile")
+                return redirect("cv:Edit XP")
 
             except Exception as e:
                 print(e)
@@ -52,10 +52,9 @@ def edit_xp(request):
     if not request.user.is_superuser:
         raise PermissionDenied
     
-    
     profile = models.Profile.objects.first()
 
-    extra = 1 + int(request.POST.get('new')) if request.POST.get('new') else 0
+    extra = 1 + int(request.GET.get('new')) if request.GET.get('new') else 0
     xp = inlineformset_factory(
         parent_model=models.Profile,
         model=models.XP,
@@ -68,7 +67,16 @@ def edit_xp(request):
     if request.method == "GET":
         _xp = xp()
     elif request.method == "POST":
-        _xp = xp()
+        print("lol")
+        # _xp = forms.XPForm(request.POST, instance=profile)
+        # if _xp.is_valid():
+        #     try:
+        #         _xp = _xp.save(commit=False)
+        #         _xp.save()
+        #         return redirect("cv:Edit Education")
+
+        #     except Exception as e:
+        #         print(e)
 
     return render(request, 'cv/edit_xp.html', {'xp': _xp, 'extra': extra})
 
@@ -78,12 +86,15 @@ def edit_education(request):
     if not request.user.is_superuser:
         raise PermissionDenied
     
+    profile = models.Profile.objects.first()
+    
+    extra = 1 + int(request.GET.get('new')) if request.GET.get('new') else 0
     education = inlineformset_factory(
         parent_model=models.Profile,
         model=models.Education,
         form=forms.EducationForm, 
         exclude=('profile',),
-        extra=1,
+        extra=profile.education_set.count() + extra,
         max_num=15,
     )
 
@@ -95,12 +106,12 @@ def edit_education(request):
             try:
                 _education = _education.save(commit=False)
                 _education.save()
-                return redirect("cv:Edit Education")
+                return redirect("cv:Edit Additional Education")
 
             except Exception as e:
                 print(e)
 
-    return render(request, 'cv/edit_education.html', {'education': _education})
+    return render(request, 'cv/edit_education.html', {'education': _education, 'extra': extra})
 
 
 @login_required(login_url='/root/')
@@ -108,12 +119,15 @@ def edit_additional_education(request):
     if not request.user.is_superuser:
         raise PermissionDenied
     
+    profile = models.Profile.objects.first()
+    
+    extra = 1 + int(request.GET.get('new')) if request.GET.get('new') else 0
     additional_education = inlineformset_factory(
         parent_model=models.Profile,
         model=models.AdditionalEducation,
         form=forms.AdditionalEducationForm, 
         exclude=('profile',),
-        extra=1,
+        extra=profile.additionaleducation_set.count() + extra,
         max_num=15,
     )
 
@@ -125,12 +139,12 @@ def edit_additional_education(request):
             try:
                 _additional_education = _additional_education.save(commit=False)
                 _additional_education.save()
-                return redirect("cv:Edit Additional Education")
+                return redirect("cv:Profile")
 
             except Exception as e:
                 print(e)
 
-    return render(request, 'cv/edit_additional_education.html', {'additional_education': _additional_education})
+    return render(request, 'cv/edit_additional_education.html', {'additional_education': _additional_education, 'extra': extra})
 
 
 

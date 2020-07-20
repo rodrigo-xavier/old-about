@@ -1,3 +1,10 @@
+mybutton = document.getElementById("backtop");
+window.onscroll = function() {scrollFunction()};
+
+function topFunction() {
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
 $(document).ready(function () {
     var trigger = $('.hamburger'),
         overlay = $('.overlay'),

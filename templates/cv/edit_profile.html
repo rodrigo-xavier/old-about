@@ -1,7 +1,7 @@
 {% extends "starter.html" %}
 {% load i18n static %}
 
-{% block title %}{% trans "Form of Profile" %}{% endblock %}
+{% block title %}{% trans "Edit Profile" %}{% endblock %}
 
 {% block extrastyle %}
   <link type="text/css" rel="stylesheet" href="{% static 'css/profile/edit.css' %}">
@@ -17,7 +17,7 @@
     {% csrf_token %}
     <div class="card card-primary">
       <div class="card-header elegant-color-dark" style="height: 70px; font-size:50px">
-        <h1 style="font-size:25px;" class="card-title"><b>{% trans "Profile" %}</b></h1>
+        <h1 style="font-size:35px;" class="centralize card-title"><b>{% trans "Profile" %}</b></h1>
         {% comment %} <div class="card-tools">
           <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
             <i class="fas fa-minus"></i>
@@ -92,10 +92,10 @@
         </div>
       </div>
     </div>
-    <button onclick="clean_phone();" type="submit" name="save" style="position:fixed;bottom:65px;right:65px;">
-        <div class="float">
-        <i class="fas fa-save float-icon"></i>
-        </div>
+    <button onclick="clean_phone();" type="submit" name="save" class="float">
+      <div class="float-save success-color text-light">
+          <i class="fas fa-save centralize"></i>
+      </div>
     </button>
   </form>
 {% endblock %}
