@@ -50,15 +50,15 @@ def edit_xp(request):
     
     profile = models.Profile.objects.first()
 
-    extra = 1 + int(request.GET.get('new')) if request.GET.get('new') else 0
     xp_inlineformset = inlineformset_factory(
         parent_model=models.Profile,
         model=models.XP,
         form=forms.XPForm,
         exclude=('profile',),
-        extra=profile.xp_set.count() + extra,
+        extra= 1 + int(request.GET.get('new')) if request.GET.get('new') else 0,
         max_num=15,
     )
+    extra = xp_inlineformset.extra
     
     if request.method == "GET":
         if (profile.xp_set.count() != 0):
@@ -84,28 +84,29 @@ def edit_education(request):
     
     profile = models.Profile.objects.first()
     
-    extra = 1 + int(request.GET.get('new')) if request.GET.get('new') else 0
     education_inlineformset = inlineformset_factory(
         parent_model=models.Profile,
         model=models.Education,
         form=forms.EducationForm, 
         exclude=('profile',),
-        extra=profile.education_set.count() + extra,
+        extra= 1 + int(request.GET.get('new')) if request.GET.get('new') else 0,
         max_num=15,
     )
+    extra = education_inlineformset.extra
 
     if request.method == "GET":
-        _education = education_inlineformset()
+        if (profile.education_set.count() != 0):
+            _education = education_inlineformset(instance=profile)
+        elif (profile is None):
+            # Mostrar mensagem para editar profile primeiro
+            return redirect("cv:Edit Profile")
+        else:
+            _education = education_inlineformset()
     elif request.method == "POST":
-        _education = forms.EducationForm(request.POST, instance=profile)
+        _education = education_inlineformset(request.POST, instance=profile)
         if _education.is_valid():
-            try:
-                _education = _education.save(commit=False)
-                _education.save()
-                return redirect("cv:Edit Additional Education")
-
-            except Exception as e:
-                print(e)
+            _education.save()
+            return redirect("cv:Edit Additional Education")
 
     return render(request, 'cv/edit_education.html', {'education': _education, 'extra': extra})
 
@@ -116,30 +117,33 @@ def edit_additional_education(request):
         raise PermissionDenied
     
     profile = models.Profile.objects.first()
+
+    # Conta objetos additionaleducation que tenham relacao com a instancia profile, utilizando aggregate, apenas para exibir conhecimentos
+    # models.AdditionalEducation.objects.filter(profile=profile).aggregate(Count('profile'))['profile__count']
     
-    extra = 1 + int(request.GET.get('new')) if request.GET.get('new') else 0
     additional_education_inlineformset = inlineformset_factory(
         parent_model=models.Profile,
         model=models.AdditionalEducation,
         form=forms.AdditionalEducationForm, 
-        exclude=('profile',),
-        # Poderia ser simples, mas queria mesmo utilizar meus conhecimentos
-        extra= models.AdditionalEducation.objects.filter(profile=profile).aggregate(Count('profile'))['profile__count'] +  extra,
+        exclude=('profile', 'from_period', 'until_period'),
+        extra= 1 + int(request.GET.get('new')) if request.GET.get('new') else 0,
         max_num=15,
     )
-
+    extra = additional_education_inlineformset.extra
+    
     if request.method == "GET":
-        _additional_education = additional_education_inlineformset()
+        if (profile.education_set.count() != 0):
+            _additional_education = additional_education_inlineformset(instance=profile)
+        elif (profile is None):
+            # Mostrar mensagem para editar profile primeiro
+            return redirect("cv:Edit Profile")
+        else:
+            _additional_education = additional_education_inlineformset()
     elif request.method == "POST":
-        _additional_education = forms.AdditionalEducationForm(request.POST, instance=profile)
+        _additional_education = additional_education_inlineformset(request.POST, instance=profile)
         if _additional_education.is_valid():
-            try:
-                _additional_education = _additional_education.save(commit=False)
-                _additional_education.save()
-                return redirect("cv:Profile")
-
-            except Exception as e:
-                print(e)
+            _additional_education.save()
+            return redirect("cv:Profile")
 
     return render(request, 'cv/edit_additional_education.html', {'additional_education': _additional_education, 'extra': extra})
 

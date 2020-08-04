@@ -137,12 +137,6 @@ class AdditionalEducationForm(forms.ModelForm):
             self.fields['description'].widget.attrs.update({
                 }
             )
-            self.fields['from_period'].widget.attrs.update({
-                }
-            )
-            self.fields['until_period'].widget.attrs.update({
-                }
-            )
             self.fields['duration'].widget.attrs.update({
                 }
             )
