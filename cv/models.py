@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
 from datetime import date, timedelta, datetime
 from phonenumber_field.modelfields import PhoneNumberField
-from django.utils import timezone
+from utils.utils import capitalize
 
 
 class Profile(models.Model):
@@ -28,7 +28,7 @@ class Profile(models.Model):
     phone = PhoneNumberField(verbose_name=_('Phone'), max_length=255)
     # fluency = models.ChoiceField(choices=[FLUENCY], verbose_name=_("Fluency"))
     # nickname
-    link = models.URLField(verbose_name=_("Other Platform"), max_length=100, default='', blank=True) # Have to be a dict
+    link = models.URLField(verbose_name=_("Other Platform"), max_length=200, default='', blank=True) # Have to be a dict
     about = models.TextField(verbose_name=_("About"), max_length=2000, default='', blank=True)
     current_goals = models.TextField(verbose_name=_("Current Goals"), max_length=1000, default='', blank=True) # Objetivos atuais
     proffessional_description = models.TextField(verbose_name=_("Professional Description"), max_length=1000, default='', blank=True) # Descricao profissional (Pode nao ser necessario)
@@ -49,16 +49,10 @@ class Profile(models.Model):
     @property
     def last_name(self):
         return self.name.split(' ')[-1]
-    
-    def capitalize(self, words):
-        uppercase = ""
-        for n in words:
-            uppercase += n.capitalize() + " "
-        return uppercase[0:-1]
 
     def clean(self):
         super(Profile, self).clean()       
-        self.name = self.capitalize(self.name.split(' '))
+        self.name = capitalize(self.name.split(' '))
     
     def save(self, *args, **kwargs):
         self.clean()
@@ -71,16 +65,26 @@ class Profile(models.Model):
 
 class XP(models.Model):
     profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
-    company = models.CharField(verbose_name=_("Company"), unique=True, max_length=100, default='')
-    role = models.CharField(verbose_name=_("Role"), max_length=100, default='') # Cargo
-    main_activities = models.CharField(verbose_name=_("Main Activities"), max_length=100, default='')
-    from_period = models.DateField(verbose_name=_("From Period"), default=timezone.now)
-    until_period = models.DateField(verbose_name=_("Until Period"), default=timezone.now)
-    # site da empresa
-    # numero da empresa
+    company_name = models.CharField(verbose_name=_("Company Name"), unique=True, max_length=100, default='')
+    company_description = models.TextField(verbose_name=_("Company Description"), max_length=1000, default='', blank=True)
+    company_website = models.URLField(verbose_name=_("Company Website"), max_length=200, default='', blank=True)
+    company_mail = models.EmailField(verbose_name=_("Company Mail"), max_length=255, default='')
+    company_phone = PhoneNumberField(verbose_name=_('Company Phone'), max_length=255, blank=True)
+    employee_role = models.CharField(verbose_name=_("Role"), max_length=100, default='') # Cargo
+    employee_main_activity = models.TextField(verbose_name=_("Main Activities"), max_length=500, default='')
+    from_period = models.DateField(verbose_name=_("From Period"), default='')
+    until_period = models.DateField(verbose_name=_("Until Period"), default='')
 
     def __str__(self):
         return self.company
+    
+    def clean(self):
+        super(XP, self).clean()       
+        self.company_name = capitalize(self.company_name.split(' '))
+    
+    def save(self, *args, **kwargs):
+        self.clean()
+        return super(XP, self).save(**kwargs)
 
     class Meta:
         verbose_name = _("Professional Experience")
@@ -91,8 +95,8 @@ class Education(models.Model):
     profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
     institution = models.CharField(verbose_name=_("Institution"), max_length=100, default='')
     description = models.TextField(verbose_name=_("Description"), max_length=1000, default='')
-    from_period = models.DateField(verbose_name=_("From Period"), default=timezone.now, null=True)
-    until_period = models.DateField(verbose_name=_("Until Period"), default=timezone.now, null=True)
+    from_period = models.DateField(verbose_name=_("From Period"), default='', null=True)
+    until_period = models.DateField(verbose_name=_("Until Period"), default='', null=True)
     # site da universidade
 
     def __str__(self):

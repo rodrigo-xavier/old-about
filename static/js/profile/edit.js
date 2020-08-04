@@ -49,4 +49,4 @@ $(document).ready(function(){
     }
 
     $('input,textarea,select').filter('[required]').parent().parent().find("label").append("*");
-  });
+});

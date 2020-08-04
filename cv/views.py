@@ -64,7 +64,6 @@ def edit_xp(request):
         if (profile.xp_set.count() != 0):
             _xp = xp_inlineformset(instance=profile)
         elif (profile is None):
-            # Mostrar mensagem para editar profile primeiro
             return redirect("cv:Edit Profile")
         else:
             _xp = xp_inlineformset()
@@ -98,7 +97,6 @@ def edit_education(request):
         if (profile.education_set.count() != 0):
             _education = education_inlineformset(instance=profile)
         elif (profile is None):
-            # Mostrar mensagem para editar profile primeiro
             return redirect("cv:Edit Profile")
         else:
             _education = education_inlineformset()
@@ -135,7 +133,6 @@ def edit_additional_education(request):
         if (profile.education_set.count() != 0):
             _additional_education = additional_education_inlineformset(instance=profile)
         elif (profile is None):
-            # Mostrar mensagem para editar profile primeiro
             return redirect("cv:Edit Profile")
         else:
             _additional_education = additional_education_inlineformset()

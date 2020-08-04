@@ -81,14 +81,31 @@ class XPForm(forms.ModelForm):
         super(XPForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
-            self.fields['company'].widget.attrs.update({
+            self.fields['company_name'].widget.attrs.update({
                     'placeholder': _("Enter company name"),
                 }
             )
-            self.fields['role'].widget.attrs.update({
+            self.fields['company_description'].widget.attrs.update({
+                    'placeholder': _("Describe the company you've been worked"),
                 }
             )
-            self.fields['main_activities'].widget.attrs.update({
+            self.fields['company_website'].widget.attrs.update({
+                    'placeholder': _("Enter here the company website address"),
+                }
+            )
+            self.fields['company_mail'].widget.attrs.update({
+                    'placeholder': _("Enter here the company email address"),
+                }
+            )
+            self.fields['company_phone'].widget.attrs.update({
+                    'placeholder': _("Enter here "),
+                }
+            )
+            self.fields['employee_role'].widget.attrs.update({
+                }
+            )
+            self.fields['employee_main_activity'].widget.attrs.update({
+                    'placeholder': _("Describe the main activities you performed at the company"),
                 }
             )
             self.fields['from_period'].widget.attrs.update({
@@ -97,6 +114,16 @@ class XPForm(forms.ModelForm):
             self.fields['until_period'].widget.attrs.update({
                 }
             )
+    
+    def clean(self):
+        cleaned_data = super(XPForm, self).clean()
+        company = cleaned_data['company'].split(" ")
+        company = "".join(company)
+        if not (company.isalpha()):
+            self.add_error('company', _('must be alphanumeric'))
+            raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
+
+        return cleaned_data
     
     class Meta:
         widgets = {
@@ -123,6 +150,22 @@ class EducationForm(forms.ModelForm):
             self.fields['until_period'].widget.attrs.update({
                 }
             )
+    
+    def clean(self):
+        cleaned_data = super(EducationForm, self).clean()
+        institution = cleaned_data['institution'].split(" ")
+        institution = "".join(institution)
+        if not (institution.isalpha()):
+            self.add_error('institution', _('must be alphanumeric'))
+            raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
+
+        return cleaned_data
+    
+    class Meta:
+        widgets = {
+            'from_period': forms.DateInput(attrs={'type': 'date'}),
+            'until_period': forms.DateInput(attrs={'type': 'date'})
+        }
 
 
 class AdditionalEducationForm(forms.ModelForm):
@@ -140,3 +183,13 @@ class AdditionalEducationForm(forms.ModelForm):
             self.fields['duration'].widget.attrs.update({
                 }
             )
+    
+    def clean(self):
+        cleaned_data = super(AdditionalEducationForm, self).clean()
+        institution = cleaned_data['institution'].split(" ")
+        institution = "".join(institution)
+        if not (institution.isalpha()):
+            self.add_error('institution', _('must be alphanumeric'))
+            raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
+
+        return cleaned_data
