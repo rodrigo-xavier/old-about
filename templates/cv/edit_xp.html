@@ -23,29 +23,30 @@
             <div class="card-body">
 
                 <div class="row">
+                    {{ xp.management_form }}
                     {% for field in xp %}
-                    <div class="col-xl-4">
-                        <div class="pt-2"></div>
-                        <div class="card blue-gradient">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    {{ field.label_tag }}
-                                    {{ field }}
-                                    {% if field.errors %}
-                                    <div class="alert alert-danger red" style="font-size:13px;">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                                aria-hidden="true">&times;</span></button>
-                                        {{ field.errors|striptags }}<br>
+                        <div class="col-xl-4">
+                            <div class="pt-2"></div>
+                            <div class="card blue-gradient">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        {{ field.label_tag }}
+                                        {{ field }}
+                                        {% if field.errors %}
+                                        <div class="alert alert-danger red" style="font-size:13px;">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                            {{ field.errors|striptags }}<br>
+                                        </div>
+                                        {% endif %}
+                                        {% if field.help_text %}
+                                        <p class="help">{{ field.help_text|safe }}</p>
+                                        {% endif %}
                                     </div>
-                                    {% endif %}
-                                    {% if field.help_text %}
-                                    <p class="help">{{ field.help_text|safe }}</p>
-                                    {% endif %}
                                 </div>
                             </div>
+                            <div class="pb-2"></div>
                         </div>
-                        <div class="pb-2"></div>
-                    </div>
                     {% endfor %}
                 </div>
 

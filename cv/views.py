@@ -6,6 +6,7 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.forms import formset_factory, modelformset_factory, inlineformset_factory
+from django.db.models import Count
 
 
 def profile(request):
@@ -14,11 +15,6 @@ def profile(request):
     # xp = models.XP.objects.all()
     # certification = models.Certification.objects.all()
     return render(request, 'cv/profile.html', {'profile':profile})
-
-
-
-
-
 
 @login_required(login_url='/root/')
 def edit_profile(request):
@@ -55,7 +51,7 @@ def edit_xp(request):
     profile = models.Profile.objects.first()
 
     extra = 1 + int(request.GET.get('new')) if request.GET.get('new') else 0
-    xp = inlineformset_factory(
+    xp_inlineformset = inlineformset_factory(
         parent_model=models.Profile,
         model=models.XP,
         form=forms.XPForm,
@@ -65,18 +61,18 @@ def edit_xp(request):
     )
     
     if request.method == "GET":
-        _xp = xp()
+        if (profile.xp_set.count() != 0):
+            _xp = xp_inlineformset(instance=profile)
+        elif (profile is None):
+            # Mostrar mensagem para editar profile primeiro
+            return redirect("cv:Edit Profile")
+        else:
+            _xp = xp_inlineformset()
     elif request.method == "POST":
-        print("lol")
-        # _xp = forms.XPForm(request.POST, instance=profile)
-        # if _xp.is_valid():
-        #     try:
-        #         _xp = _xp.save(commit=False)
-        #         _xp.save()
-        #         return redirect("cv:Edit Education")
-
-        #     except Exception as e:
-        #         print(e)
+        _xp = xp_inlineformset(request.POST, instance=profile)
+        if _xp.is_valid():
+            _xp.save()
+            return redirect("cv:Edit Education")
 
     return render(request, 'cv/edit_xp.html', {'xp': _xp, 'extra': extra})
 
@@ -89,7 +85,7 @@ def edit_education(request):
     profile = models.Profile.objects.first()
     
     extra = 1 + int(request.GET.get('new')) if request.GET.get('new') else 0
-    education = inlineformset_factory(
+    education_inlineformset = inlineformset_factory(
         parent_model=models.Profile,
         model=models.Education,
         form=forms.EducationForm, 
@@ -99,9 +95,9 @@ def edit_education(request):
     )
 
     if request.method == "GET":
-        _education = education()
+        _education = education_inlineformset()
     elif request.method == "POST":
-        _education = forms.EducationForm(request.POST, instance=education)
+        _education = forms.EducationForm(request.POST, instance=profile)
         if _education.is_valid():
             try:
                 _education = _education.save(commit=False)
@@ -122,19 +118,20 @@ def edit_additional_education(request):
     profile = models.Profile.objects.first()
     
     extra = 1 + int(request.GET.get('new')) if request.GET.get('new') else 0
-    additional_education = inlineformset_factory(
+    additional_education_inlineformset = inlineformset_factory(
         parent_model=models.Profile,
         model=models.AdditionalEducation,
         form=forms.AdditionalEducationForm, 
         exclude=('profile',),
-        extra=profile.additionaleducation_set.count() + extra,
+        # Poderia ser simples, mas queria mesmo utilizar meus conhecimentos
+        extra= models.AdditionalEducation.objects.filter(profile=profile).aggregate(Count('profile'))['profile__count'] +  extra,
         max_num=15,
     )
 
     if request.method == "GET":
-        _additional_education = additional_education()
+        _additional_education = additional_education_inlineformset()
     elif request.method == "POST":
-        _additional_education = forms.AdditionalEducationForm(request.POST, instance=additional_education)
+        _additional_education = forms.AdditionalEducationForm(request.POST, instance=profile)
         if _additional_education.is_valid():
             try:
                 _additional_education = _additional_education.save(commit=False)
