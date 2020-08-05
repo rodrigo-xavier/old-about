@@ -65,18 +65,18 @@ class Profile(models.Model):
 
 class XP(models.Model):
     profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
-    company_name = models.CharField(verbose_name=_("Company Name"), unique=True, max_length=100, default='')
+    company_name = models.CharField(verbose_name=_("Company Name"), unique=True, max_length=100, default='', blank=False)
     company_description = models.TextField(verbose_name=_("Company Description"), max_length=1000, default='', blank=True)
     company_website = models.URLField(verbose_name=_("Company Website"), max_length=200, default='', blank=True)
-    company_mail = models.EmailField(verbose_name=_("Company Mail"), max_length=255, default='')
+    company_mail = models.EmailField(verbose_name=_("Company Mail"), max_length=255, default='', blank=True)
     company_phone = PhoneNumberField(verbose_name=_('Company Phone'), max_length=255, blank=True)
-    employee_role = models.CharField(verbose_name=_("Role"), max_length=100, default='') # Cargo
-    employee_main_activity = models.TextField(verbose_name=_("Main Activities"), max_length=500, default='')
-    from_period = models.DateField(verbose_name=_("From Period"), default='')
-    until_period = models.DateField(verbose_name=_("Until Period"), default='')
+    employee_role = models.CharField(verbose_name=_("Role"), max_length=100, default='', blank=False) # Cargo
+    employee_main_activity = models.TextField(verbose_name=_("Main Activities"), max_length=500, default='', blank=False)
+    from_period = models.DateField(verbose_name=_("From Period"), default='', blank=False)
+    until_period = models.DateField(verbose_name=_("Until Period"), default='', blank=False)
 
     def __str__(self):
-        return self.company
+        return self.company_name
     
     def clean(self):
         super(XP, self).clean()       

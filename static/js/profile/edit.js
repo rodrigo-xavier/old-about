@@ -44,6 +44,9 @@ $(document).ready(function(){
         });
     });
 
+    $("label:contains('Delete')").next().hide()
+    $("label:contains('Delete')").hide()
+
     // function save_form(){
     //     var method = $(".cv_edit").attr('method');
     //     if (method == 'post') {
@@ -56,7 +59,4 @@ $(document).ready(function(){
     // $('[href]').click(function(){
     //     save_form();
     // });
-
-    $('input,textarea,select').filter('[required]').parent().parent().find("label").append("*");
-
 });

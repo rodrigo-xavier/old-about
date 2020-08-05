@@ -83,6 +83,7 @@ class XPForm(forms.ModelForm):
             visible.field.widget.attrs['class'] = 'form-control'
             self.fields['company_name'].widget.attrs.update({
                     'placeholder': _("Enter company name"),
+                    'required': ""
                 }
             )
             self.fields['company_description'].widget.attrs.update({
@@ -103,25 +104,29 @@ class XPForm(forms.ModelForm):
             )
             self.fields['employee_role'].widget.attrs.update({
                     'placeholder': _("Enter here which was your job on the company"),
+                    'required': ""
                 }
             )
             self.fields['employee_main_activity'].widget.attrs.update({
                     'placeholder': _("Describe the main activities you performed at the company"),
+                    'required': ""
                 }
             )
             self.fields['from_period'].widget.attrs.update({
+                    'required': ""
                 }
             )
             self.fields['until_period'].widget.attrs.update({
+                    'required': ""
                 }
             )
     
     def clean(self):
         cleaned_data = super(XPForm, self).clean()
-        company = cleaned_data['company'].split(" ")
-        company = "".join(company)
-        if not (company.isalpha()):
-            self.add_error('company', _('must be alphanumeric'))
+        company_name = cleaned_data['company_name'].split(" ")
+        company_name = "".join(company_name)
+        if not (company_name.isalpha()):
+            self.add_error('company_name', _('must be alphanumeric'))
             raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
 
         return cleaned_data

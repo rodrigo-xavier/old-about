@@ -9,6 +9,9 @@
 
 {% block extrajs %}
 <script type="text/javascript" src="{% static 'js/profile/edit.js' %}"></script>
+<script type="text/javascript" charset="utf-8">
+    $('input,textarea,select').filter('[required]').prev().append("*");
+</script>
 {% endblock %}
 
 {% block content %}
@@ -30,7 +33,6 @@
                             <div class="card blue-gradient">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        {{ field.label_tag }}
                                         {{ field }}
                                         {% if field.errors %}
                                             <div class="alert alert-danger red" style="font-size:13px;">
