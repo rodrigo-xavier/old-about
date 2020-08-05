@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.forms import formset_factory, modelformset_factory, inlineformset_factory
 from django.db.models import Count
+import reversion
 
 
 def profile(request):
@@ -17,6 +18,7 @@ def profile(request):
     return render(request, 'cv/profile.html', {'profile':profile})
 
 @login_required(login_url='/root/')
+@reversion.views.create_revision(manage_manually=False, using=None, atomic=True, request_creates_revision=None)
 def edit_profile(request):
     if not request.user.is_superuser:
         raise PermissionDenied
@@ -35,7 +37,7 @@ def edit_profile(request):
             try:
                 _profile = _profile.save(commit=False)
                 _profile.save()
-                return redirect("cv:Edit XP")
+                return redirect("cv:Edit Profile")
 
             except Exception as e:
                 print(e)
@@ -44,6 +46,7 @@ def edit_profile(request):
 
 
 @login_required(login_url='/root/')
+@reversion.views.create_revision(manage_manually=False, using=None, atomic=True, request_creates_revision=None)
 def edit_xp(request):
     if not request.user.is_superuser:
         raise PermissionDenied
@@ -71,12 +74,13 @@ def edit_xp(request):
         _xp = xp_inlineformset(request.POST, instance=profile)
         if _xp.is_valid():
             _xp.save()
-            return redirect("cv:Edit Education")
+            return redirect("cv:Edit XP")
 
     return render(request, 'cv/edit_xp.html', {'xp': _xp, 'extra': extra})
 
 
 @login_required(login_url='/root/')
+@reversion.views.create_revision(manage_manually=False, using=None, atomic=True, request_creates_revision=None)
 def edit_education(request):
     if not request.user.is_superuser:
         raise PermissionDenied
@@ -104,12 +108,13 @@ def edit_education(request):
         _education = education_inlineformset(request.POST, instance=profile)
         if _education.is_valid():
             _education.save()
-            return redirect("cv:Edit Additional Education")
+            return redirect("cv:Edit Education")
 
     return render(request, 'cv/edit_education.html', {'education': _education, 'extra': extra})
 
 
 @login_required(login_url='/root/')
+@reversion.views.create_revision(manage_manually=False, using=None, atomic=True, request_creates_revision=None)
 def edit_additional_education(request):
     if not request.user.is_superuser:
         raise PermissionDenied
@@ -140,7 +145,7 @@ def edit_additional_education(request):
         _additional_education = additional_education_inlineformset(request.POST, instance=profile)
         if _additional_education.is_valid():
             _additional_education.save()
-            return redirect("cv:Profile")
+            return redirect("cv:Edit Additional Education")
 
     return render(request, 'cv/edit_additional_education.html', {'additional_education': _additional_education, 'extra': extra})
 

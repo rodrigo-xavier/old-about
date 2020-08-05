@@ -6,12 +6,20 @@ __pycache__/
 *sqlite
 *.sql
 *.cnf
+Pipfile.lock
+temp/
+
+
+# Ignore file/folders of tests
 htmlcov/
 .coverage
 .coverage.*
 coverage.xml
 *.cover
 *.pytest_cache
-Pipfile.lock
-temp/
-**/migrations/
+
+
+# Ignore Migrations
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
