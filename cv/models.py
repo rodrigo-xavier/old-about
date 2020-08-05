@@ -22,7 +22,7 @@ class Profile(models.Model):
     ]
 
     name = models.CharField(verbose_name=_('Name'), max_length=40, default='')
-    birth = models.DateField(verbose_name=_("Born"), default=date.today() - timedelta(23*365))
+    born_in = models.DateField(verbose_name=_("Born In"), default=date.today() - timedelta(23*365))
     mail = models.EmailField(verbose_name=_("Mail"), max_length=255, default='')
     languages = models.PositiveSmallIntegerField(choices=LANGUAGES, verbose_name=_("Languages"), default=0) # Have to be a dict
     phone = PhoneNumberField(verbose_name=_('Phone'), max_length=255)
@@ -40,7 +40,7 @@ class Profile(models.Model):
     @property
     def age(self):
         days_on_year = 365.2425
-        return int((datetime.now().date() - self.birth).days / days_on_year)
+        return int((datetime.now().date() - self.born_in).days / days_on_year)
 
     @property
     def first_name(self):

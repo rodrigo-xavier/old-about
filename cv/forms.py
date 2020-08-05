@@ -17,7 +17,7 @@ class ProfileForm(forms.ModelForm):
                     'autofocus': "",
                 }
             )
-            self.fields['birth'].widget.attrs.update({
+            self.fields['born_in'].widget.attrs.update({
                     'value':'2019-01-01'
                 }
             )
@@ -67,11 +67,11 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = models.Profile
-        fields = ('name', 'birth', 'mail', 'phone', 'languages', 'link',
+        fields = ('name', 'born_in', 'mail', 'phone', 'languages', 'link',
             'about', 'current_goals', 'proffessional_description'
         )
         widgets = {
-            'birth': forms.DateInput(attrs={'type': 'date'})
+            'born_in': forms.DateInput(attrs={'type': 'date'})
         }
 
 
@@ -98,10 +98,11 @@ class XPForm(forms.ModelForm):
                 }
             )
             self.fields['company_phone'].widget.attrs.update({
-                    'placeholder': _("Enter here "),
+                    'placeholder': _("Enter here the company phone"),
                 }
             )
             self.fields['employee_role'].widget.attrs.update({
+                    'placeholder': _("Enter here which was your job on the company"),
                 }
             )
             self.fields['employee_main_activity'].widget.attrs.update({

@@ -44,9 +44,19 @@ $(document).ready(function(){
         });
     });
 
-    function clean_phone(){
-        $("tel").replace(/\D/g,'');
-    }
+    // function save_form(){
+    //     var method = $(".cv_edit").attr('method');
+    //     if (method == 'post') {
+    //         alert("tentando")
+    //         $("form").filter('.cv_edit').submit(function(){});
+    //         alert("conseguiu")
+    //     }
+    // }
+
+    // $('[href]').click(function(){
+    //     save_form();
+    // });
 
     $('input,textarea,select').filter('[required]').parent().parent().find("label").append("*");
+
 });
