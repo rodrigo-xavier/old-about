@@ -46,4 +46,22 @@ Agora, antes de rodar o projeto, é necessário gerar as migrations, criar um su
 
 Entre com nome e email desejados, e em seguida designe uma senha.
 
+O site está pronto para ser executado. rode o seguinte comando:
 
+        python manage.py runserver localhost:8000
+
+E em seguida, no seu navegador, abra a página http://localhost:8000/
+
+Eu particularmente, prefiro abrir uma das portas de rede do meu computador para poder acessar o site em outros dispositivos na mesma rede, fazendo o seguinte:
+
+        sudo apt-get install ufw
+        sudo ufw allow 8000
+       
+Descubra o seu endereço ip de alguma forma, e então basta rodar (Assumindo no exemplo que meu ip é 192.168.5.191)
+
+        python manage.py runserver 192.168.5.191:8000
+
+Agora, acessando http:/192.168.5.191:8000/ no navegador de qualquer dispositivo de sua rede, será possivel visualizar o site.
+
+
+OBSERVAÇÕES
