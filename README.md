@@ -64,4 +64,7 @@ Descubra o seu endereço ip de alguma forma, e então basta rodar (Assumindo no 
 Agora, acessando http:/192.168.5.191:8000/ no navegador de qualquer dispositivo de sua rede, será possivel visualizar o site.
 
 
-OBSERVAÇÕES
+**OBSERVAÇÕES**
+
+Para logar no sistema, é necessário acessar http:/192.168.5.191:8000/root/
+Para editar o perfil, basta estar logado no sistema e acessar a seguinte página http://192.168.0.191:8000/cv/edit/profile
