@@ -8,17 +8,19 @@ O código a seguir executa o instalador automático do pyenv.
 
     curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
 
-Em seguida, instale o python versão 3.8.2 utilizando o pacote pyenv, da seguinte forma:
+Em seguida, instale o python versão 3.8.3 utilizando o pacote pyenv, da seguinte forma:
 
-    pyenv install 3.8.2
-    pyenv shell 3.8.2
+    pyenv install 3.8.3
+    pyenv shell 3.8.3
 
 Faça um clone do meu repositório:
 
     git clone https://github.com/rodrigo-xavier/about-me.git
 
-Agora faça um upgrade do pip e instale os requisitos:
+Agora crie uma virtualenv, ative-a, faça o upgrade do pip e instale os requisitos do projeto:
 
+    python -m venv virtualenv
+    source virtualenv/bin/activate
     pip install --upgrade pip
     pip install -r requirements.txt
 
@@ -34,6 +36,14 @@ E então crie um arquivo chamado .env no diretório principal, com os seguintes 
     
 Entre no seguinte site para gerar sua própria SECRET_KEY e insira-a no .env, no campo designado:
 
-*https://djecrety.ir/
+*   https://djecrety.ir/
 
-Agora, antes de rodar o projeto, é necessário criar um 
+Agora, antes de rodar o projeto, é necessário gerar as migrations, criar um superusuário:
+
+        python manage.py makemigrations
+        python manage.py migrate
+        python manage.py createsuperuser
+
+Entre com nome e email desejados, e em seguida designe uma senha.
+
+
