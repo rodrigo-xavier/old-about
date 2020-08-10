@@ -66,5 +66,5 @@ Agora, acessando http:/192.168.5.191:8000/ no navegador de qualquer dispositivo 
 
 **OBSERVAÇÕES**
 
-*   Para logar no sistema, é necessário acessar http:/192.168.5.191:8000/root/
+*   Para logar no sistema, é necessário acessar http://192.168.5.191:8000/root/
 *   Para editar o perfil, basta estar logado no sistema e acessar a seguinte página http://192.168.0.191:8000/cv/edit/profile
