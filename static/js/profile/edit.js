@@ -47,6 +47,11 @@ $(document).ready(function(){
     $("label:contains('Delete')").next().hide()
     $("label:contains('Delete')").hide()
 
+    $(".btn-close").click(function(){
+        btn_name = $( this ).attr("name");
+        $(btn_name).prop( "checked", true );
+    });
+
     // function save_form(){
     //     var method = $(".cv_edit").attr('method');
     //     if (method == 'post') {

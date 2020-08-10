@@ -60,23 +60,24 @@ def edit_xp(request):
         exclude=('profile',),
         extra= 1 + int(request.GET.get('new')) if request.GET.get('new') else 0,
         max_num=15,
+        can_delete=True
     )
     extra = xp_inlineformset.extra
     
     if request.method == "GET":
         if (profile.xp_set.count() != 0):
-            _xp = xp_inlineformset(instance=profile)
+            xp = xp_inlineformset(instance=profile)
         elif (profile is None):
             return redirect("cv:Edit Profile")
         else:
-            _xp = xp_inlineformset()
+            xp = xp_inlineformset()
     elif request.method == "POST":
-        _xp = xp_inlineformset(request.POST, instance=profile)
-        if _xp.is_valid():
-            _xp.save()
+        xp = xp_inlineformset(request.POST, instance=profile)
+        if xp.is_valid():
+            xp.save()
             return redirect("cv:Edit XP")
 
-    return render(request, 'cv/edit_xp.html', {'xp': _xp, 'extra': extra})
+    return render(request, 'cv/edit_xp.html', {'xp': xp, 'extra': extra})
 
 
 @login_required(login_url='/root/')
@@ -99,18 +100,18 @@ def edit_education(request):
 
     if request.method == "GET":
         if (profile.education_set.count() != 0):
-            _education = education_inlineformset(instance=profile)
+            education = education_inlineformset(instance=profile)
         elif (profile is None):
             return redirect("cv:Edit Profile")
         else:
-            _education = education_inlineformset()
+            education = education_inlineformset()
     elif request.method == "POST":
-        _education = education_inlineformset(request.POST, instance=profile)
-        if _education.is_valid():
-            _education.save()
+        education = education_inlineformset(request.POST, instance=profile)
+        if education.is_valid():
+            education.save()
             return redirect("cv:Edit Education")
 
-    return render(request, 'cv/edit_education.html', {'education': _education, 'extra': extra})
+    return render(request, 'cv/edit_education.html', {'education': education, 'extra': extra})
 
 
 @login_required(login_url='/root/')
@@ -136,18 +137,18 @@ def edit_additional_education(request):
     
     if request.method == "GET":
         if (profile.education_set.count() != 0):
-            _additional_education = additional_education_inlineformset(instance=profile)
+            additional_education = additional_education_inlineformset(instance=profile)
         elif (profile is None):
             return redirect("cv:Edit Profile")
         else:
-            _additional_education = additional_education_inlineformset()
+            additional_education = additional_education_inlineformset()
     elif request.method == "POST":
-        _additional_education = additional_education_inlineformset(request.POST, instance=profile)
-        if _additional_education.is_valid():
-            _additional_education.save()
+        additional_education = additional_education_inlineformset(request.POST, instance=profile)
+        if additional_education.is_valid():
+            additional_education.save()
             return redirect("cv:Edit Additional Education")
 
-    return render(request, 'cv/edit_additional_education.html', {'additional_education': _additional_education, 'extra': extra})
+    return render(request, 'cv/edit_additional_education.html', {'additional_education': additional_education, 'extra': extra})
 
 
 

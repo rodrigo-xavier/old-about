@@ -9,6 +9,9 @@
 
 {% block extrajs %}
 <script type="text/javascript" src="{% static 'js/profile/edit.js' %}"></script>
+<script type="text/javascript" charset="utf-8">
+    $('input,textarea,select').filter('[required]').prev().append("*");
+</script>
 {% endblock %}
 
 {% block content %}
@@ -24,29 +27,21 @@
 
                 <div class="row">
                     {{ education.management_form }}
-                    {% for field in education %}
-                    <div class="col-xl-4">
-                        <div class="pt-2"></div>
-                        <div class="card blue-gradient">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    {{ field.label_tag }}
-                                    {{ field }}
-                                    {% if field.errors %}
-                                    <div class="alert alert-danger red" style="font-size:13px;">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                                aria-hidden="true">&times;</span></button>
-                                        {{ field.errors|striptags }}<br>
+                    {% for form in education %}
+                        <div class="col-xl-4">
+                            <div class="pt-2"></div>
+                            <div class="card blue-gradient">
+                                <button name="#id_education_set-{{ forloop.counter0 }}-DELETE" type="submit" class="btn btn-close">
+                                    <i class="centralize fas fa-times" style="font-size:25px"></i>
+                                </button>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        {{ form }}
                                     </div>
-                                    {% endif %}
-                                    {% if field.help_text %}
-                                    <p class="help">{{ field.help_text|safe }}</p>
-                                    {% endif %}
                                 </div>
                             </div>
+                            <div class="pb-2"></div>
                         </div>
-                        <div class="pb-2"></div>
-                    </div>
                     {% endfor %}
                 </div>
 
@@ -54,21 +49,26 @@
 
             </div>
         </div>
-        <button onclick="clean_phone();" type="submit" name="save" class="float">
+        <button type="submit" name="save" class="float">
             <div class="float-save success-color text-light">
                 <i class="fas fa-save centralize"></i>
             </div>
         </button>
     </form>
     <form class="cv" role="form" method="get" action="{% url 'cv:Edit Education' %}">
-        <div class="row">
+        <button class="float" formmethod="get" type="submit" name="new" value="{{ extra }}">
+            <div class="float-add purple-gradient text-light">
+                <i class="fas fa-plus centralize"></i>
+            </div>
+        </button>
+        {% comment %} <div class="row">
             <div class="col-xl-4"></div>
             <div class="col-xl-4">
                 <button autofocus class="centralize btn-circle btn btn-lg blue-gradient waves-effect" formmethod="get" type="submit" name="new" value="{{ extra }}">
                         <i class="fas fa-plus centralize text-light" style="font-size:60px;"></i>
                 </button>
             </div>
-        </div>
+        </div> {% endcomment %}
     </form>
     <div class="pb-5"></div>
     <div class="pb-3"></div>

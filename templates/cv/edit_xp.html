@@ -27,24 +27,16 @@
 
                 <div class="row">
                     {{ xp.management_form }}
-                    {% for field in xp %}
+                    {% for form in xp %}
                         <div class="col-xl-4">
                             <div class="pt-2"></div>
                             <div class="card blue-gradient">
+                                <button name="#id_xp_set-{{ forloop.counter0 }}-DELETE" type="submit" class="btn btn-close">
+                                    <i class="centralize fas fa-times" style="font-size:25px"></i>
+                                </button>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        {{ field }}
-                                        {% if field.errors %}
-                                            <div class="alert alert-danger red" style="font-size:13px;">
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                {{ field.errors|striptags }}<br>
-                                            </div>
-                                        {% endif %}
-                                        {% if field.help_text %}
-                                            <p class="help">{{ field.help_text|safe }}</p>
-                                        {% endif %}
+                                        {{ form }}
                                     </div>
                                 </div>
                             </div>
@@ -64,14 +56,19 @@
         </button>
     </form>
     <form role="form" method="get" action="{% url 'cv:Edit XP' %}">
-        <div class="row">
+        <button class="float" formmethod="get" type="submit" name="new" value="{{ extra }}">
+            <div class="float-add purple-gradient text-light">
+                <i class="fas fa-plus centralize"></i>
+            </div>
+        </button>
+        {% comment %} <div class="row">
             <div class="col-xl-4"></div>
             <div class="col-xl-4">
                 <button autofocus class="centralize btn-circle btn btn-lg blue-gradient waves-effect" formmethod="get" type="submit" name="new" value="{{ extra }}">
                         <i class="fas fa-plus centralize text-light" style="font-size:60px;"></i>
                 </button>
             </div>
-        </div>
+        </div> {% endcomment %}
     </form>
     <div class="pb-5"></div>
     <div class="pb-3"></div>
