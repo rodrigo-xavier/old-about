@@ -65,7 +65,7 @@ def edit_xp(request):
     extra = xp_inlineformset.extra
     
     if request.method == "GET":
-        if (profile.xp_set.count() != 0):
+        if hasattr(profile, "xp_set") and (profile.xp_set.count() != 0):
             xp = xp_inlineformset(instance=profile)
         elif (profile is None):
             return redirect("cv:Edit Profile")
@@ -99,7 +99,7 @@ def edit_education(request):
     extra = education_inlineformset.extra
 
     if request.method == "GET":
-        if (profile.education_set.count() != 0):
+        if hasattr(profile, "education_set") and (profile.education_set.count() != 0):
             education = education_inlineformset(instance=profile)
         elif (profile is None):
             return redirect("cv:Edit Profile")
@@ -136,7 +136,7 @@ def edit_additional_education(request):
     extra = additional_education_inlineformset.extra
     
     if request.method == "GET":
-        if (profile.education_set.count() != 0):
+        if hasattr(profile, "additional_education_set") and (profile.education_set.count() != 0):
             additional_education = additional_education_inlineformset(instance=profile)
         elif (profile is None):
             return redirect("cv:Edit Profile")

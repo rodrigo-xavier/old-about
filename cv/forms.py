@@ -195,9 +195,11 @@ class AdditionalEducationForm(forms.ModelForm):
             )
     
     def clean(self):
+        institution=""
         cleaned_data = super(AdditionalEducationForm, self).clean()
-        institution = cleaned_data['institution'].split(" ")
-        institution = "".join(institution)
+        if cleaned_data['id'] is not None:
+            institution = cleaned_data['institution'].split(" ")
+            institution = "".join(institution)
         if not (institution.isalpha()):
             self.add_error('institution', _('must be alphanumeric'))
             raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
