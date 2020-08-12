@@ -1,4 +1,11 @@
-# about-me
+** Imagens do Site **
+
+https://github.com/rodrigo-xavier/about-me/blob/master/static/img/site/Screenshot_2020-08-12_09-01-07.png?raw=true
+https://github.com/rodrigo-xavier/about-me/blob/master/static/img/site/Screenshot_2020-08-12_09-01-22.png?raw=true
+https://github.com/rodrigo-xavier/about-me/blob/master/static/img/site/Screenshot_2020-08-12_09-02-14.png?raw=true
+
+
+** Tutorial **
 
 Passo a passo para executar o projeto no seu computador:
 
@@ -62,6 +69,8 @@ Descubra o seu endereço ip de alguma forma, e então basta rodar (Assumindo no 
         python manage.py runserver 192.168.5.191:8000
 
 Agora, acessando http:/192.168.5.191:8000/ no navegador de qualquer dispositivo de sua rede, será possivel visualizar o site.
+
+
 
 
 **OBSERVAÇÕES**
