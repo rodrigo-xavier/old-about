@@ -14,7 +14,16 @@ def profile(request):
     profile = models.Profile.objects.first()
     education = models.Education.objects.all()
     xp = models.XP.objects.all()
-    return render(request, 'cv/profile.html', {'profile':profile, 'xp':xp, 'education':education})
+    current_xp = models.XP.objects.filter(is_current=True)
+    current_education = models.Education.objects.filter(is_current=True)
+    data = {
+        'profile':profile, 
+        'xp':xp, 
+        'education':education,
+        'current_xp':current_xp,
+        'current_education':current_education,
+    }
+    return render(request, 'cv/profile.html', data)
 
 @login_required(login_url='/root/')
 @reversion.views.create_revision(manage_manually=False, using=None, atomic=True, request_creates_revision=None)
@@ -40,8 +49,13 @@ def edit_profile(request):
 
             except Exception as e:
                 print(e)
+    
+    data = {
+        'profile': profile,
+        'profile_form': _profile,
+    }
 
-    return render(request, 'cv/edit_profile.html', {'profile': _profile})
+    return render(request, 'cv/edit_profile.html', data)
 
 
 @login_required(login_url='/root/')
@@ -75,8 +89,14 @@ def edit_xp(request):
         if xp.is_valid():
             xp.save()
             return redirect("cv:Edit XP")
+    
+    data = {
+        'xp': xp, 
+        'extra': extra,
+        'profile': profile,
+    }
 
-    return render(request, 'cv/edit_xp.html', {'xp': xp, 'extra': extra})
+    return render(request, 'cv/edit_xp.html', data)
 
 
 @login_required(login_url='/root/')
@@ -109,10 +129,22 @@ def edit_education(request):
         if education.is_valid():
             education.save()
             return redirect("cv:Edit Education")
+    
+    data = {
+        'education': education, 
+        'extra': extra,
+        'profile': profile,
+    }
 
-    return render(request, 'cv/edit_education.html', {'education': education, 'extra': extra})
+    return render(request, 'cv/edit_education.html', data)
 
 
 
 def schedule(request):
-    return render(request, 'schedule/schedule.html', {})
+    profile = models.Profile.objects.first()
+
+    data = {
+        'profile': profile,
+    }
+
+    return render(request, 'schedule/schedule.html', data)

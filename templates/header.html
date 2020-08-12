@@ -40,19 +40,23 @@
       </a>
     </li>
     <li class="nav-item dropdown">
-      <a class="nav-link" target="_blank" title="Github:rodrigo-xavier" href="https://github.com/rodrigo-xavier">
+      <a class="nav-link" target="_blank" title="Github" href="https://github.com/rodrigo-xavier">
         <i class="fab fa-github"></i>
       </a>
     </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link" target="_blank" title="Gmail:example@gmail.com" href="mailto:example@gmail.com">
-        <i class="fas fa-envelope"></i>
-      </a>
-    </li>
-    <li class="nav-item dropdown">  
-      <a class="nav-link" target="_blank" title="+55 (xx) xxxxx-xxxx" href="">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-    </li>
+    {% if profile.mail %}
+      <li class="nav-item dropdown">
+        <a class="nav-link" target="_blank" title="Gmail" href="mailto:{{ profile.mail }}">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    {% endif %}
+    {% if profile.phone %}
+      <li class="nav-item dropdown">  
+        <a class="nav-link" target="_blank" title="{{ profile.phone }}" href="https://wa.me/{{ profile.phone }}">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    {% endif %}
   </ul>
 </nav>

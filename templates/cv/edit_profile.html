@@ -32,7 +32,7 @@
           <div class="col-xl-4">
             <div class="card blue-gradient">
               <div class="card-body">
-                {% for field in profile.visible_fields|slice:"0:6" %}
+                {% for field in profile_form.visible_fields|slice:"0:6" %}
                   <div class="form-group">
                       {{ field.label_tag }}
                       {{ field }}
@@ -53,7 +53,7 @@
           <div class="col-xl-4">
             <div class="card blue-gradient">
               <div class="card-body">
-                {% for field in profile.visible_fields|slice:"6:7" %}
+                {% for field in profile_form.visible_fields|slice:"6:7" %}
                   <div class="form-group">
                       {{ field.label_tag }} 
                       {{ field }}
@@ -74,7 +74,7 @@
           <div class="col-xl-4">
             <div class="card blue-gradient">
               <div class="card-body">
-                {% for field in profile.visible_fields|slice:"7:9" %}
+                {% for field in profile_form.visible_fields|slice:"7:9" %}
                   <div class="form-group">
                       {{ field.label_tag }} 
                       {{ field }}

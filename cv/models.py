@@ -20,16 +20,25 @@ class Profile(models.Model):
         (2, _('Intermediary')),
         (3, _('Advanced')),
     ]
+    LINKS = [
+        (0, _('None')),
+        (1, _('Github')),
+        (2, _('Linkedin')),
+        (3, _('Instagram')),
+        (4, _('Facebook')),
+        (5, _('Other')),
+    ]
 
     name = models.CharField(verbose_name=_('Name'), max_length=40, default='')
     born_in = models.DateField(verbose_name=_("Born In"), default=date.today() - timedelta(23*365))
     mail = models.EmailField(verbose_name=_("Mail"), max_length=255, default='')
-    languages = models.PositiveSmallIntegerField(choices=LANGUAGES, verbose_name=_("Languages"), default=0) # Have to be a dict
+    languages = models.PositiveSmallIntegerField(choices=LANGUAGES, verbose_name=_("Languages"), default=0)
     phone = PhoneNumberField(verbose_name=_('Phone'), max_length=255)
     # fluency = models.ChoiceField(choices=[FLUENCY], verbose_name=_("Fluency"))
     # nickname
-    link = models.URLField(verbose_name=_("Other Platform"), max_length=200, default='', blank=True) # Have to be a dict
-    about = models.TextField(verbose_name=_("About"), max_length=2000, default='', blank=True)
+    link_title = models.PositiveSmallIntegerField(choices=LINKS, verbose_name=_("Platforms"), default=0)
+    link = models.URLField(max_length=200, default='', blank=True)
+    about = models.TextField(verbose_name=_("About You"), max_length=2000, default='', blank=True)
     current_goals = models.TextField(verbose_name=_("Current Goals"), max_length=1000, default='', blank=True) # Objetivos atuais
     proffessional_description = models.TextField(verbose_name=_("Professional Description"), max_length=1000, default='', blank=True) # Descricao profissional (Pode nao ser necessario)
     last = models.DateTimeField(verbose_name=_("Last Modification"), unique=True, auto_now=True)
@@ -93,7 +102,12 @@ class XP(models.Model):
 
 
 class Education(models.Model):
+    CATEGORY = [
+        (0, _('Academic')),
+        (1, _('Certification')),
+    ]
     profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
+    category = models.PositiveSmallIntegerField(choices=CATEGORY, verbose_name=_("Category"), default=0)
     institution = models.CharField(verbose_name=_("Institution"), max_length=100, default='')
     institution_description = models.TextField(verbose_name=_("Company Description"), max_length=1000, default='', blank=True)
     institution_website = models.URLField(verbose_name=_("Company Website"), max_length=200, default='', blank=True)
