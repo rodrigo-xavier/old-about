@@ -1,8 +1,8 @@
 ** Imagens do Site **
 
-https://github.com/rodrigo-xavier/about-me/blob/master/static/img/site/Screenshot_2020-08-12_09-01-07.png?raw=true
-https://github.com/rodrigo-xavier/about-me/blob/master/static/img/site/Screenshot_2020-08-12_09-01-22.png?raw=true
-https://github.com/rodrigo-xavier/about-me/blob/master/static/img/site/Screenshot_2020-08-12_09-02-14.png?raw=true
+![image](https://user-images.githubusercontent.com/19516620/90013420-b415a300-dc51-11ea-8a7c-b39977fa36d7.png)
+![image](https://user-images.githubusercontent.com/19516620/90013441-c0016500-dc51-11ea-9c7b-46a662775b6c.png)
+![image](https://user-images.githubusercontent.com/19516620/90013463-c98acd00-dc51-11ea-988c-7066c72adc15.png)
 
 
 ** Tutorial **
