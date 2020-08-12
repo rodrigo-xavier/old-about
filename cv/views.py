@@ -12,10 +12,9 @@ import reversion
 
 def profile(request):
     profile = models.Profile.objects.first()
-    # academic = models.Academic.objects.all()
-    # xp = models.XP.objects.all()
-    # certification = models.Certification.objects.all()
-    return render(request, 'cv/profile.html', {'profile':profile})
+    education = models.Education.objects.all()
+    xp = models.XP.objects.all()
+    return render(request, 'cv/profile.html', {'profile':profile, 'xp':xp, 'education':education})
 
 @login_required(login_url='/root/')
 @reversion.views.create_revision(manage_manually=False, using=None, atomic=True, request_creates_revision=None)
@@ -112,45 +111,6 @@ def edit_education(request):
             return redirect("cv:Edit Education")
 
     return render(request, 'cv/edit_education.html', {'education': education, 'extra': extra})
-
-
-@login_required(login_url='/root/')
-@reversion.views.create_revision(manage_manually=False, using=None, atomic=True, request_creates_revision=None)
-def edit_additional_education(request):
-    if not request.user.is_superuser:
-        raise PermissionDenied
-    
-    profile = models.Profile.objects.first()
-
-    # Conta objetos additionaleducation que tenham relacao com a instancia profile, utilizando aggregate, apenas para exibir conhecimentos
-    # models.AdditionalEducation.objects.filter(profile=profile).aggregate(Count('profile'))['profile__count']
-    
-    additional_education_inlineformset = inlineformset_factory(
-        parent_model=models.Profile,
-        model=models.AdditionalEducation,
-        form=forms.AdditionalEducationForm, 
-        exclude=('profile', 'from_period', 'until_period'),
-        extra= 1 + int(request.GET.get('new')) if request.GET.get('new') else 0,
-        max_num=15,
-    )
-    extra = additional_education_inlineformset.extra
-    
-    if request.method == "GET":
-        if hasattr(profile, "additional_education_set") and (profile.education_set.count() != 0):
-            additional_education = additional_education_inlineformset(instance=profile)
-        elif (profile is None):
-            return redirect("cv:Edit Profile")
-        else:
-            additional_education = additional_education_inlineformset()
-    elif request.method == "POST":
-        additional_education = additional_education_inlineformset(request.POST, instance=profile)
-        if additional_education.is_valid():
-            additional_education.save()
-            return redirect("cv:Edit Additional Education")
-
-    return render(request, 'cv/edit_additional_education.html', {'additional_education': additional_education, 'extra': extra})
-
-
 
 
 

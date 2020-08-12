@@ -80,7 +80,7 @@ class XPForm(forms.ModelForm):
         kwargs.setdefault('label_suffix', '')
         super(XPForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
+            visible.field.widget.attrs['class'] = 'form-control form-group'
             self.fields['company_name'].widget.attrs.update({
                     'placeholder': _("Enter company name"),
                     'required': ""
@@ -120,14 +120,28 @@ class XPForm(forms.ModelForm):
                     'required': ""
                 }
             )
+            self.fields['is_current'].widget.attrs.update({
+                }
+            )
     
-    def clean(self):
-        cleaned_data = super(XPForm, self).clean()
-        company_name = cleaned_data['company_name'].split(" ")
+    def validate_name(self, data):
+        company_name = data['company_name'].split(" ")
         company_name = "".join(company_name)
         if not (company_name.isalpha()):
             self.add_error('company_name', _('must be alphanumeric'))
             raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
+
+    # def validate_is_current(self, data):
+    #     if data['is_current'] is True:
+    #         models.XP.objects
+    #         if not ():
+    #             self.add_error('is_current', _('Is permitted just one checkbox selected'))
+    #             raise forms.ValidationError(_("Is permitted just one checkbox selected"), code='invalid')
+    
+    def clean(self):
+        cleaned_data = super(XPForm, self).clean()
+        self.validate_name(cleaned_data)
+        # self.validate_is_current(cleaned_data)
 
         return cleaned_data
     
@@ -143,21 +157,33 @@ class EducationForm(forms.ModelForm):
         kwargs.setdefault('label_suffix', '')
         super(EducationForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
+            visible.field.widget.attrs['class'] = 'form-control form-group'
             self.fields['institution'].widget.attrs.update({
                 'placeholder': _("Describe the main activities you performed at the company"),
                 
                 }
             )
-            self.fields['description'].widget.attrs.update({
+            self.fields['institution_description'].widget.attrs.update({
                 }
             )
-            self.fields['from_period'].widget.attrs.update({
+            self.fields['institution_website'].widget.attrs.update({
                 }
             )
-            self.fields['until_period'].widget.attrs.update({
+            self.fields['institution_mail'].widget.attrs.update({
                 }
             )
+            self.fields['institution_phone'].widget.attrs.update({
+                }
+            )
+            self.fields['course'].widget.attrs.update({
+                }
+            )
+            self.fields['course_description'].widget.attrs.update({
+                }
+            )
+            self.fields['from_period'].widget = forms.HiddenInput()
+            self.fields['until_period'].widget = forms.HiddenInput()
+            self.fields['duration'].widget = forms.HiddenInput()
     
     def clean(self):
         institution = ""
@@ -176,32 +202,3 @@ class EducationForm(forms.ModelForm):
             'from_period': forms.DateInput(attrs={'type': 'date'}),
             'until_period': forms.DateInput(attrs={'type': 'date'})
         }
-
-
-class AdditionalEducationForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        kwargs.setdefault('label_suffix', '')
-        super(AdditionalEducationForm, self).__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
-            self.fields['institution'].widget.attrs.update({
-                }
-            )
-            self.fields['description'].widget.attrs.update({
-                }
-            )
-            self.fields['duration'].widget.attrs.update({
-                }
-            )
-    
-    def clean(self):
-        institution=""
-        cleaned_data = super(AdditionalEducationForm, self).clean()
-        if cleaned_data['id'] is not None:
-            institution = cleaned_data['institution'].split(" ")
-            institution = "".join(institution)
-        if not (institution.isalpha()):
-            self.add_error('institution', _('must be alphanumeric'))
-            raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
-
-        return cleaned_data

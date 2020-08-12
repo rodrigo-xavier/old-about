@@ -74,12 +74,13 @@ class XP(models.Model):
     employee_main_activity = models.TextField(verbose_name=_("Main Activities"), max_length=500, default='', blank=False)
     from_period = models.DateField(verbose_name=_("From Period"), default='', blank=False)
     until_period = models.DateField(verbose_name=_("Until Period"), default='', blank=False)
+    is_current = models.BooleanField(verbose_name=_("Is Current"), default=False, blank=True)
 
     def __str__(self):
         return self.company_name
     
     def clean(self):
-        super(XP, self).clean()       
+        super(XP, self).clean()
         self.company_name = capitalize(self.company_name.split(' '))
     
     def save(self, *args, **kwargs):
@@ -94,33 +95,27 @@ class XP(models.Model):
 class Education(models.Model):
     profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
     institution = models.CharField(verbose_name=_("Institution"), max_length=100, default='')
-    description = models.TextField(verbose_name=_("Description"), max_length=1000, default='')
-    from_period = models.DateField(verbose_name=_("From Period"), default='', null=True)
-    until_period = models.DateField(verbose_name=_("Until Period"), default='', null=True)
-    # site da universidade
+    institution_description = models.TextField(verbose_name=_("Company Description"), max_length=1000, default='', blank=True)
+    institution_website = models.URLField(verbose_name=_("Company Website"), max_length=200, default='', blank=True)
+    institution_mail = models.EmailField(verbose_name=_("Company Mail"), max_length=255, default='', blank=True)
+    institution_phone = PhoneNumberField(verbose_name=_('Company Phone'), max_length=255, blank=True)
+    course = models.CharField(verbose_name=_("Course"), max_length=100, default='', blank=True)
+    course_description = models.TextField(verbose_name=_("Course Description"), max_length=1000, default='', blank=True)
+    from_period = models.DateField(verbose_name=_("From Period"), default='', null=True, blank=True)
+    until_period = models.DateField(verbose_name=_("Until Period"), default='', null=True, blank=True)
+    duration = models.PositiveSmallIntegerField(verbose_name=_("Duration (In hours)"), default=0, blank=True)
+    is_current = models.BooleanField(verbose_name=_("Is Current"), default=False, blank=True)
 
     def __str__(self):
         return self.institution
     
-    class Meta:
-        verbose_name = _("Education")
-
-
-class AdditionalEducation(Education):
-    duration = models.PositiveSmallIntegerField(verbose_name=_("Duration"), default=0)
-    from_period = None
-    until_period = None
-
     def clean(self):
-        self.from_period = None
-        self.until_period = None
-        return super(AdditionalEducation, self).clean()
+        super(XP, self).clean()       
+        self.institution = capitalize(self.institution.split(' '))
     
     def save(self, *args, **kwargs):
         self.clean()
-        return super(AdditionalEducation, self).save(*args, **kwargs)
-
+        return super(XP, self).save(**kwargs)
+    
     class Meta:
-        verbose_name = _("Additional Education")
-        verbose_name_plural = _("Additional Education")
-
+        verbose_name = _("Education")

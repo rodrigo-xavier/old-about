@@ -1,23 +1,18 @@
 {% load i18n static %}
 <div class="row">
-  <div class="col-xl-3">
+  <div class="col-xl-4">
       <a id="edit_profile" class="w-100 btn btn-primary waves-effect" href="{% url "CV:Edit Profile" %}">
           <b>Profile</b>
       </a>
   </div>
-  <div id="edit_xp" class="col-xl-3">
+  <div id="edit_xp" class="col-xl-4">
       <a class="w-100 btn btn-danger waves-effect" href="{% url "CV:Edit XP" %}">
           <b>Professional Experience</b>
       </a>
   </div>
-  <div id="edit_education" class="col-xl-3">
+  <div id="edit_education" class="col-xl-4">
       <a class="w-100 btn btn-success waves-effect" href="{% url "CV:Edit Education" %}">
           <b>Education</b>
-      </a>
-  </div>
-  <div id="edit_additional_education" class="col-xl-3">
-      <a class="w-100 btn btn-warning waves-effect" href="{% url "CV:Edit Additional Education" %}">
-          <b>Additional Education</b>
       </a>
   </div>
 </div>

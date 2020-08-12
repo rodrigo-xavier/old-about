@@ -28,7 +28,7 @@
                 <div class="row">
                     {{ education.management_form }}
                     {% for form in education %}
-                        <div class="col-xl-4">
+                        <div class="col-xl-6">
                             <div class="pt-2"></div>
                             <div class="card blue-gradient">
                                 <button name="#id_education_set-{{ forloop.counter0 }}-DELETE" type="submit" class="btn btn-close">
@@ -37,6 +37,16 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         {{ form }}
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <button type="button" class="w-100 btn grey"> Dates
+                                                </button>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <button type="button" class="w-100 btn grey"> Duration
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
