@@ -1,11 +1,13 @@
-** Imagens do Site **
+**Imagens do Site**
 
 ![image](https://user-images.githubusercontent.com/19516620/90013420-b415a300-dc51-11ea-8a7c-b39977fa36d7.png)
+
 ![image](https://user-images.githubusercontent.com/19516620/90013441-c0016500-dc51-11ea-9c7b-46a662775b6c.png)
+
 ![image](https://user-images.githubusercontent.com/19516620/90013463-c98acd00-dc51-11ea-988c-7066c72adc15.png)
 
 
-** Tutorial **
+**Tutorial**
 
 Passo a passo para executar o projeto no seu computador:
 
