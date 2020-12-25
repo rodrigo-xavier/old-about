@@ -1,0 +1,27 @@
+{% extends "starter.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Blog" %}{% endblock %}
+
+
+{% block extrajs %}
+<script type="text/javascript" charset="utf-8">
+    ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .then( editor => {
+        console.log( editor );
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
+</script>
+{% endblock %}
+
+{% block content %}
+
+{% comment %} <div id="toolbar-container"></div> {% endcomment %}
+    <div id="editor">
+        <p>Here goes the initial content of the editor.</p>
+    </div>
+
+{% endblock %}

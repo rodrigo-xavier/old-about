@@ -12,6 +12,16 @@
   <script type="text/javascript" charset="utf-8">
     $('input,textarea,select').filter('[required]').parent().parent().find("label").append("*");
   </script>
+  <script type="text/javascript" charset="utf-8">
+    ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .then( editor => {
+        console.log( editor );
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
+</script>
 {% endblock %}
 
 {% block content %}
@@ -54,8 +64,8 @@
             <div class="card blue-gradient">
               <div class="card-body">
                 {% for field in profile_form.visible_fields|slice:"6:7" %}
-                  <div class="form-group">
-                      {{ field.label_tag }} 
+                  <div class="form-group" id="editor">
+                      {{ field.label_tag }}
                       {{ field }}
                       {% if field.errors %}
                         <div class="alert alert-danger red"  style="font-size:13px;">

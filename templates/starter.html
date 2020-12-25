@@ -10,7 +10,6 @@
 
   <title>Rodrigo | {% block title %}{% endblock %}</title>
 
-
   <!-- Font Awesome Icons -->
   <link type="text/css" rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
   <!-- Google Font: Source Sans Pro -->
@@ -19,7 +18,7 @@
   <link type="text/css" rel="stylesheet" href="{% static 'plugins/adminlte/css/adminlte.min.css' %}">
   <!-- Material Design Bootstrap -->
   <link type="text/css" rel="stylesheet" href="{% static 'plugins/mdb/css/mdb.min.css' %}">
-  
+  <!-- Menu -->
   <link type="text/css" rel="stylesheet" href="{% static 'css/menu/menu.css' %}">
 
   {% block extrastyle %}{% endblock %}
@@ -74,23 +73,27 @@
   <script type="text/javascript" src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
   <!-- Bootstrap 4 -->
   <script type="text/javascript" src="{% static 'plugins/bootstrap-4.5.0/js/bootstrap.bundle.min.js' %}"></script>
+  <!-- React -->
+  <script src="plugins/react.js" crossorigin></script>
+  <script src="plugins/react-dom.js" crossorigin></script>
   <!-- AdminLTE App -->
   <script type="text/javascript" src="{% static 'plugins/adminlte/js/adminlte.min.js' %}"></script>
-  {% comment %} Menu {% endcomment %}
+  <!-- Menu -->
   <script type="text/javascript" src="{% static 'js/menu/menu.js' %}"></script>
-
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="{% static 'plugins/mdb/js/mdb.min.js' %}"></script>
-
+  <!-- CKEditor 5 -->
+  <script type="text/javascript" src="{% static 'plugins/ckeditor5-custom/build/ckeditor.js' %}"></script>
+  {% comment %} <script type="text/javascript" src="{% static 'plugins/ckeditor5-build-balloon/ckeditor.js' %}"></script> {% endcomment %}
+  {% comment %} <script type="text/javascript" src="{% static 'plugins/ckeditor5-build-balloon-block/ckeditor.js' %}"></script> {% endcomment %}
+  {% comment %} <script type="text/javascript" src="{% static 'plugins/ckeditor5-build-classic/ckeditor.js' %}"></script> {% endcomment %}
+  {% comment %} <script type="text/javascript" src="{% static 'plugins/ckeditor5-build-decoupled-document/ckeditor.js' %}"></script> {% endcomment %}
+  {% comment %} <script type="text/javascript" src="{% static 'plugins/ckeditor5-build-inline/ckeditor.js' %}"></script> {% endcomment %}
   <!-- FastClick -->
   <script type="text/javascript" src="{% static 'plugins/fastclick/fastclick.js' %}"></script>
-  <script type="text/javascript" charset="utf-8">
-    $(function() {
-    FastClick.attach(document.body);
-  });
-  </script>
 
   {% block extrajs %}{% endblock %}
+  {% comment %} {% include "snow.html" %} {% endcomment %}
 
 </body>
 

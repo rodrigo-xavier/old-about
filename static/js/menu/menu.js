@@ -29,4 +29,8 @@ $(document).ready(function () {
     $('[data-toggle="offcanvas"]').click(function () {
             $('#wrapper').toggleClass('toggled');
     });
+
+    $(function() {
+        FastClick.attach(document.body);
+    });
 });
