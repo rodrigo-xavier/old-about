@@ -9,11 +9,13 @@
 
 {% block extrajs %}
   <script type="text/javascript" src="{% static 'js/profile/edit.js' %}"></script>
+  {% comment %} <script type="text/javascript" src="{% static 'plugins/ckeditor5-build-balloon/ckeditor.js' %}"></script> {% endcomment %}
+  {% comment %} <script type="text/javascript" src="{% static 'plugins/ckeditor5-build-balloon-block/ckeditor.js' %}"></script> {% endcomment %}
   <script type="text/javascript" charset="utf-8">
     $('input,textarea,select').filter('[required]').parent().parent().find("label").append("*");
   </script>
-  <script type="text/javascript" charset="utf-8">
-    ClassicEditor
+  {% comment %} <script type="text/javascript" charset="utf-8">
+    BalloonEditor
     .create( document.querySelector( '#editor' ) )
     .then( editor => {
         console.log( editor );
@@ -21,87 +23,82 @@
     .catch( error => {
         console.error( error );
     } );
-</script>
+</script> {% endcomment %}
 {% endblock %}
 
 {% block content %}
   {% include "cv/buttons.html" %}
   <form class="cv_edit" role="form" method="post" action="{% url 'cv:Edit Profile' %}">
     {% csrf_token %}
-    <div class="card card-primary">
-      <div class="card-header elegant-color-dark" style="height: 70px; font-size:50px">
-        <h1 style="font-size:35px;" class="centralize card-title"><b>{% trans "Profile" %}</b></h1>
-        {% comment %} <div class="card-tools">
-          <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-        </div> {% endcomment %}
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-xl-4">
-            <div class="card blue-gradient">
-              <div class="card-body">
-                {% for field in profile_form.visible_fields|slice:"0:6" %}
-                  <div class="form-group">
-                      {{ field.label_tag }}
-                      {{ field }}
-                      {% if field.errors %}
-                        <div class="alert alert-danger red"  style="font-size:13px;">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            {{ field.errors|striptags }}<br>
-                        </div>
-                      {% endif %}
-                      {% if field.help_text %}
-                        <p class="help">{{ field.help_text|safe }}</p>
-                      {% endif %}
-                  </div>
-                {% endfor %}
-              </div>
+    {% comment %} <div class="card-tools">
+      <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+    </div> {% endcomment %}
+    <div class="card-body">
+      <div class="row">
+        <div class="col-xl-4">
+          <div class="card card-outline card-primary">
+            <div class="card-body">
+              {% for field in profile_form.visible_fields|slice:"0:6" %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                      <div class="alert alert-danger red"  style="font-size:13px;">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          {{ field.errors|striptags }}<br>
+                      </div>
+                    {% endif %}
+                    {% if field.help_text %}
+                      <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+              {% endfor %}
             </div>
           </div>
-          <div class="col-xl-4">
-            <div class="card blue-gradient">
-              <div class="card-body">
-                {% for field in profile_form.visible_fields|slice:"6:7" %}
-                  <div class="form-group" id="editor">
-                      {{ field.label_tag }}
-                      {{ field }}
-                      {% if field.errors %}
-                        <div class="alert alert-danger red"  style="font-size:13px;">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            {{ field.errors|striptags }}<br>
-                        </div>
-                      {% endif %}
-                      {% if field.help_text %}
-                        <p class="help">{{ field.help_text|safe }}</p>
-                      {% endif %}
-                  </div>
-                {% endfor %}
-              </div>
+        </div>
+        <div class="col-xl-4">
+          <div class="card card-outline card-primary">
+            <div class="card-body">
+              {% for field in profile_form.visible_fields|slice:"6:7" %}
+                <div class="form-group" id="editor">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                      <div class="alert alert-danger red"  style="font-size:13px;">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          {{ field.errors|striptags }}<br>
+                      </div>
+                    {% endif %}
+                    {% if field.help_text %}
+                      <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+              {% endfor %}
             </div>
           </div>
-          <div class="col-xl-4">
-            <div class="card blue-gradient">
-              <div class="card-body">
-                {% for field in profile_form.visible_fields|slice:"7:9" %}
-                  <div class="form-group">
-                      {{ field.label_tag }} 
-                      {{ field }}
-                      {% if field.errors %}
-                        <div class="alert alert-danger red"  style="font-size:13px;">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                            {{ field.errors|striptags }}<br>
-                        </div>
-                      {% endif %}
-                      {% if field.help_text %}
-                        <p class="help">{{ field.help_text|safe }}</p>
-                      {% endif %}
-                  </div>
-                {% endfor %}
-              </div>
+        </div>
+        <div class="col-xl-4">
+          <div class="card card-outline card-primary">
+            <div class="card-body">
+              {% for field in profile_form.visible_fields|slice:"7:9" %}
+                <div class="form-group">
+                    {{ field.label_tag }} 
+                    {{ field }}
+                    {% if field.errors %}
+                      <div class="alert alert-danger red"  style="font-size:13px;">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                          {{ field.errors|striptags }}<br>
+                      </div>
+                    {% endif %}
+                    {% if field.help_text %}
+                      <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+              {% endfor %}
             </div>
           </div>
         </div>

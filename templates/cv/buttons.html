@@ -1,19 +1,46 @@
 {% load i18n static %}
+
+{% url "CV:Edit Profile" as edit_profile %}
+{% url "CV:Edit XP" as edit_xp %}
+{% url "CV:Edit Education" as edit_education %}
+
 <div class="row">
-  <div class="col-xl-4">
-      <a id="edit_profile" class="w-100 btn btn-primary waves-effect" href="{% url "CV:Edit Profile" %}">
-          <b>Profile</b>
-      </a>
-  </div>
-  <div id="edit_xp" class="col-xl-4">
-      <a class="w-100 btn btn-danger waves-effect" href="{% url "CV:Edit XP" %}">
-          <b>Professional Experience</b>
-      </a>
-  </div>
-  <div id="edit_education" class="col-xl-4">
-      <a class="w-100 btn btn-success waves-effect" href="{% url "CV:Edit Education" %}">
-          <b>Education</b>
-      </a>
-  </div>
+    <div id="edit_profile" class="col-xl-4">
+        {% if request.get_full_path == edit_profile %}
+            <a id="edit_profile" class="w-100 h-100 btn btn-primary waves-effect" href="{{ edit_profile }}">
+                <b>Profile</b>
+            </a>
+        {% else %}
+            <a id="edit_profile" class="w-100 btn btn-primary waves-effect" href="{{ edit_profile }}">
+                <b>Profile</b>
+            </a>
+            <div class="pb-3"></div>
+        {% endif %}
+    </div>
+
+    <div id="edit_xp" class="col-xl-4">
+        {% if request.get_full_path == edit_xp %}
+            <a class="w-100 h-100 btn btn-danger waves-effect" href="{{ edit_xp }}">
+                <b>Professional Experience</b>
+            </a>
+        {% else %}
+            <a class="w-100 btn btn-danger waves-effect" href="{{ edit_xp }}">
+                <b>Professional Experience</b>
+            </a>
+            <div class="pb-3"></div>
+        {% endif %}
+    </div>
+
+    <div id="edit_education" class="col-xl-4">
+        {% if request.get_full_path == edit_education %}
+            <a class="w-100 h-100 btn btn-success waves-effect" href="{{ edit_education }}">
+                <b>Education</b>
+            </a>
+        {% else %}
+            <a class="w-100 btn btn-success waves-effect" href="{{ edit_education }}">
+                <b>Education</b>
+            </a>
+            <div class="pb-3"></div>
+        {% endif %}
+    </div>
 </div>
-<div class="pb-3"></div>

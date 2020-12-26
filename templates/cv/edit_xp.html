@@ -19,10 +19,7 @@
 
     <form class="cv_edit" role="form" method="post" action="{% url 'cv:Edit XP' %}">
         {% csrf_token %}
-        <div class="card card-primary">
-            <div class="card-header elegant-color-dark" style="height: 70px; font-size:50px">
-                <h1 style="font-size:35px;" class="centralize card-title"><b>{% trans "Professional Experience" %}</b></h1>
-            </div>
+        {% comment %} <div class="card card-primary"> {% endcomment %}
             <div class="card-body">
 
                 <div class="row">
@@ -30,7 +27,7 @@
                     {% for form in xp %}
                         <div class="col-xl-6">
                             <div class="pt-2"></div>
-                            <div class="card blue-gradient">
+                            <div class="card card-outline card-danger">
                                 <button name="#id_xp_set-{{ forloop.counter0 }}-DELETE" type="submit" class="btn btn-close">
                                     <i class="centralize fas fa-times" style="font-size:25px"></i>
                                 </button>
@@ -64,7 +61,7 @@
         {% comment %} <div class="row">
             <div class="col-xl-4"></div>
             <div class="col-xl-4">
-                <button autofocus class="centralize btn-circle btn btn-lg blue-gradient waves-effect" formmethod="get" type="submit" name="new" value="{{ extra }}">
+                <button autofocus class="centralize btn-circle btn btn-lg card-outline card-danger waves-effect" formmethod="get" type="submit" name="new" value="{{ extra }}">
                         <i class="fas fa-plus centralize text-light" style="font-size:60px;"></i>
                 </button>
             </div>
