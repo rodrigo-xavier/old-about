@@ -2,11 +2,6 @@
 
 ![image](https://raw.githubusercontent.com/rodrigo-xavier/about-me/master/static/img/site/about.gif)
 
-![image](https://user-images.githubusercontent.com/19516620/90013441-c0016500-dc51-11ea-9c7b-46a662775b6c.png)
-
-![image](https://user-images.githubusercontent.com/19516620/90013463-c98acd00-dc51-11ea-988c-7066c72adc15.png)
-
-
 **Tutorial**
 
 Passo a passo para executar o projeto no seu computador:
