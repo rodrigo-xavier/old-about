@@ -23,9 +23,8 @@
             <div class="card-body">
                 <div class="row">
                     {{ xp.management_form }}
-                    {% for form in xp %}
+                    {% for form in xp reversed %}
                         <div class="col-xl-6">
-                            <div class="pt-2"></div>
                             <div class="card card-outline card-danger">
                                 <div class="card-tools">
                                     <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
@@ -41,13 +40,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="pb-2"></div>
                         </div>
                     {% endfor %}
                 </div>
-
-                <div class="pb-3"></div>
-
             </div>
         </div>
         <button type="submit" name="save" class="float">

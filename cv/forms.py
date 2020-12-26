@@ -83,7 +83,8 @@ class XPForm(forms.ModelForm):
             visible.field.widget.attrs['class'] = 'form-control form-group'
             self.fields['company_name'].widget.attrs.update({
                     'placeholder': _("Enter company name"),
-                    'required': ""
+                    'required': "",
+                    'autofocus': "",
                 }
             )
             self.fields['company_description'].widget.attrs.update({
@@ -160,6 +161,7 @@ class EducationForm(forms.ModelForm):
             visible.field.widget.attrs['class'] = 'form-control form-group'
             self.fields['institution'].widget.attrs.update({
                 'placeholder': _("Describe the main activities you performed at the company"),
+                'autofocus': "",
                 
                 }
             )
