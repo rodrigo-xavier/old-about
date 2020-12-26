@@ -71,7 +71,7 @@ def edit_xp(request):
         model=models.XP,
         form=forms.XPForm,
         exclude=('profile',),
-        extra= 1 + int(request.GET.get('new')) if request.GET.get('new') else 0,
+        extra= 1 + int(request.GET.get('new')) if request.GET.get('new') else 1, # Pega o valor extra do formulario e adiciona +1 quando o botao 'new' eh pressionado, criando outro formulario
         max_num=15,
         can_delete=True
     )
@@ -112,7 +112,7 @@ def edit_education(request):
         model=models.Education,
         form=forms.EducationForm, 
         exclude=('profile',),
-        extra= 1 + int(request.GET.get('new')) if request.GET.get('new') else 0,
+        extra= 1 + int(request.GET.get('new')) if request.GET.get('new') else 1,
         max_num=15,
     )
     extra = education_inlineformset.extra

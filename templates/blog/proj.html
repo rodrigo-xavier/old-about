@@ -1,10 +1,11 @@
 {% extends "starter.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "Blog" %}{% endblock %}
 
 
 {% block extrajs %}
+<script type="text/javascript" src="{% static 'plugins/ckeditor5-build-classic/ckeditor.js' %}"></script>
 <script type="text/javascript" charset="utf-8">
     ClassicEditor
     .create( document.querySelector( '#editor' ) )

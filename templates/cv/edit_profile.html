@@ -18,11 +18,6 @@
   {% include "cv/buttons.html" %}
   <form class="cv_edit" role="form" method="post" action="{% url 'cv:Edit Profile' %}">
     {% csrf_token %}
-    {% comment %} <div class="card-tools">
-      <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
-        <i class="fas fa-minus"></i>
-      </button>
-    </div> {% endcomment %}
     <div class="card-body">
       <div class="row">
         <div class="col-xl-4">
