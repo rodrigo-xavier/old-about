@@ -19,7 +19,7 @@
     </div>
 
     <div id="edit_xp" class="col-xl-4">
-        {% if request.get_full_path == edit_xp %}
+        {% if request.path == edit_xp %}
             <a class="w-100 h-100 btn btn-danger waves-effect" href="{{ edit_xp }}">
                 <b>Professional Experience</b>
             </a>
@@ -32,7 +32,7 @@
     </div>
 
     <div id="edit_education" class="col-xl-4">
-        {% if request.get_full_path == edit_education %}
+        {% if request.path == edit_education %}
             <a class="w-100 h-100 btn btn-success waves-effect" href="{{ edit_education }}">
                 <b>Education</b>
             </a>
