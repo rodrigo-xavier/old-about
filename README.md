@@ -1,6 +1,6 @@
 **Imagens do Site**
 
-![image](https://user-images.githubusercontent.com/19516620/90013420-b415a300-dc51-11ea-8a7c-b39977fa36d7.png)
+![image](https://raw.githubusercontent.com/rodrigo-xavier/about-me/master/static/img/site/about.gif)
 
 ![image](https://user-images.githubusercontent.com/19516620/90013441-c0016500-dc51-11ea-9c7b-46a662775b6c.png)
 
