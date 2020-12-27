@@ -155,3 +155,6 @@ PHONENUMBER_DB_FORMAT = 'INTERNATIONAL'
 
 # RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
 # RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'

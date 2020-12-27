@@ -44,11 +44,6 @@
                     <i class="fas fa-chart-pie"></i> {% trans "Trade" %}
                 </a>
             </li>
-            <li>
-                <a href="{% url "Login" %}">
-                    <i class="fas fa-broom"></i> {% trans "Login" %}
-                </a>
-            </li>
             {% if request.user.is_superuser %}
                 <li>
                     <a href="{% url "Admin" %}">

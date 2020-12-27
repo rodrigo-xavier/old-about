@@ -24,38 +24,40 @@
 
     <body>
         <div class="col-xl-4 centralize">
-            <form role="form" method="post">
+            <form role="form" method="post" action="{% url 'login' %}">
                 {% csrf_token %}
-                <div class="card blue-gradient">
+                <div class="card ">
                     <div class="card-header">
                         <div style="text-align: center;">
                             <img src="{% static "img/logo/skyrim.svg" %}" alt="{% lorem 1 w random %}"
                                 class="img-circle" style="width: 250px;">
                         </div>
                     </div>
+                    <br>
                     <div class="card-body">
                         <div class="form-group">
-                            <input autofocus type="text" class="form-control" maxlength="30"
-                                placeholder="{% trans "Login" %}" required>
+                            {{ form.username.label_tag }}
+                            {{ form.username }}
+                            {% comment %} <input autofocus type="text" class="form-control" maxlength="30"
+                                placeholder="{% trans "Login" %}" required> {% endcomment %}
                         </div>
                         <div class="form-group">
-                            <input autofocus type="password" class="form-control" maxlength="30"
-                                placeholder="{% trans "Password" %}" required>
+                            {{ form.password.label_tag }}
+                            {{ form.password }}
+                            {% comment %} <input type="password" class="form-control" maxlength="30"
+                                placeholder="{% trans "Password" %}" required> {% endcomment %}
                         </div>
                         <div class="form-group">
-                            <a href="{% url "Login" %}">
-                                {% trans "Join" %}
-                            </a>
-                            <a style="align-content: flex-end;" href="{% url "Login" %}">
-                                {% trans "Forgot Password" %}
-                            </a>
+                            {% comment %} <a href="{% url "Login" %}"> {% endcomment %}
+                                {% trans "Forgot Password?" %}
+                            {% comment %} </a> {% endcomment %}
                         </div>
                     </div>
-
-                    <button type="submit" class="btn black login-btn">
-                        <i class="fas fa-check" style="font-size: 50px;"></i>
-                    </button>
-
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-dark w-100">
+                            <h5 style=" color:success;">{% trans "Sign in" %}</h5>
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -65,14 +67,13 @@
         <!-- REQUIRED SCRIPTS -->
 
         <!-- jQuery -->
-        <script type="text/javascript" src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+        {% comment %} <script type="text/javascript" src="{% static 'plugins/jquery/jquery.min.js' %}"></script> {% endcomment %}
         <!-- Bootstrap 4 -->
         <script type="text/javascript" src="{% static 'plugins/bootstrap-4.5.0/js/bootstrap.bundle.min.js' %}"></script>
         <!-- AdminLTE App -->
         <script type="text/javascript" src="{% static 'plugins/adminlte/js/adminlte.min.js' %}"></script>
         <!-- FastClick -->
         <script type="text/javascript" src="{% static 'plugins/fastclick/fastclick.js' %}"></script>
-
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="{% static 'plugins/mdb/js/mdb.min.js' %}"></script>
     </body>

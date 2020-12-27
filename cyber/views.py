@@ -14,9 +14,6 @@ from django.contrib.auth import authenticate, login
 def admin(request):
     return render(request, 'admin.html', {})
 
-def login(request):
-    return render(request, 'login.html', {})
-
 # def bad_request(request, *args, **kwargs):
 #     """Return page for HTTP Error 400"""
 #     return render(request, '400.html', status=400)

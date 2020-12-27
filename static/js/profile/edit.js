@@ -52,6 +52,12 @@ $(document).ready(function(){
         $(btn_name).prop( "checked", true );
     });
 
+    $('input,textarea,select').filter('[required]').prev().append("*");
+
+    $("#id_username").change(function () {
+        console.log( $(this).val() );
+    });
+
     // function save_form(){
     //     var method = $(".cv_edit").attr('method');
     //     if (method == 'post') {

@@ -9,9 +9,6 @@
 
 {% block extrajs %}
 <script type="text/javascript" src="{% static 'js/profile/edit.js' %}"></script>
-<script type="text/javascript" charset="utf-8">
-    $('input,textarea,select').filter('[required]').prev().append("*");
-</script>
 {% endblock %}
 
 {% block content %}
@@ -19,30 +16,31 @@
 
     <form class="cv_edit" role="form" method="post" action="{% url 'cv:Edit XP' %}">
         {% csrf_token %}
-        {% comment %} <div class="card card-primary"> {% endcomment %}
-            <div class="card-body">
-                <div class="row">
-                    {{ xp.management_form }}
-                    {% for form in xp reversed %}
-                        <div class="col-xl-6">
-                            <div class="card card-outline card-danger">
-                                <div class="card-tools">
-                                    <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button name="#id_xp_set-{{ forloop.counter0 }}-DELETE" type="submit" class="float-right btn btn-danger btn-close">
-                                        <i class="centralize fas fa-times" style="font-size:25px"></i>
-                                    </button>
+        <div class="card-body">
+            <div class="row">
+                {{ xp.management_form }}
+                {% for form in xp reversed %}
+                    <div class="col-xl-6">
+                        <div class="card card-outline card-danger">
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool btn-primary btn-sm" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button name="#id_xp_set-{{ forloop.counter0 }}-DELETE" type="submit" class="float-right btn btn-danger btn-close">
+                                    <i class="centralize fas fa-times" style="font-size:25px"></i>
+                                </button>
+                                <div class="card-header">
+                                    <h3 class="card-title">Collapsible Card Example</h3>
                                 </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        {{ form }}
-                                    </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    {{ form }}
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
-                </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         <button type="submit" name="save" class="float">

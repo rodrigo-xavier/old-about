@@ -34,6 +34,15 @@
   {% comment %} TODO: Substituir links abaixo por links do banco de dados  {% endcomment %}
 
   <ul class="navbar-nav ml-auto">
+
+    {% comment %} Medida temporaria, remover posteriormente {% endcomment %}      
+    <li class="nav-item dropdown">
+      <a class="nav-link" href="{% url "login" %}">
+        <button class="btn btn-sm btn-primary waves-effect">
+            {% trans "Login" %}
+        </button>
+      </a>
+    </li>
     <li class="nav-item dropdown">
       <a class="nav-link" target="_blank" title="Linkedin" href="https://www.linkedin.com/in/rodrigo-xavier-a33b18156/">
         <i class="fab fa-linkedin"></i>

@@ -10,7 +10,7 @@ body{
     transform: translate(-50%, -50%)
 }
 
-.login-btn{
-	color:green;
-    box-shadow: 2px 2px 3px rgb(0, 0, 0);
+.h5{
+    font-weight: bold;
+    color:blue;
 }
