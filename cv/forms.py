@@ -81,9 +81,17 @@ class XPForm(forms.ModelForm):
         super(XPForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control form-group'
+            self.fields['is_current'].widget.attrs.update({
+                'data-toggle': "toggle",
+                'data-on': _("Yes"),
+                'data-off': _("No"),
+                'data-size': "small",
+                'data-onstyle': "primary",
+                }
+            )
             self.fields['company_name'].widget.attrs.update({
                     'placeholder': _("Enter company name"),
-                    'required': "",
+                    # 'required': "",
                     'autofocus': "",
                 }
             )
@@ -105,23 +113,20 @@ class XPForm(forms.ModelForm):
             )
             self.fields['employee_role'].widget.attrs.update({
                     'placeholder': _("Enter here which was your job on the company"),
-                    'required': ""
+                    # 'required': ""
                 }
             )
             self.fields['employee_main_activity'].widget.attrs.update({
                     'placeholder': _("Describe the main activities you performed at the company"),
-                    'required': ""
+                    # 'required': ""
                 }
             )
             self.fields['from_period'].widget.attrs.update({
-                    'required': ""
+                    # 'required': ""
                 }
             )
             self.fields['until_period'].widget.attrs.update({
-                    'required': ""
-                }
-            )
-            self.fields['is_current'].widget.attrs.update({
+                    # 'required': ""
                 }
             )
     
@@ -147,9 +152,16 @@ class XPForm(forms.ModelForm):
         return cleaned_data
     
     class Meta:
+        CATEGORY = [
+            (0, _('Academic')),
+            (1, _('Certification')),
+        ]
         widgets = {
             'from_period': forms.DateInput(attrs={'type': 'date'}),
-            'until_period': forms.DateInput(attrs={'type': 'date'})
+            'until_period': forms.DateInput(attrs={'type': 'date'}),
+        }
+        labels = {
+            'is_current': _('Is your current Job?')
         }
 
 
@@ -159,22 +171,30 @@ class EducationForm(forms.ModelForm):
         super(EducationForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control form-group'
-            self.fields['institution'].widget.attrs.update({
+            self.fields['is_current'].widget.attrs.update({
+                'data-toggle': "toggle",
+                'data-on': _("Yes"),
+                'data-off': _("No"),
+                'data-size': "small",
+                'data-onstyle': "primary",
+                }
+            )
+            self.fields['institute'].widget.attrs.update({
                 'placeholder': _("Describe the main activities you performed at the company"),
                 'autofocus': "",
                 
                 }
             )
-            self.fields['institution_description'].widget.attrs.update({
+            self.fields['institute_description'].widget.attrs.update({
                 }
             )
-            self.fields['institution_website'].widget.attrs.update({
+            self.fields['institute_website'].widget.attrs.update({
                 }
             )
-            self.fields['institution_mail'].widget.attrs.update({
+            self.fields['institute_mail'].widget.attrs.update({
                 }
             )
-            self.fields['institution_phone'].widget.attrs.update({
+            self.fields['institute_phone'].widget.attrs.update({
                 }
             )
             self.fields['course'].widget.attrs.update({
@@ -187,17 +207,24 @@ class EducationForm(forms.ModelForm):
             self.fields['until_period'].widget = forms.HiddenInput()
             self.fields['duration'].widget = forms.HiddenInput()
     
-    def clean(self):
-        institution = ""
-        cleaned_data = super(EducationForm, self).clean()
-        if cleaned_data['id'] is not None:
-            institution = cleaned_data['institution'].split(" ")
-            institution = "".join(institution)
-        if not (institution.isalpha()):
-            self.add_error('institution', _('must be alphanumeric'))
+    def validate_name(self, data):
+        institute_name = data['institute'].split(" ")
+        institute_name = "".join(institute_name)
+        if not (institute_name.isalpha()):
+            self.add_error('institute', _('must be alphanumeric'))
             raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
 
-        return cleaned_data
+    # def validate_is_current(self, data):
+    #     if data['is_current'] is True:
+    #         models.Education.objects
+    #         if not ():
+    #             self.add_error('is_current', _('Is permitted just one checkbox selected'))
+    #             raise forms.ValidationError(_("Is permitted just one checkbox selected"), code='invalid')
+    
+    def clean(self):
+        cleaned_data = super(EducationForm, self).clean()
+        self.validate_name(cleaned_data)
+        # self.validate_is_current(cleaned_data)
     
     class Meta:
         widgets = {

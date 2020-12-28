@@ -1,14 +1,16 @@
 {% extends "starter.html" %}
-{% load i18n static %}
+{% load i18n static poll_extras %}
 
 {% block title %}{% trans "Edit Professional Experience" %}{% endblock %}
 
 {% block extrastyle %}
 <link type="text/css" rel="stylesheet" href="{% static 'css/profile/edit.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'plugins/bootstrap-toggle/css/bootstrap-toggle.css' %}">
 {% endblock %}
 
 {% block extrajs %}
 <script type="text/javascript" src="{% static 'js/profile/edit.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/bootstrap-toggle/js/bootstrap-toggle.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -23,15 +25,16 @@
                     <div class="col-xl-6">
                         <div class="card card-outline card-danger">
                             <div class="card-tools">
-                                <button type="button" class="btn btn-tool btn-primary btn-sm" data-card-widget="collapse">
+                                {% comment %} <button type="button" class="btn btn-tool btn-primary btn-sm" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
-                                </button>
+                                </button> {% endcomment %}
+                                {% comment %} {{ form.company_name.id_for_label }} {% endcomment %}
                                 <button name="#id_xp_set-{{ forloop.counter0 }}-DELETE" type="submit" class="float-right btn btn-danger btn-close">
                                     <i class="centralize fas fa-times" style="font-size:25px"></i>
                                 </button>
-                                <div class="card-header">
+                                {% comment %} <div class="card-header">
                                     <h3 class="card-title">Collapsible Card Example</h3>
-                                </div>
+                                </div> {% endcomment %}
                             </div>
                             <div class="card-body">
                                 <div class="form-group">

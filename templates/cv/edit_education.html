@@ -5,13 +5,12 @@
 
 {% block extrastyle %}
 <link type="text/css" rel="stylesheet" href="{% static 'css/profile/edit.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'plugins/bootstrap-toggle/css/bootstrap-toggle.css' %}">
 {% endblock %}
 
 {% block extrajs %}
 <script type="text/javascript" src="{% static 'js/profile/edit.js' %}"></script>
-<script type="text/javascript" charset="utf-8">
-    $('input,textarea,select').filter('[required]').prev().append("*");
-</script>
+<script type="text/javascript" src="{% static 'plugins/bootstrap-toggle/js/bootstrap-toggle.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -27,12 +26,15 @@
                         <div class="col-xl-6">
                             <div class="card card-outline card-success">
                                 <div class="card-tools">
-                                    <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
+                                    {% comment %} <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
-                                    </button>
+                                    </button> {% endcomment %}
                                     <button name="#id_education_set-{{ forloop.counter0 }}-DELETE" type="submit" class="float-right btn btn-danger btn-close">
                                         <i class="centralize fas fa-times" style="font-size:25px"></i>
                                     </button>
+                                    {% comment %} <div class="card-header">
+                                        <h3 class="card-title">Collapsible Card Example</h3>
+                                    </div> {% endcomment %}
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">

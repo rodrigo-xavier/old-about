@@ -74,6 +74,7 @@ class Profile(models.Model):
 
 class XP(models.Model):
     profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
+    is_current = models.BooleanField(verbose_name=_("Is Current"), default=False, blank=True)
     company_name = models.CharField(verbose_name=_("Company Name"), unique=True, max_length=100, default='', blank=False)
     company_description = models.TextField(verbose_name=_("Company Description"), max_length=1000, default='', blank=True)
     company_website = models.URLField(verbose_name=_("Company Website"), max_length=200, default='', blank=True)
@@ -83,7 +84,6 @@ class XP(models.Model):
     employee_main_activity = models.TextField(verbose_name=_("Main Activities"), max_length=500, default='', blank=False)
     from_period = models.DateField(verbose_name=_("From Period"), default='', blank=False)
     until_period = models.DateField(verbose_name=_("Until Period"), default='', blank=False)
-    is_current = models.BooleanField(verbose_name=_("Is Current"), default=False, blank=True)
 
     def __str__(self):
         return self.company_name
@@ -107,29 +107,29 @@ class Education(models.Model):
         (1, _('Certification')),
     ]
     profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
+    is_current = models.BooleanField(verbose_name=_("Is Current"), default=False, blank=True)
     category = models.PositiveSmallIntegerField(choices=CATEGORY, verbose_name=_("Category"), default=0)
-    institution = models.CharField(verbose_name=_("Institution"), max_length=100, default='')
-    institution_description = models.TextField(verbose_name=_("Company Description"), max_length=1000, default='', blank=True)
-    institution_website = models.URLField(verbose_name=_("Company Website"), max_length=200, default='', blank=True)
-    institution_mail = models.EmailField(verbose_name=_("Company Mail"), max_length=255, default='', blank=True)
-    institution_phone = PhoneNumberField(verbose_name=_('Company Phone'), max_length=255, blank=True)
+    institute = models.CharField(verbose_name=_("Institute"), max_length=100, default='')
+    institute_description = models.TextField(verbose_name=_("Company Description"), max_length=1000, default='', blank=True)
+    institute_website = models.URLField(verbose_name=_("Company Website"), max_length=200, default='', blank=True)
+    institute_mail = models.EmailField(verbose_name=_("Company Mail"), max_length=255, default='', blank=True)
+    institute_phone = PhoneNumberField(verbose_name=_('Company Phone'), max_length=255, blank=True)
     course = models.CharField(verbose_name=_("Course"), max_length=100, default='', blank=True)
     course_description = models.TextField(verbose_name=_("Course Description"), max_length=1000, default='', blank=True)
     from_period = models.DateField(verbose_name=_("From Period"), default='', null=True, blank=True)
     until_period = models.DateField(verbose_name=_("Until Period"), default='', null=True, blank=True)
     duration = models.PositiveSmallIntegerField(verbose_name=_("Duration (In hours)"), default=0, blank=True)
-    is_current = models.BooleanField(verbose_name=_("Is Current"), default=False, blank=True)
 
     def __str__(self):
-        return self.institution
+        return self.institute
     
     def clean(self):
-        super(XP, self).clean()       
-        self.institution = capitalize(self.institution.split(' '))
+        super(Education, self).clean()       
+        self.institute = capitalize(self.institute.split(' '))
     
     def save(self, *args, **kwargs):
         self.clean()
-        return super(XP, self).save(**kwargs)
+        return super(Education, self).save(**kwargs)
     
     class Meta:
         verbose_name = _("Education")

@@ -9,9 +9,6 @@
 
 {% block extrajs %}
   <script type="text/javascript" src="{% static 'js/profile/edit.js' %}"></script>
-  <script type="text/javascript" charset="utf-8">
-    $('input,textarea,select').filter('[required]').parent().parent().find("label").append("*");
-  </script>
 {% endblock %}
 
 {% block content %}
