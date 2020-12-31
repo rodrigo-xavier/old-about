@@ -20,6 +20,7 @@ from django.urls import path
 from django.shortcuts import redirect
 from django.conf.urls import (include, handler400, handler403, handler404, handler500)
     
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
@@ -27,6 +28,8 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace="Blog")),
     path('admin/', views.admin, name="Admin"),
     path('root/', admin.site.urls, name="root"),
+
+    path('root/', RedirectView.as_view(url='/root'), name='super-user')
 ]
 
 if settings.DEBUG:

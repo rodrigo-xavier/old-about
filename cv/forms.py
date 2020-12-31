@@ -32,6 +32,7 @@ class ProfileForm(forms.ModelForm):
             )
             self.fields['languages'].widget.attrs.update({
                     'placeholder': _("Select languages you can speak"),
+                    'class': 'form-control select2',
                 }
             )
             self.fields['link'].widget.attrs.update({
@@ -89,7 +90,7 @@ class XPForm(forms.ModelForm):
                 'data-onstyle': "primary",
                 }
             )
-            self.fields['company_name'].widget.attrs.update({
+            self.fields['company'].widget.attrs.update({
                     'placeholder': _("Enter company name"),
                     # 'required': "",
                     'autofocus': "",
@@ -97,6 +98,7 @@ class XPForm(forms.ModelForm):
             )
             self.fields['company_description'].widget.attrs.update({
                     'placeholder': _("Describe the company you've been worked"),
+                    'maxlength':"998",
                 }
             )
             self.fields['company_website'].widget.attrs.update({
@@ -130,12 +132,12 @@ class XPForm(forms.ModelForm):
                 }
             )
     
-    def validate_name(self, data):
-        company_name = data['company_name'].split(" ")
-        company_name = "".join(company_name)
-        if not (company_name.isalpha()):
-            self.add_error('company_name', _('must be alphanumeric'))
-            raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
+    # def validate_name(self, data): # O nome da empresa nao precisa ser alphanumerico
+    #     company = data['company'].split(" ")
+    #     company = "".join(company)
+    #     if not (company.isalpha()):
+    #         self.add_error('company', _('must be alphanumeric'))
+    #         raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
 
     # def validate_is_current(self, data):
     #     if data['is_current'] is True:
@@ -146,7 +148,7 @@ class XPForm(forms.ModelForm):
     
     def clean(self):
         cleaned_data = super(XPForm, self).clean()
-        self.validate_name(cleaned_data)
+        # self.validate_name(cleaned_data)
         # self.validate_is_current(cleaned_data)
 
         return cleaned_data

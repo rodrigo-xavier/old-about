@@ -29,9 +29,13 @@
                                     <i class="fas fa-minus"></i>
                                 </button> {% endcomment %}
                                 {% comment %} {{ form.company_name.id_for_label }} {% endcomment %}
-                                <button name="#id_xp_set-{{ forloop.counter0 }}-DELETE" type="submit" class="float-right btn btn-danger btn-close">
-                                    <i class="centralize fas fa-times" style="font-size:25px"></i>
-                                </button>
+                                {% if forloop.counter0 != 0 %}
+                                    <button name="#id_xp_set-{{ forloop.revcounter0 }}-DELETE" type="submit" class="float-right btn btn-danger btn-close">
+                                        <i class="centralize fas fa-times" style="font-size:25px"></i>
+                                    </button>
+                                {% else %}
+                                    <div style="padding-top:42px" ></div>
+                                {% endif %}
                                 {% comment %} <div class="card-header">
                                     <h3 class="card-title">Collapsible Card Example</h3>
                                 </div> {% endcomment %}

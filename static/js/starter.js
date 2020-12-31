@@ -31,8 +31,9 @@ $(document).ready(function () {
         $('#wrapper').toggleClass('toggled');
     });
         
-
     $(function() {
         FastClick.attach(document.body);
     });
+
+    $('.select2').select2();
 });

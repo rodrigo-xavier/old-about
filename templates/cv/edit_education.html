@@ -29,9 +29,13 @@
                                     {% comment %} <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
                                     </button> {% endcomment %}
-                                    <button name="#id_education_set-{{ forloop.counter0 }}-DELETE" type="submit" class="float-right btn btn-danger btn-close">
-                                        <i class="centralize fas fa-times" style="font-size:25px"></i>
-                                    </button>
+                                    {% if forloop.counter0 != 0 %}
+                                        <button name="#id_education_set-{{ forloop.revcounter0 }}-DELETE" type="submit" class="float-right btn btn-danger btn-close">
+                                            <i class="centralize fas fa-times" style="font-size:25px"></i>
+                                        </button>
+                                    {% else %}
+                                        <div style="padding-top:42px" ></div>
+                                    {% endif %}
                                     {% comment %} <div class="card-header">
                                         <h3 class="card-title">Collapsible Card Example</h3>
                                     </div> {% endcomment %}

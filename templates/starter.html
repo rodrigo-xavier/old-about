@@ -24,6 +24,8 @@
   <link type="text/css" rel="stylesheet" href="{% static 'css/starter.css' %}">
   <!-- Simple Bar -->
   <link type="text/css" rel="stylesheet" href="{% static 'plugins/simple-bar/simplebar.css' %}">
+  <!-- Select2 -->
+  <link type="text/css" rel="stylesheet" href="{% static 'plugins/select2-4.0.13/dist/css/select2.css' %}">
 
   {% block extrastyle %}{% endblock %}
 
@@ -94,12 +96,13 @@
   <script type="text/javascript" src="{% static 'plugins/fastclick/fastclick.js' %}"></script>
   <!-- Starter -->
   <script type="text/javascript" src="{% static 'js/starter.js' %}"></script>
-  <!-- Simple Bar -->
+  <!-- Simple Bar # TODO: UTILIZAR DEPOIS PARA PERSONALIZAR A BARRA DE ROLAGEM --> 
   <script type="text/javascript" src="{% static 'plugins/simple-bar/simplebar.js' %}"></script>
+  <!-- Select2 -->
+  <script type="text/javascript" src="{% static 'plugins/select2-4.0.13/dist/js/select2.full.js' %}"></script>
 
   {% block extrajs %}{% endblock %}
+
   {% comment %} {% include "snow.html" %} {% endcomment %}
-
 </body>
-
 </html>
