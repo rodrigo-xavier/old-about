@@ -55,6 +55,8 @@ $(document).ready(function(){
     // $('input,textarea,select').filter('[required]').prev().append("*");
     $('input,textarea,select').filter('[required]').parent().parent().find("label").append("*");
 
+    $('.select2').select2();
+
 
 
     // function save_form(){

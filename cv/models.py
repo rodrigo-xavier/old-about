@@ -6,38 +6,24 @@ from django.core.validators import RegexValidator
 from datetime import date, timedelta, datetime
 from phonenumber_field.modelfields import PhoneNumberField
 from utils.utils import capitalize
+from utils.constants import LANGUAGES
 
 
-class Profile(models.Model):
-    LANGUAGES = [
-        (0, _('None')),
-        (1, _('English')),
-        (2, _('Chinese')),
-        (3, _('Portuguese')),
-    ]
-    FLUENCY = [
-        (1, _('Basic')),
-        (2, _('Intermediary')),
-        (3, _('Advanced')),
-    ]
-    LINKS = [
-        (0, _('None')),
-        (1, _('Github')),
-        (2, _('Linkedin')),
-        (3, _('Instagram')),
-        (4, _('Facebook')),
-        (5, _('Other')),
+class Profile(models.Model):    
+    SITES = [
+        (0, _('Github')),
+        (1, _('Linkedin')),
+        (2, _('Instagram')),
+        (3, _('Facebook')),
+        (4, _('Other')),
     ]
 
     name = models.CharField(verbose_name=_('Name'), max_length=40, default='')
     born_in = models.DateField(verbose_name=_("Born In"), default=date.today() - timedelta(23*365))
     mail = models.EmailField(verbose_name=_("Mail"), max_length=255, default='')
-    languages = models.PositiveSmallIntegerField(choices=LANGUAGES, verbose_name=_("Languages"), default=0)
     phone = PhoneNumberField(verbose_name=_('Phone'), max_length=255)
-    # fluency = models.ChoiceField(choices=[FLUENCY], verbose_name=_("Fluency"))
-    # nickname
-    link_title = models.PositiveSmallIntegerField(choices=LINKS, verbose_name=_("Platforms"), default=0)
-    link = models.URLField(max_length=200, default='', blank=True)
+    site = models.PositiveSmallIntegerField(choices=SITES, verbose_name=_("Platforms"), default=0)
+    url = models.URLField(max_length=200, default='', blank=True)
     about = models.TextField(verbose_name=_("About You"), max_length=2000, default='', blank=True)
     current_goals = models.TextField(verbose_name=_("Current Goals"), max_length=1000, default='', blank=True) # Objetivos atuais
     proffessional_description = models.TextField(verbose_name=_("Professional Description"), max_length=1000, default='', blank=True) # Descricao profissional (Pode nao ser necessario)
@@ -133,3 +119,19 @@ class Education(models.Model):
     
     class Meta:
         verbose_name = _("Education")
+
+
+
+# TODO: criar uma classe many-to-many de profile para Language, criar uma checkbox dinamica
+# com select2 para selecionar a linguagem. Ao clicar na opcao desejada, utilizar jquery para
+# selecionar a opcao de fluencia em uma caixa de selecao ao lado da de linguagens.
+class Language(models.Model):
+    FLUENCY = [
+        (0, _('Basic')),
+        (1, _('Intermediary')),
+        (2, _('Advanced')),
+        (3, _('Fluent')),
+    ]
+    profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
+    languages = models.PositiveSmallIntegerField(verbose_name=_("Languages"), default=0)
+    fluency_level = models.PositiveSmallIntegerField(choices=FLUENCY, verbose_name=_("Fluency"), default=0)

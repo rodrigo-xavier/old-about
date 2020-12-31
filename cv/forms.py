@@ -3,9 +3,11 @@ from django import forms
 from datetime import date
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
+from utils.constants import LANGUAGES
 
 
 class ProfileForm(forms.ModelForm):
+    languages = forms.MultipleChoiceField(required=False, choices=LANGUAGES,)# widget=forms.CheckboxSelectMultiple)
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
@@ -33,9 +35,10 @@ class ProfileForm(forms.ModelForm):
             self.fields['languages'].widget.attrs.update({
                     'placeholder': _("Select languages you can speak"),
                     'class': 'form-control select2',
+                    # 'multiple': 'multiple',
                 }
             )
-            self.fields['link'].widget.attrs.update({
+            self.fields['url'].widget.attrs.update({
                     'placeholder': _("Input your links"),
                 }
             )
@@ -68,11 +71,11 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = models.Profile
-        fields = ('name', 'born_in', 'mail', 'phone', 'languages', 'link',
+        fields = ('name', 'born_in', 'mail', 'phone', 'languages', 'url',
             'about', 'current_goals', 'proffessional_description'
         )
         widgets = {
-            'born_in': forms.DateInput(attrs={'type': 'date'})
+            'born_in': forms.DateInput(attrs={'type': 'date'}),
         }
 
 

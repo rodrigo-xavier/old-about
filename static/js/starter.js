@@ -34,6 +34,4 @@ $(document).ready(function () {
     $(function() {
         FastClick.attach(document.body);
     });
-
-    $('.select2').select2();
 });
