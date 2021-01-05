@@ -16,10 +16,12 @@ class UserForm(forms.ModelForm):
             self.fields['first_name'].widget.attrs.update({
                     'placeholder': _("Enter your first name"),
                     'autofocus': "",
+                    # 'required': "",
                 }
             )
             self.fields['last_name'].widget.attrs.update({
                     'placeholder': _("Enter your last name"),
+                    # 'required': "",
                 }
             )
             self.fields['email'].widget.attrs.update({
@@ -67,14 +69,7 @@ class ProfileForm(forms.ModelForm):
     
     def clean(self):
         cleaned_data = super(ProfileForm, self).clean()
-        name = cleaned_data['name'].split(" ")
-        name = "".join(name)
-        if not (name.isalpha()):
-            self.add_error('name', _('must be alphanumeric'))
-            raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
-
         return cleaned_data
-
 
     class Meta:
         model = models.Profile
@@ -106,9 +101,9 @@ class LanguageForm(forms.ModelForm):
     class Meta:
         model = models.Language
         fields = ('languages',)
-        # widgets = {
-        #     'languages': forms.MultipleChoiceField(),
-        # }
+        widgets = {
+            'languages': forms.SelectMultiple(),
+        }
 
 
 class XPForm(forms.ModelForm):

@@ -1,5 +1,5 @@
 {% extends "starter.html" %}
-{% load i18n static %}
+{% load i18n static poll_extras %}
 
 {% block title %}{% trans "Edit Profile" %}{% endblock %}
 
@@ -23,22 +23,8 @@
         <div class="col-xl-4">
           <div class="card card-outline card-primary">
             <div class="card-body">
-              {% for field in user.visible_fields %}
-                <div class="form-group">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% if field.errors %}
-                      <div class="alert alert-danger red"  style="font-size:13px;">
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          {{ field.errors|striptags }}<br>
-                      </div>
-                    {% endif %}
-                    {% if field.help_text %}
-                      <p class="help">{{ field.help_text|safe }}</p>
-                    {% endif %}
-                </div>
-              {% endfor %}
-              {% for field in profile.visible_fields|slice:"0:3" %}
+              {{ user_form.as_p }}
+              {% for field in profile_form.visible_fields|slice:"0:3" %}
                 <div class="form-group" id="editor">
                     {{ field.label_tag }}
                     {{ field }}
@@ -53,14 +39,15 @@
                     {% endif %}
                 </div>
               {% endfor %}
-              {{ languages }}
+              {{ languages_form.management_form }}
+              {{ languages_form }}
             </div>
           </div>
         </div>
         <div class="col-xl-4">
           <div class="card card-outline card-primary">
             <div class="card-body">
-              {% for field in profile.visible_fields|slice:"3:4" %}
+              {% for field in profile_form.visible_fields|slice:"3:4" %}
                 <div class="form-group" id="editor">
                     {{ field.label_tag }}
                     {{ field }}
@@ -81,7 +68,7 @@
         <div class="col-xl-4">
           <div class="card card-outline card-primary">
             <div class="card-body">
-              {% for field in profile.visible_fields|slice:"4:6" %}
+              {% for field in profile_form.visible_fields|slice:"4:6" %}
                 <div class="form-group">
                     {{ field.label_tag }} 
                     {{ field }}

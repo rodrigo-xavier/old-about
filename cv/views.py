@@ -33,6 +33,8 @@ def edit_profile(request):
     if not request.user.is_superuser:
         raise PermissionDenied
 
+    user = User.objects.all().select_related('profile').get(username=request.user)
+
     LanguageFormSet = inlineformset_factory(
         parent_model=models.Profile,
         model=models.Language,
@@ -42,24 +44,26 @@ def edit_profile(request):
     )
 
     if request.method == "GET":
-        user = forms.UserForm(instance=request.user)
-        profile = forms.ProfileForm(instance=request.user.profile)
-        language = LanguageFormSet(instance=request.user.profile)
+        user_form = forms.UserForm(instance=request.user)
+        profile_form = forms.ProfileForm(instance=request.user.profile)
+        language_form = LanguageFormSet(instance=request.user.profile)
 
     else: #POST
-        user = forms.UserForm(request.POST, instance=request.user)
-        profile = forms.ProfileForm(request.POST, instance=request.user.profile)
-        language = LanguageFormSet(request.POST, instance=request.user.profile)
-        if user.is_valid() and profile.is_valid() and language.is_valid():
-            user.save()
-            profile.save()
-            language.save()
+        user_form = forms.UserForm(request.POST, instance=request.user)
+        profile_form = forms.ProfileForm(request.POST, instance=request.user.profile)
+        language_form = LanguageFormSet(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid() and language_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            language_form.save()
             return redirect("cv:Edit Profile")
     
     data = {
         'user': user,
-        'profile': profile,
-        'languages': language,
+        'profile': user.profile,
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'languages_form': language_form,
     }
 
     return render(request, 'cv/edit_profile.html', data)
@@ -71,7 +75,7 @@ def edit_xp(request):
     if not request.user.is_superuser:
         raise PermissionDenied
     
-    profile = models.Profile.objects.first()
+    user = User.objects.all().select_related('profile').get(username=request.user)
 
     XPFormSet = inlineformset_factory(
         parent_model=models.Profile,
@@ -85,23 +89,19 @@ def edit_xp(request):
     extra = XPFormSet.extra
     
     if request.method == "GET":
-        if hasattr(profile, "xp_set") and (profile.xp_set.count() != 0):
-            xp = XPFormSet(instance=request.user)
-        elif (profile is None):
-            return redirect("cv:Edit Profile")
-        else:
-            xp = XPFormSet()
+        xp_form = XPFormSet(instance=request.user.profile)
 
     else: #POST
-        xp = XPFormSet(request.POST, instance=request.user)
-        if xp.is_valid():
-            xp.save()
+        xp_form = XPFormSet(request.POST, instance=request.user.profile)
+        if xp_form.is_valid():
+            xp_form.save()
             return redirect("cv:Edit XP")
     
     data = {
-        'xp': xp, 
+        'user': user,
+        'profile': user.profile,
+        'xp_form': xp_form, 
         'extra': extra,
-        'profile': profile,
     }
 
     return render(request, 'cv/edit_xp.html', data)
@@ -113,7 +113,7 @@ def edit_education(request):
     if not request.user.is_superuser:
         raise PermissionDenied
     
-    profile = models.Profile.objects.first()
+    user = User.objects.all().select_related('profile').get(username=request.user)
     
     EducationFormSet = inlineformset_factory(
         parent_model=models.Profile,
@@ -126,32 +126,28 @@ def edit_education(request):
     extra = EducationFormSet.extra
 
     if request.method == "GET":
-        if hasattr(profile, "education_set") and (profile.education_set.count() != 0):
-            education = EducationFormSet(instance=request.user)
-        elif (profile is None):
-            return redirect("cv:Edit Profile")
-        else:
-            education = EducationFormSet()
+        education_form = EducationFormSet(instance=request.user.profile)
     
     else: #POST
-        education = EducationFormSet(request.POST, instance=request.user)
-        if education.is_valid():
-            education.save()
+        education_form = EducationFormSet(request.POST, instance=request.user.profile)
+        if education_form.is_valid():
+            education_form.save()
             return redirect("cv:Edit Education")
     
     data = {
-        'education': education, 
+        'user': user,
+        'profile': user.profile,
+        'education_form': education_form, 
         'extra': extra,
-        'profile': profile,
     }
 
     return render(request, 'cv/edit_education.html', data)
 
 def schedule(request):
-    profile = models.Profile.objects.first()
+    user = User.objects.all().select_related('profile').get(username=request.user)
 
     data = {
-        'profile': profile,
+        'profile': user.profile,
     }
 
     return render(request, 'schedule/schedule.html', data)

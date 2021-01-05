@@ -20,15 +20,15 @@
         {% csrf_token %}
         <div class="card-body">
             <div class="row">
-                {{ xp.management_form }}
-                {% for form in xp reversed %}
+                {{ xp_form.management_form }}
+                {% for fields in xp_form reversed %}
                     <div class="col-xl-6">
                         <div class="card card-outline card-danger">
                             <div class="card-tools">
                                 {% comment %} <button type="button" class="btn btn-tool btn-primary btn-sm" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
                                 </button> {% endcomment %}
-                                {% comment %} {{ form.company_name.id_for_label }} {% endcomment %}
+                                {% comment %} {{ fields.company_name.id_for_label }} {% endcomment %}
                                 {% if forloop.counter0 != 0 %}
                                     <button name="#id_xp_set-{{ forloop.revcounter0 }}-DELETE" type="submit" class="float-right btn btn-danger btn-close">
                                         <i class="centralize fas fa-times" style="font-size:25px"></i>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    {{ form }}
+                                    {{ fields }}
                                 </div>
                             </div>
                         </div>

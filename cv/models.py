@@ -22,7 +22,6 @@ class Profile(models.Model):
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    languages = models.ManyToManyField(Language, verbose_name=_("Language"))
     born_in = models.DateField(verbose_name=_("Born In"), default=date.today() - timedelta(23*365))
     phone = PhoneNumberField(verbose_name=_('Phone'), max_length=255)
     site = models.PositiveSmallIntegerField(choices=SITES, verbose_name=_("Platforms"), default=0)
@@ -33,16 +32,18 @@ class Profile(models.Model):
     last = models.DateTimeField(verbose_name=_("Last Modification"), unique=True, auto_now=True)
 
     def __str__(self):
-        return self.user
+        return str(self.user)
     
     @property
     def age(self):
         days_on_year = 365.2425
         return int((datetime.now().date() - self.born_in).days / days_on_year)
     
-    def save(self, *args, **kwargs):
-        self.clean()
-        return super(Profile, self).save(**kwargs)
+    # def save(self, *args, **kwargs):
+    #     print('calling clean')
+    #     self.clean()
+    #     print('cleaned')
+    #     return super(Profile, self).save(**kwargs)
     
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -132,8 +133,10 @@ class Language(models.Model):
         (3, _('Fluent')),
     ]
 
-    languages = models.PositiveSmallIntegerField(choices=LANGUAGES, verbose_name=_("Languages"), blank=True)
-    fluency_level = models.PositiveSmallIntegerField(choices=FLUENCY, verbose_name=_("Fluency"), blank=True)
+    # profile = models.ManyToManyField(Profile, verbose_name=_("Profile"))
+    profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
+    languages = models.PositiveSmallIntegerField(choices=LANGUAGES, verbose_name=_("Languages"), blank=True, null=True)
+    fluency_level = models.PositiveSmallIntegerField(choices=FLUENCY, verbose_name=_("Fluency"), blank=True, null=True)
 
     # @receiver(post_save, sender=Profile)
     # def create_profile_language(sender, instance, created, **kwargs):
