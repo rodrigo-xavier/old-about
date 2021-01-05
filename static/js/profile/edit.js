@@ -52,12 +52,15 @@ $(document).ready(function(){
         $(btn_name).prop( "checked", true );
     });
     
-    // $('input,textarea,select').filter('[required]').prev().append("*");
-    $('input,textarea,select').filter('[required]').parent().parent().find("label").append("*");
+    $('input,textarea,select').filter('[required]').prev().append("*");
+    // $('input,textarea,select').filter('[required]').parent().parent().find("label").append("*");
 
-    $('.select2').select2({}).on("change", function(e){
-        $.each($(this).val(), function(i, selected) {
-            $('.select2-selection__choice').addClass("btn-dark");
-        });
+
+    $('.bootstrap-toggle').bootstrapToggle({
+        on: 'ON',
+        off: 'OFF',
+        size: 'small',
+        onstyle: 'primary',
+        offstyle: 'dark',
     });
 });

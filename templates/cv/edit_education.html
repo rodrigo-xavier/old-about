@@ -22,7 +22,7 @@
 
                 <div class="row">
                     {{ education_form.management_form }}
-                    {% for fields in education_form reversed %}
+                    {% for sub_form in education_form reversed %}
                         <div class="col-xl-6">
                             <div class="card card-outline card-success">
                                 <div class="card-tools">
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        {{ fields }}
+                                        {{ sub_form }}
                                         <div class="row">
                                             <div class="col-xl-6">
                                                 <button type="button" class="w-100 btn grey"> Dates

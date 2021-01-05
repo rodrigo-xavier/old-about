@@ -11,6 +11,7 @@
 {% block extrajs %}
 <script type="text/javascript" src="{% static 'js/profile/edit.js' %}"></script>
 <script type="text/javascript" src="{% static 'plugins/bootstrap-toggle/js/bootstrap-toggle.js' %}"></script>
+<script type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}
@@ -21,14 +22,14 @@
         <div class="card-body">
             <div class="row">
                 {{ xp_form.management_form }}
-                {% for fields in xp_form reversed %}
+                {% for sub_form in xp_form reversed %}
                     <div class="col-xl-6">
                         <div class="card card-outline card-danger">
                             <div class="card-tools">
                                 {% comment %} <button type="button" class="btn btn-tool btn-primary btn-sm" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
                                 </button> {% endcomment %}
-                                {% comment %} {{ fields.company_name.id_for_label }} {% endcomment %}
+                                {% comment %} {{ sub_form.company_name.id_for_label }} {% endcomment %}
                                 {% if forloop.counter0 != 0 %}
                                     <button name="#id_xp_set-{{ forloop.revcounter0 }}-DELETE" type="submit" class="float-right btn btn-danger btn-close">
                                         <i class="centralize fas fa-times" style="font-size:25px"></i>
@@ -42,7 +43,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    {{ fields }}
+                                    {{ sub_form }}
                                 </div>
                             </div>
                         </div>

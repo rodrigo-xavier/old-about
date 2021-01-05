@@ -13,23 +13,18 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):    
-    SITES = [
-        (0, _('Github')),
-        (1, _('Linkedin')),
-        (2, _('Instagram')),
-        (3, _('Facebook')),
-        (4, _('Other')),
-    ]
-
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     born_in = models.DateField(verbose_name=_("Born In"), default=date.today() - timedelta(23*365))
     phone = PhoneNumberField(verbose_name=_('Phone'), max_length=255)
-    site = models.PositiveSmallIntegerField(choices=SITES, verbose_name=_("Platforms"), default=0)
-    url = models.URLField(max_length=200, default='', blank=True)
     about = models.TextField(verbose_name=_("About You"), max_length=2000, default='', blank=True)
     current_goals = models.TextField(verbose_name=_("Current Goals"), max_length=1000, default='', blank=True) # Objetivos atuais
     proffessional_description = models.TextField(verbose_name=_("Professional Description"), max_length=1000, default='', blank=True) # Descricao profissional (Pode nao ser necessario)
     last = models.DateTimeField(verbose_name=_("Last Modification"), unique=True, auto_now=True)
+    github = models.URLField(max_length=200, default='', blank=True)
+    linkedin = models.URLField(max_length=200, default='', blank=True)
+    instagram = models.URLField(max_length=200, default='', blank=True)
+    # logo
+    # image
 
     def __str__(self):
         return str(self.user)
@@ -39,11 +34,9 @@ class Profile(models.Model):
         days_on_year = 365.2425
         return int((datetime.now().date() - self.born_in).days / days_on_year)
     
-    # def save(self, *args, **kwargs):
-    #     print('calling clean')
-    #     self.clean()
-    #     print('cleaned')
-    #     return super(Profile, self).save(**kwargs)
+    def save(self, *args, **kwargs):
+        self.clean()
+        return super(Profile, self).save(**kwargs)
     
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

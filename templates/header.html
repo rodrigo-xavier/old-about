@@ -20,7 +20,7 @@
   </ul>
 
   <!-- SEARCH FORM -->
-  <form class="form-inline ml-3">
+  {% comment %} <form class="form-inline ml-3">
     <div class="input-group input-group-sm">
       <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
       <div class="input-group-append">
@@ -29,14 +29,14 @@
         </button>
       </div>
     </div>
-  </form>
+  </form> {% endcomment %}
 
   {% comment %} TODO: Substituir links abaixo por links do banco de dados  {% endcomment %}
 
   <ul class="navbar-nav ml-auto">
 
     {% comment %} Medida temporaria, remover posteriormente {% endcomment %}      
-    <li class="nav-item dropdown">
+    {% comment %} <li class="nav-item dropdown">
       <a class="nav-link" href="{% url "login" %}">
         <button class="btn btn-sm btn-primary waves-effect">
             {% trans "Login" %}
@@ -49,21 +49,32 @@
             {% trans "Root" %}
         </button>
       </a>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link" target="_blank" title="Linkedin" href="https://www.linkedin.com/in/rodrigo-xavier-a33b18156/">
-        <i class="fab fa-linkedin"></i>
-      </a>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link" target="_blank" title="Github" href="https://github.com/rodrigo-xavier">
-        <i class="fab fa-github"></i>
-      </a>
-    </li>
+    </li> {% endcomment %}
     {% if user.email %}
       <li class="nav-item dropdown">
         <a class="nav-link" target="_blank" title="Gmail" href="mailto:{{ user.email }}">
           <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    {% endif %}
+    {% if profile.linkedin %}
+      <li class="nav-item dropdown">
+        <a class="nav-link" target="_blank" title="Linkedin" href="{{ profile.linkedin }}">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+    {% endif %}
+    {% if profile.github %}
+      <li class="nav-item dropdown">
+        <a class="nav-link" target="_blank" title="Github" href="{{ profile.github }}">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+    {% endif %}
+    {% if profile.instagram %}
+      <li class="nav-item dropdown">
+        <a class="nav-link" target="_blank" title="Instagram" href="{{ profile.instagram }}">
+          <i class="fab fa-instagram"></i>
         </a>
       </li>
     {% endif %}

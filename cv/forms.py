@@ -16,12 +16,12 @@ class UserForm(forms.ModelForm):
             self.fields['first_name'].widget.attrs.update({
                     'placeholder': _("Enter your first name"),
                     'autofocus': "",
-                    # 'required': "",
+                    'required': "",
                 }
             )
             self.fields['last_name'].widget.attrs.update({
                     'placeholder': _("Enter your last name"),
-                    # 'required': "",
+                    'required': "",
                 }
             )
             self.fields['email'].widget.attrs.update({
@@ -47,23 +47,31 @@ class ProfileForm(forms.ModelForm):
                     'maxlength':'15',
                 }
             )
-            self.fields['url'].widget.attrs.update({
-                    'placeholder': _("Input your links"),
-                }
-            )
             self.fields['about'].widget.attrs.update({
                     'placeholder': _("Describe yourself"),
-                    'rows': 19,
+                    'rows': 29,
                 }
             )
             self.fields['current_goals'].widget.attrs.update({
                     'placeholder': _("Describe your current goals"),
-                    'rows': 8,
+                    'rows': 13,
                 }
             )
             self.fields['proffessional_description'].widget.attrs.update({
                     'placeholder': _("Tell about your professional profile"),
-                    'rows': 8,
+                    'rows': 13,
+                }
+            )
+            self.fields['github'].widget.attrs.update({
+                    'placeholder': _("GitHub profile link"),
+                }
+            )
+            self.fields['linkedin'].widget.attrs.update({
+                    'placeholder': _("Linkedin profile link"),
+                }
+            )
+            self.fields['instagram'].widget.attrs.update({
+                    'placeholder': _("Instagram profile link"),
                 }
             )
     
@@ -73,7 +81,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = models.Profile
-        fields = ('born_in', 'phone', 'url',
+        fields = ('born_in', 'phone', 'github', 'linkedin', 'instagram',
             'about', 'current_goals', 'proffessional_description'
         )
         widgets = {
@@ -113,11 +121,12 @@ class XPForm(forms.ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control form-group'
             self.fields['is_current'].widget.attrs.update({
-                'data-toggle': "toggle",
-                'data-on': _("Yes"),
-                'data-off': _("No"),
-                'data-size': "small",
-                'data-onstyle': "primary",
+                # 'data-toggle': "toggle",
+                # 'data-on': _("Yes"),
+                # 'data-off': _("No"),
+                # 'data-size': "small",
+                # 'data-onstyle': "primary",
+                'class': 'bootstrap-toggle',
                 }
             )
             self.fields['company'].widget.attrs.update({
