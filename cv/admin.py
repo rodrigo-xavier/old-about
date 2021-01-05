@@ -11,6 +11,9 @@ class XPAdmin(VersionAdmin):
 @admin.register(models.Education)
 class EducationAdmin(VersionAdmin):
     pass
+@admin.register(models.Language)
+class EducationAdmin(VersionAdmin):
+    pass
 
 # admin.site.register(models.Profile)
 # admin.site.register(models.XP)

@@ -16,7 +16,7 @@
 {% block content %}
     {% include "cv/buttons.html" %}
 
-    <form class="cv_edit" role="form" method="post" action="{% url 'cv:Edit Education' %}">
+    <form role="form" method="post" action="{% url 'cv:Edit Education' %}">
         {% csrf_token %}
             <div class="card-body">
 

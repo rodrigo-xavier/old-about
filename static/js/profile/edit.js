@@ -55,20 +55,9 @@ $(document).ready(function(){
     // $('input,textarea,select').filter('[required]').prev().append("*");
     $('input,textarea,select').filter('[required]').parent().parent().find("label").append("*");
 
-    $('.select2').select2();
-
-
-
-    // function save_form(){
-    //     var method = $(".cv_edit").attr('method');
-    //     if (method == 'post') {
-    //         alert("tentando")
-    //         $("form").filter('.cv_edit').submit(function(){});
-    //         alert("conseguiu")
-    //     }
-    // }
-
-    // $('[href]').click(function(){
-    //     save_form();
-    // });
+    $('.select2').select2({}).on("change", function(e){
+        $.each($(this).val(), function(i, selected) {
+            $('.select2-selection__choice').addClass("btn-dark");
+        });
+    });
 });

@@ -4,29 +4,26 @@
 {% block title %}{% trans "Edit Profile" %}{% endblock %}
 
 {% block extrastyle %}
+  <link type="text/css" rel="stylesheet" href="{% static 'plugins/select2-4.0.13/dist/css/select2.css' %}">
   <link type="text/css" rel="stylesheet" href="{% static 'css/profile/edit.css' %}">
-  <!-- Select2 -->
-  <link type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-  {% comment %} <link type="text/css" rel="stylesheet" href="{% static 'plugins/select2-4.0.13/dist/css/select2.css' %}"> {% endcomment %}
 {% endblock %}
 
 {% block extrajs %}
+  <script type="text/javascript" src="{% static 'plugins/select2-4.0.13/dist/js/select2.full.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/profile/edit.js' %}"></script>
-<!-- Select2 -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-  {% comment %} <script type="text/javascript" src="{% static 'plugins/select2-4.0.13/dist/js/select2.full.js' %}"></script> {% endcomment %}
+
 {% endblock %}
 
 {% block content %}
   {% include "cv/buttons.html" %}
-  <form class="cv_edit" role="form" method="post" action="{% url 'cv:Edit Profile' %}">
+  <form role="form" method="post" action="{% url 'cv:Edit Profile' %}">
     {% csrf_token %}
     <div class="card-body">
       <div class="row">
         <div class="col-xl-4">
           <div class="card card-outline card-primary">
             <div class="card-body">
-              {% for field in profile_form.visible_fields|slice:"0:6" %}
+              {% for field in user.visible_fields %}
                 <div class="form-group">
                     {{ field.label_tag }}
                     {{ field }}
@@ -41,13 +38,29 @@
                     {% endif %}
                 </div>
               {% endfor %}
+              {% for field in profile.visible_fields|slice:"0:3" %}
+                <div class="form-group" id="editor">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                      <div class="alert alert-danger red"  style="font-size:13px;">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          {{ field.errors|striptags }}<br>
+                      </div>
+                    {% endif %}
+                    {% if field.help_text %}
+                      <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+              {% endfor %}
+              {{ languages }}
             </div>
           </div>
         </div>
         <div class="col-xl-4">
           <div class="card card-outline card-primary">
             <div class="card-body">
-              {% for field in profile_form.visible_fields|slice:"6:7" %}
+              {% for field in profile.visible_fields|slice:"3:4" %}
                 <div class="form-group" id="editor">
                     {{ field.label_tag }}
                     {{ field }}
@@ -68,7 +81,7 @@
         <div class="col-xl-4">
           <div class="card card-outline card-primary">
             <div class="card-body">
-              {% for field in profile_form.visible_fields|slice:"7:9" %}
+              {% for field in profile.visible_fields|slice:"4:6" %}
                 <div class="form-group">
                     {{ field.label_tag }} 
                     {{ field }}

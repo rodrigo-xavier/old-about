@@ -4,38 +4,45 @@ from datetime import date
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 from utils.constants import LANGUAGES
+from django.contrib.auth.models import User
 
+
+class UserForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(UserForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+            self.fields['first_name'].widget.attrs.update({
+                    'placeholder': _("Enter your first name"),
+                    'autofocus': "",
+                }
+            )
+            self.fields['last_name'].widget.attrs.update({
+                    'placeholder': _("Enter your last name"),
+                }
+            )
+            self.fields['email'].widget.attrs.update({
+                    'placeholder': _("Enter your email"),
+                }
+            )
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
 
 class ProfileForm(forms.ModelForm):
-    languages = forms.MultipleChoiceField(required=False, choices=LANGUAGES,)# widget=forms.CheckboxSelectMultiple)
-
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super(ProfileForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
-            self.fields['name'].widget.attrs.update({
-                    'placeholder': _("Enter your name"),
-                    'autofocus': "",
-                }
-            )
             self.fields['born_in'].widget.attrs.update({
                     'value':'2019-01-01'
-                }
-            )
-            self.fields['mail'].widget.attrs.update({
-                    'placeholder': _("Enter your email"),
                 }
             )
             self.fields['phone'].widget.attrs.update({
                     'placeholder': _("Ex: (00) 00000-0000"),
                     'maxlength':'15',
-                }
-            )
-            self.fields['languages'].widget.attrs.update({
-                    'placeholder': _("Select languages you can speak"),
-                    'class': 'form-control select2',
-                    # 'multiple': 'multiple',
                 }
             )
             self.fields['url'].widget.attrs.update({
@@ -71,12 +78,37 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = models.Profile
-        fields = ('name', 'born_in', 'mail', 'phone', 'languages', 'url',
+        fields = ('born_in', 'phone', 'url',
             'about', 'current_goals', 'proffessional_description'
         )
         widgets = {
             'born_in': forms.DateInput(attrs={'type': 'date'}),
         }
+
+
+class LanguageForm(forms.ModelForm):
+    # languages = forms.MultipleChoiceField(required=False, choices=LANGUAGES,)# widget=forms.CheckboxSelectMultiple)
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(LanguageForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            self.fields['languages'].widget.attrs.update({
+                    'placeholder': _("Select languages you can speak"),
+                    'class': 'form-control select2',
+                }
+            )
+    
+    def clean(self):
+        cleaned_data = super(LanguageForm, self).clean()
+        return cleaned_data
+
+    class Meta:
+        model = models.Language
+        fields = ('languages',)
+        # widgets = {
+        #     'languages': forms.MultipleChoiceField(),
+        # }
 
 
 class XPForm(forms.ModelForm):

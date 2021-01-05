@@ -7,6 +7,9 @@ from datetime import date, timedelta, datetime
 from phonenumber_field.modelfields import PhoneNumberField
 from utils.utils import capitalize
 from utils.constants import LANGUAGES
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Profile(models.Model):    
@@ -18,9 +21,9 @@ class Profile(models.Model):
         (4, _('Other')),
     ]
 
-    name = models.CharField(verbose_name=_('Name'), max_length=40, default='')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    languages = models.ManyToManyField(Language, verbose_name=_("Language"))
     born_in = models.DateField(verbose_name=_("Born In"), default=date.today() - timedelta(23*365))
-    mail = models.EmailField(verbose_name=_("Mail"), max_length=255, default='')
     phone = PhoneNumberField(verbose_name=_('Phone'), max_length=255)
     site = models.PositiveSmallIntegerField(choices=SITES, verbose_name=_("Platforms"), default=0)
     url = models.URLField(max_length=200, default='', blank=True)
@@ -30,28 +33,25 @@ class Profile(models.Model):
     last = models.DateTimeField(verbose_name=_("Last Modification"), unique=True, auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.user
     
     @property
     def age(self):
         days_on_year = 365.2425
         return int((datetime.now().date() - self.born_in).days / days_on_year)
-
-    @property
-    def first_name(self):
-        return self.name.split(' ')[0]
-
-    @property
-    def last_name(self):
-        return self.name.split(' ')[-1]
-
-    def clean(self):
-        super(Profile, self).clean()       
-        self.name = capitalize(self.name.split(' '))
     
     def save(self, *args, **kwargs):
         self.clean()
         return super(Profile, self).save(**kwargs)
+    
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
     
     class Meta:
         verbose_name = _("Profile")
@@ -122,8 +122,7 @@ class Education(models.Model):
 
 
 
-# TODO: criar uma classe many-to-many de profile para Language, criar uma checkbox dinamica
-# com select2 para selecionar a linguagem. Ao clicar na opcao desejada, utilizar jquery para
+# TODO: Ao clicar na opcao desejada, utilizar jquery/Ajax para
 # selecionar a opcao de fluencia em uma caixa de selecao ao lado da de linguagens.
 class Language(models.Model):
     FLUENCY = [
@@ -132,6 +131,15 @@ class Language(models.Model):
         (2, _('Advanced')),
         (3, _('Fluent')),
     ]
-    profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
-    languages = models.PositiveSmallIntegerField(verbose_name=_("Languages"), default=0)
-    fluency_level = models.PositiveSmallIntegerField(choices=FLUENCY, verbose_name=_("Fluency"), default=0)
+
+    languages = models.PositiveSmallIntegerField(choices=LANGUAGES, verbose_name=_("Languages"), blank=True)
+    fluency_level = models.PositiveSmallIntegerField(choices=FLUENCY, verbose_name=_("Fluency"), blank=True)
+
+    # @receiver(post_save, sender=Profile)
+    # def create_profile_language(sender, instance, created, **kwargs):
+    #     if created:
+    #         Language.objects.create(profile=instance)
+
+    # @receiver(post_save, sender=Profile)
+    # def save_profile_language(sender, instance, **kwargs):
+    #     instance.profile.save()

@@ -60,9 +60,9 @@
         <i class="fab fa-github"></i>
       </a>
     </li>
-    {% if profile.mail %}
+    {% if user.email %}
       <li class="nav-item dropdown">
-        <a class="nav-link" target="_blank" title="Gmail" href="mailto:{{ profile.mail }}">
+        <a class="nav-link" target="_blank" title="Gmail" href="mailto:{{ user.email }}">
           <i class="fas fa-envelope"></i>
         </a>
       </li>

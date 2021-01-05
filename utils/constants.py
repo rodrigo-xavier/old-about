@@ -1,8 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 
 LANGUAGES = [
-    # (0, _('None')),  
-    (0, ''),  
+    # (0, _('None')),
     (1, _('Afrikaans')),
     (2, _('Albanian')),
     (3, _('Amharic')),
