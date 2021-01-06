@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-    {% include "cv/buttons.html" %}
+    {% include "cv/tabs.html" %}
 
     <form role="form" method="post" action="{% url 'cv:Edit XP' %}">
         {% csrf_token %}
@@ -31,7 +31,7 @@
                                 </button> {% endcomment %}
                                 {% comment %} {{ sub_form.company_name.id_for_label }} {% endcomment %}
                                 {% if forloop.counter0 != 0 %}
-                                    <button name="#id_xp_set-{{ forloop.revcounter0 }}-DELETE" type="submit" class="float-right btn btn-danger btn-close">
+                                    <button name="#id_xp_set-{{ forloop.revcounter0 }}-DELETE" type="submit" class="btn btn-danger btn-close">
                                         <i class="centralize fas fa-times" style="font-size:25px"></i>
                                     </button>
                                 {% else %}
@@ -43,6 +43,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
+                                    <div class="mb-3"></div>
                                     {{ sub_form }}
                                 </div>
                             </div>
@@ -51,19 +52,19 @@
                 {% endfor %}
             </div>
         </div>
-        <button type="submit" name="save" class="float">
+        {% comment %} <button type="submit" name="save" class="float">
             <div class="float-save success-color text-light">
                 <i class="fas fa-save centralize"></i>
             </div>
-        </button>
+        </button> {% endcomment %}
     </form>
-    <form role="form" method="get" action="{% url 'cv:Edit XP' %}">
+    {% comment %} <form role="form" method="get" action="{% url 'cv:Edit XP' %}">
         <button class="float" formmethod="get" type="submit" name="new" value="{{ extra }}">
             <div class="float-add purple-gradient text-light">
                 <i class="fas fa-plus centralize"></i>
             </div>
         </button>
-    </form>
+    </form> {% endcomment %}
     <div class="pb-5"></div>
     <div class="pb-3"></div>
 {% endblock %}

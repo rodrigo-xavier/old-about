@@ -90,8 +90,6 @@ class ProfileForm(forms.ModelForm):
 
 
 class LanguageForm(forms.ModelForm):
-    # languages = forms.MultipleChoiceField(required=False, choices=LANGUAGES,)# widget=forms.CheckboxSelectMultiple)
-
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super(LanguageForm, self).__init__(*args, **kwargs)
@@ -121,12 +119,8 @@ class XPForm(forms.ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control form-group'
             self.fields['is_current'].widget.attrs.update({
-                # 'data-toggle': "toggle",
-                # 'data-on': _("Yes"),
-                # 'data-off': _("No"),
-                # 'data-size': "small",
-                # 'data-onstyle': "primary",
                 'class': 'bootstrap-toggle',
+                "data-style":"ios",
                 }
             )
             self.fields['company'].widget.attrs.update({
@@ -171,25 +165,8 @@ class XPForm(forms.ModelForm):
                 }
             )
     
-    # def validate_name(self, data): # O nome da empresa nao precisa ser alphanumerico
-    #     company = data['company'].split(" ")
-    #     company = "".join(company)
-    #     if not (company.isalpha()):
-    #         self.add_error('company', _('must be alphanumeric'))
-    #         raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
-
-    # def validate_is_current(self, data):
-    #     if data['is_current'] is True:
-    #         models.XP.objects
-    #         if not ():
-    #             self.add_error('is_current', _('Is permitted just one checkbox selected'))
-    #             raise forms.ValidationError(_("Is permitted just one checkbox selected"), code='invalid')
-    
     def clean(self):
         cleaned_data = super(XPForm, self).clean()
-        # self.validate_name(cleaned_data)
-        # self.validate_is_current(cleaned_data)
-
         return cleaned_data
     
     class Meta:
@@ -213,11 +190,8 @@ class EducationForm(forms.ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control form-group'
             self.fields['is_current'].widget.attrs.update({
-                'data-toggle': "toggle",
-                'data-on': _("Yes"),
-                'data-off': _("No"),
-                'data-size': "small",
-                'data-onstyle': "primary",
+                'class': 'bootstrap-toggle',
+                "data-style":"ios",
                 }
             )
             self.fields['institute'].widget.attrs.update({
@@ -254,21 +228,15 @@ class EducationForm(forms.ModelForm):
         if not (institute_name.isalpha()):
             self.add_error('institute', _('must be alphanumeric'))
             raise forms.ValidationError(_("must be alphanumeric"), code='invalid')
-
-    # def validate_is_current(self, data):
-    #     if data['is_current'] is True:
-    #         models.Education.objects
-    #         if not ():
-    #             self.add_error('is_current', _('Is permitted just one checkbox selected'))
-    #             raise forms.ValidationError(_("Is permitted just one checkbox selected"), code='invalid')
     
     def clean(self):
         cleaned_data = super(EducationForm, self).clean()
-        self.validate_name(cleaned_data)
-        # self.validate_is_current(cleaned_data)
     
     class Meta:
         widgets = {
             'from_period': forms.DateInput(attrs={'type': 'date'}),
             'until_period': forms.DateInput(attrs={'type': 'date'})
+        }
+        labels = {
+            'is_current': _('Is current?')
         }

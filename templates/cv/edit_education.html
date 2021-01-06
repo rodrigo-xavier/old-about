@@ -14,34 +14,28 @@
 {% endblock %}
 
 {% block content %}
-    {% include "cv/buttons.html" %}
+    {% include "cv/tabs.html" %}
 
     <form role="form" method="post" action="{% url 'cv:Edit Education' %}">
         {% csrf_token %}
             <div class="card-body">
-
                 <div class="row">
                     {{ education_form.management_form }}
                     {% for sub_form in education_form reversed %}
                         <div class="col-xl-6">
                             <div class="card card-outline card-success">
                                 <div class="card-tools">
-                                    {% comment %} <button type="button" class="btn btin-tool btn-primary btn-sm" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button> {% endcomment %}
                                     {% if forloop.counter0 != 0 %}
-                                        <button name="#id_education_set-{{ forloop.revcounter0 }}-DELETE" type="submit" class="float-right btn btn-danger btn-close">
+                                        <button name="#id_education_set-{{ forloop.revcounter0 }}-DELETE" type="submit" class="btn btn-danger btn-close">
                                             <i class="centralize fas fa-times" style="font-size:25px"></i>
                                         </button>
                                     {% else %}
                                         <div style="padding-top:42px" ></div>
                                     {% endif %}
-                                    {% comment %} <div class="card-header">
-                                        <h3 class="card-title">Collapsible Card Example</h3>
-                                    </div> {% endcomment %}
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
+                                        <div class="mb-3"></div>
                                         {{ sub_form }}
                                         <div class="row">
                                             <div class="col-xl-6">

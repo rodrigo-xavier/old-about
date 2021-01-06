@@ -56,11 +56,16 @@ $(document).ready(function(){
     // $('input,textarea,select').filter('[required]').parent().parent().find("label").append("*");
 
 
-    $('.bootstrap-toggle').bootstrapToggle({
-        on: 'ON',
-        off: 'OFF',
-        size: 'small',
-        onstyle: 'primary',
-        offstyle: 'dark',
+    $('.bootstrap-toggle').each(function() {
+        $(this).after("<br /><br />");
+        $( this ).bootstrapToggle({
+            on: 'ON',
+            off: 'OFF',
+            size: 'small',
+            onstyle: 'primary',
+            offstyle: 'dark',
+            // width: 85,
+        });
+        $(this).parent().addClass('float-right');
     });
 });

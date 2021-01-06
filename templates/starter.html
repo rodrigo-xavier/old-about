@@ -24,6 +24,8 @@
   <link type="text/css" rel="stylesheet" href="{% static 'css/starter.css' %}">
   <!-- Simple Bar -->
   <link type="text/css" rel="stylesheet" href="{% static 'plugins/simple-bar/simplebar.css' %}">
+  <!-- Float Buttons -->
+  <link type="text/css" rel="stylesheet" href="{% static 'plugins/material-floating-button-master/dist/mfb.css' %}">
 
   {% block extrastyle %}{% endblock %}
 
@@ -57,18 +59,13 @@
   </div>
 
   <aside>
+    {% include "buttons.html" %}
+  </aside>
+
+  <aside>
     <div id="footer" class="main-footer" style="margin-left:0px;">
       {% include "footer.html" %}
     </div>
-  </aside>
-
-{% comment %} TODO: Remover ou substituir botao posteriormente {% endcomment %}
-  <aside>
-    <button onclick="topFunction()" type="button" id="backtop" class="float">
-      <div class="info-color float-chevron text-light">
-          <i class="fas fa-chevron-up centralize"></i>
-      </div>
-    </button>
   </aside>
 
   <!-- REQUIRED SCRIPTS -->
@@ -96,6 +93,8 @@
   <script type="text/javascript" src="{% static 'js/starter.js' %}"></script>
   <!-- Simple Bar # TODO: UTILIZAR DEPOIS PARA PERSONALIZAR A BARRA DE ROLAGEM --> 
   <script type="text/javascript" src="{% static 'plugins/simple-bar/simplebar.js' %}"></script>
+  <!-- Float Buttons -->
+  <script type="text/javascript" src="{% static 'plugins/material-floating-button-master/dist/mfb.js' %}"></script>
 
   {% block extrajs %}{% endblock %}
 

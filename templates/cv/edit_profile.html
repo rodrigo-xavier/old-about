@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block content %}
-  {% include "cv/buttons.html" %}
+  {% include "cv/tabs.html" %}
   <form role="form" method="post" action="{% url 'cv:Edit Profile' %}">
     {% csrf_token %}
     <div class="card-body">

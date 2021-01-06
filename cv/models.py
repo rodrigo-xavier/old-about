@@ -89,7 +89,7 @@ class Education(models.Model):
     profile = models.ForeignKey(Profile, verbose_name=_("Profile"), on_delete=models.CASCADE)
     is_current = models.BooleanField(verbose_name=_("Is Current"), default=False, blank=True)
     category = models.PositiveSmallIntegerField(choices=CATEGORY, verbose_name=_("Category"), default=0)
-    institute = models.CharField(verbose_name=_("Institute"), max_length=100, default='')
+    institute = models.CharField(verbose_name=_("Institute"), max_length=100, default='', blank=True)
     institute_description = models.TextField(verbose_name=_("Company Description"), max_length=1000, default='', blank=True)
     institute_website = models.URLField(verbose_name=_("Company Website"), max_length=200, default='', blank=True)
     institute_mail = models.EmailField(verbose_name=_("Company Mail"), max_length=255, default='', blank=True)
