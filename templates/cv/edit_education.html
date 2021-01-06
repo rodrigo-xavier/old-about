@@ -55,19 +55,18 @@
                 </div>
             </div>
         </div>
-        <button type="submit" name="save" class="float">
+        {% comment %} <button type="submit" name="save" class="float">
             <div class="float-save success-color text-light">
                 <i class="fas fa-save centralize"></i>
             </div>
-        </button>
+        </button> {% endcomment %}
     </form>
-    <form class="cv" role="form" method="get" action="{% url 'cv:Edit Education' %}">
+    {% comment %} <form class="cv" role="form" method="get" action="{% url 'cv:Edit Education' %}">
         <button class="float" formmethod="get" type="submit" name="new" value="{{ extra }}">
             <div class="float-add purple-gradient text-light">
                 <i class="fas fa-plus centralize"></i>
             </div>
         </button>
-    </form>
-    <div class="pb-5"></div>
-    <div class="pb-3"></div>
+    </form> {% endcomment %}
+    <div class="mb-5"></div>
 {% endblock %}
