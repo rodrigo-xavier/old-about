@@ -4,3 +4,42 @@
 textarea {
     text-align: justify;
   }
+
+
+.float-save{
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:105px;
+  right:40px;
+  border-radius:100%;
+  text-align:center;
+  box-shadow: 2px 2px 3px rgb(0, 0, 0);
+  margin:0px;
+}
+
+.float-add{
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:170px;
+  right:40px;
+  border-radius:100%;
+  text-align:center;
+  box-shadow: 2px 2px 3px rgb(0, 0, 0);
+  margin:0px;
+}
+
+.btn-circle{
+  width:100px;
+  height:100px;
+  border-radius:100%;
+  text-align:center;
+  box-shadow: 2px 2px 3px rgb(0, 0, 0);
+  margin:0px;
+}
+
+.btn-close{
+  width:0px;
+  height:30px;
+}

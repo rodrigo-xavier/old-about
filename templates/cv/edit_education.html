@@ -1,4 +1,4 @@
-{% extends "starter.html" %}
+{% extends "index.html" %}
 {% load i18n static %}
 
 {% block title %}{% trans "Edit Education" %}{% endblock %}
@@ -55,18 +55,18 @@
                 </div>
             </div>
         </div>
-        {% comment %} <button type="submit" name="save" class="float">
+        <button type="submit" name="save" class="float">
             <div class="float-save success-color text-light">
                 <i class="fas fa-save centralize"></i>
             </div>
-        </button> {% endcomment %}
+        </button>
     </form>
-    {% comment %} <form class="cv" role="form" method="get" action="{% url 'cv:Edit Education' %}">
+    <form class="cv" role="form" method="get" action="{% url 'cv:Edit Education' %}">
         <button class="float" formmethod="get" type="submit" name="new" value="{{ extra }}">
             <div class="float-add purple-gradient text-light">
                 <i class="fas fa-plus centralize"></i>
             </div>
         </button>
-    </form> {% endcomment %}
+    </form>
     <div class="mb-5"></div>
 {% endblock %}

@@ -1,6 +1,45 @@
 {% load i18n static %}
 
+{% url "CV:Profile" as profile %}
+{% url "CV:Edit Profile" as edit_profile %}
+{% url "CV:Edit XP" as edit_xp %}
+{% url "CV:Edit Education" as edit_education %}
+
 <ul class="mfb-component--br mfb-zoomin" data-mfb-toggle="hover">
+  {% if request.get_full_path == edit_profile %}
+    <li>
+      <a data-mfb-label="Save" class="mfb-component__button--main bg-primary">
+        <i class="fas fa-save fa-sm centralize"></i>
+      </a>
+    </li>
+  {% elif request.get_full_path == edit_xp or request.get_full_path == edit_education %}
+    <li class="mfb-component__wrap">
+      <a class="mfb-component__button--main bg-dark">
+        <i class=" fas fa-caret-up fa-sm centralize"></i>
+      </a>
+      <ul class="mfb-component__list">
+        <li>
+          <a data-mfb-label="Save" class="mfb-component__button--main bg-primary">
+            <i class="fas fa-save fa-sm centralize"></i>
+          </a>
+        </li>
+        <li>
+          <a data-mfb-label="Add New" class="mfb-component__button--main bg-danger">
+            <i class="fas fa-plus fa-sm centralize"></i>
+          </a>
+        </li>
+      </ul>
+    </li>
+  {% else %}
+    <li>
+      <a data-mfb-label="Up" onclick="topFunction()" type="button" id="backtop" class="mfb-component__button--main bg-primary">
+        <i class="fas fa-chevron-up fa-sm centralize"></i>
+      </a>
+    </li>
+  {% endif %}
+</ul>
+
+{% comment %} <ul class="mfb-component--br mfb-zoomin" data-mfb-toggle="hover">
   <li class="mfb-component__wrap">
     <a class="mfb-component__button--main bg-dark">
       <i class=" fas fa-caret-up fa-sm centralize"></i>
@@ -23,4 +62,4 @@
       </li>
     </ul>
   </li>
-</ul>
+</ul> {% endcomment %}
