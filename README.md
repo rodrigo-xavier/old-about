@@ -74,3 +74,8 @@ Agora, acessando http:/192.168.5.191:8000/ no navegador de qualquer dispositivo 
 
 *   Para logar no sistema, é necessário acessar http://192.168.5.191:8000/root/
 *   Para editar o perfil, basta estar logado no sistema e acessar a seguinte página http://192.168.5.191:8000/cv/edit/profile
+
+
+# Detailed Description
+
+Sempre considerei o Linkedin uma ferramenta não muito boa em cumprir o seu papel. De quê adianta preencher seu perfil profissional no Linkedin, se no final a empresa contratante irá solicitar o seu currículo? Você poderia me perguntar: mas o Linkedin tem a opção de gerar um PDF do seu perfil. E eu lhe rebato: Quem em sã consciência enviaria aquele PDF para uma vaga de emprego? Por isso, eu tive a ideia de construir em Django, um sistema que pudesse gerar PDFs de currículos estilizados. No entanto, interrompi o projeto para adquirir novos conhecimentos como Docker e REST. Pretendo retornar ao projeto no futuro, com uma ideia mais clara da interface e com um plano de negócios bem definido.
